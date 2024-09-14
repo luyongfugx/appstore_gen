@@ -8,7 +8,7 @@ import { Button } from "../ui/Button";
 import { title } from "process";
 
 function TitleAndDescForm() {
-  const { count, crouLength, showForm } = useMyContext();
+  const { count, crouLength, showForm, slideData, lang } = useMyContext();
   const [values, setValues] = useState({
     title: "please wait...",
     subtitle: "please wait...",
@@ -16,16 +16,23 @@ function TitleAndDescForm() {
   });
 
   useEffect(() => {
-    const Title = document.getElementById(`title${count}`);
-    const subtitle = document.getElementById(`subtitle${count}`);
-    const description = document.getElementById(`description${count}`);
-    const newData = {
-      title: Title?.innerText as string,
-      subtitle: subtitle?.innerText as string,
-      description: description?.innerText as string,
-    };
-    setValues(newData);
-  }, [count, crouLength]);
+    console.log(slideData);
+    if (slideData[lang]) {
+      const title = slideData[lang].title;
+      const subtitle = slideData[lang].subtitle;
+      const description = slideData[lang].description;
+      const newData = {
+        title: title,
+        subtitle: subtitle,
+        description: description,
+      };
+      setValues(newData);
+    }
+
+    // const Title = document.getElementById(`title${count}`);
+    // const subtitle = document.getElementById(`subtitle${count}`);
+    // const description = document.getElementById(`description${count}`);
+  }, [count, crouLength, lang, slideData]);
 
   const handleInput = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -50,7 +57,9 @@ function TitleAndDescForm() {
             name="title"
             id="title"
             placeholder="title..."
-            value={values.title}
+            value={
+              slideData[lang] ? slideData[lang][count].title : "please wait...3"
+            }
             onChange={handleInput}
           />
         </div>

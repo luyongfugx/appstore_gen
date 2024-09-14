@@ -17,7 +17,7 @@ import Image from "next/image";
 import downloadImages from "@/lib/ImageToZip";
 
 function HomeFormHeader() {
-  const { count, crouLength } = useMyContext();
+  const { count, crouLength, lang } = useMyContext();
   const [loading, setLoading] = useState(false);
   const [img, setImg] = useState<string[]>([]);
   const pdfRef = useRef();
@@ -79,7 +79,9 @@ function HomeFormHeader() {
   };
   return (
     <div className="flex flex-row w-full items-center justify-between">
-      <h1 className="text-lg  font-mono font-medium">SLIDE {count}</h1>
+      <h1 className="text-lg  font-mono font-medium">
+        screen {count} {lang}
+      </h1>
       <div className="">
         <Dialog>
           <DialogTrigger asChild>

@@ -10,6 +10,8 @@ import bannerImg from "../../../public/banner.png";
 import iosImg from "../../../public/ios.jpg";
 function TemplateOne() {
   const {
+    slideData,
+    setSlideData,
     setCrouLength,
     bgColor,
     setBgColor,
@@ -20,56 +22,105 @@ function TemplateOne() {
     count,
     setHaveImg,
     banner,
+    lang,
     setShowForm,
   } = useMyContext();
 
   const [templateData, setTemplateData] = useState({
-    crousal: [
-      {
-        className: "",
-        Title: "Stand out from the crowd.",
-        subtitle: `App subtitle text, intuitive design and powerful features.`,
-        description: null,
-        banner: true,
-        bannerUrl: banner,
-      },
-      {
-        className: "",
+    crousal: {
+      en: [
+        {
+          className: "",
+          Title: "Stand out from the crowd.",
+          subtitle: `App subtitle text, intuitive design and powerful features.`,
+          description: null,
+          banner: true,
+          bannerUrl: banner,
+        },
+        {
+          className: "",
 
-        Title: "TOPICAL AND CONTROVERSIAL",
-        subtitle: `IS ELON MUSK RUINING TWITTER?`,
-        description: `People love controversial current events. Keep an eye out for what's happening in the world - even better if it's in your niche - then use it as the hook to share your idea.`,
-        banner: true,
-        bannerUrl: banner,
-      },
-      // {
-      //   className: "",
+          Title: "TOPICAL AND CONTROVERSIAL",
+          subtitle: `IS ELON MUSK RUINING TWITTER?`,
+          description: `People love controversial current events. Keep an eye out for what's happening in the world - even better if it's in your niche - then use it as the hook to share your idea.`,
+          banner: true,
+          bannerUrl: banner,
+        },
+        // {
+        //   className: "",
 
-      //   Title: "USE AS A MENTOR",
-      //   subtitle: `THE DAY NAVAL RAVIKANT SLAPPED ME IN THE FACE`,
-      //   description: `Build authority by association by using names in your niche. BUT make sure you're the star of the show. People are here for your ideas.`,
-      //   banner: true,
-      //   bannerUrl: banner,
-      // },
-      // {
-      //   className: "",
+        //   Title: "USE AS A MENTOR",
+        //   subtitle: `THE DAY NAVAL RAVIKANT SLAPPED ME IN THE FACE`,
+        //   description: `Build authority by association by using names in your niche. BUT make sure you're the star of the show. People are here for your ideas.`,
+        //   banner: true,
+        //   bannerUrl: banner,
+        // },
+        // {
+        //   className: "",
 
-      //   Title: "USE THE COMPETITION",
-      //   subtitle: `I GOT INTO A BAR FIGHT WITH JUSTIN WELSH AND DAN KOE`,
-      //   description: `You need a different point of view to stand out. But the secret isn't to attack other creators. It's to shed new light on an old concept.`,
-      //   banner: true,
-      //   bannerUrl: banner,
-      // },
-      // {
-      //   className: "",
+        //   Title: "USE THE COMPETITION",
+        //   subtitle: `I GOT INTO A BAR FIGHT WITH JUSTIN WELSH AND DAN KOE`,
+        //   description: `You need a different point of view to stand out. But the secret isn't to attack other creators. It's to shed new light on an old concept.`,
+        //   banner: true,
+        //   bannerUrl: banner,
+        // },
+        // {
+        //   className: "",
 
-      //   Title: "Thanks for reading!",
-      //   subtitle: `If you enjoyed this, come join 25,000+ creators reading my newsletter Digital Freedom and get weekly actionable advice to build your creator business`,
-      //   description: ` 💖 🔥 🔗`,
-      //   banner: false,
-      //   bannerUrl: null,
-      // },
-    ],
+        //   Title: "Thanks for reading!",
+        //   subtitle: `If you enjoyed this, come join 25,000+ creators reading my newsletter Digital Freedom and get weekly actionable advice to build your creator business`,
+        //   description: ` 💖 🔥 🔗`,
+        //   banner: false,
+        //   bannerUrl: null,
+        // },
+      ],
+      cn: [
+        {
+          className: "",
+          Title: "哈哈哈",
+          subtitle: `哈哈哈`,
+          description: null,
+          banner: true,
+          bannerUrl: banner,
+        },
+        {
+          className: "",
+
+          Title: "哈哈哈",
+          subtitle: `哈哈哈`,
+          description: `People love controversial current events. Keep an eye out for what's happening in the world - even better if it's in your niche - then use it as the hook to share your idea.`,
+          banner: true,
+          bannerUrl: banner,
+        },
+        // {
+        //   className: "",
+
+        //   Title: "USE AS A MENTOR",
+        //   subtitle: `THE DAY NAVAL RAVIKANT SLAPPED ME IN THE FACE`,
+        //   description: `Build authority by association by using names in your niche. BUT make sure you're the star of the show. People are here for your ideas.`,
+        //   banner: true,
+        //   bannerUrl: banner,
+        // },
+        // {
+        //   className: "",
+
+        //   Title: "USE THE COMPETITION",
+        //   subtitle: `I GOT INTO A BAR FIGHT WITH JUSTIN WELSH AND DAN KOE`,
+        //   description: `You need a different point of view to stand out. But the secret isn't to attack other creators. It's to shed new light on an old concept.`,
+        //   banner: true,
+        //   bannerUrl: banner,
+        // },
+        // {
+        //   className: "",
+
+        //   Title: "Thanks for reading!",
+        //   subtitle: `If you enjoyed this, come join 25,000+ creators reading my newsletter Digital Freedom and get weekly actionable advice to build your creator business`,
+        //   description: ` 💖 🔥 🔗`,
+        //   banner: false,
+        //   bannerUrl: null,
+        // },
+      ],
+    },
     arrow: true,
     defaultBg: "#000",
     primaryColor: "#f2ffd5",
@@ -79,14 +130,17 @@ function TemplateOne() {
     if (count >= 1) {
       const len = count - 1;
       const handleShow = {
-        title: templateData.crousal[len].Title !== null ? true : false,
-        subtitle: templateData.crousal[len]?.subtitle !== null ? true : false,
+        title: templateData.crousal[lang][len].Title !== null ? true : false,
+        subtitle:
+          templateData.crousal[lang][len]?.subtitle !== null ? true : false,
         description:
-          templateData.crousal[len]?.description !== null ? true : false,
+          templateData.crousal[lang][len]?.description !== null ? true : false,
       };
       setShowForm(handleShow);
+      console.log("setSlideData:", templateData.crousal);
+      setSlideData(templateData.crousal);
     }
-  }, [count]);
+  }, [count, lang]);
 
   // Function to update the bannerUrl for a specific item
   const updateBannerUrl = (index: number, newUrl: string) => {
@@ -94,7 +148,7 @@ function TemplateOne() {
     const updatedTemplateData = { ...templateData };
 
     // Update the bannerUrl of the specified item
-    updatedTemplateData.crousal[index] = {
+    updatedTemplateData.crousal[lang][index] = {
       ...updatedTemplateData.crousal[index],
       bannerUrl: newUrl,
     };
@@ -106,14 +160,14 @@ function TemplateOne() {
   useEffect(() => {
     if (count !== null) {
       const indx = count - 1;
-      if (myImg !== templateData.crousal[indx]?.bannerUrl) {
+      if (myImg !== templateData.crousal[lang][indx]?.bannerUrl) {
         updateBannerUrl(indx, myImg);
       }
     }
-  }, [myImg]);
+  }, [myImg, lang]);
 
   const onCrousalLoad = () => {
-    setCrouLength(templateData.crousal.length);
+    setCrouLength(templateData.crousal[lang].length);
     setBgColor(templateData.defaultBg);
     setPrimaryColor(templateData.primaryColor);
   };
@@ -129,7 +183,8 @@ function TemplateOne() {
 
   return (
     <>
-      {templateData.crousal.map((val, indx) => {
+      {templateData.crousal[lang].map((val, indx) => {
+        console.log("templateData.crousal[lang].map", lang, val);
         indxCount = indxCount + 1;
 
         return (

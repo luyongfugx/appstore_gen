@@ -25,6 +25,11 @@ import { Button } from "@/components/ui/Button";
 function FullNameHandle() {
   const languages = [
     {
+      value: "cn",
+      label: "Chinese",
+      flag: "🇨🇳",
+    },
+    {
       value: "en",
       label: "English",
       flag: "🇬🇧",
@@ -50,9 +55,9 @@ function FullNameHandle() {
       flag: "🇮🇹",
     },
   ];
-  const { setCrousalHandle, crousalHandle } = useMyContext();
+  const { setCrousalHandle, crousalHandle, setLang, lang } = useMyContext();
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
+  const [value, setValue] = React.useState("en");
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setCrousalHandle((v: any) => ({ ...v, ["fullname"]: value }));
@@ -68,7 +73,11 @@ function FullNameHandle() {
             aria-expanded={open}
             className="w-[200px] justify-between"
           >
-            {value ? value : "Select language..."}
+            {value
+              ? languages.find((language) => language.value === value)?.flag +
+                " " +
+                languages.find((language) => language.value === value)?.label
+              : "Select language..."}
             <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
@@ -83,8 +92,11 @@ function FullNameHandle() {
                     key={i}
                     onSelect={(currentValue) => {
                       setValue(currentValue === value ? "" : currentValue);
+                      setLang(currentValue);
+                      console.log("currentValue" + currentValue);
                       setOpen(false);
                     }}
+                    value={language.value}
                   >
                     <Check
                       className={cn(
