@@ -9,28 +9,27 @@ import ColorSelector from "./ColorSelector";
 
 function TabsComp() {
   const { bgColor, primaryColor, setBgColor, setBg, haveImg } = useMyContext();
-const [key, setKey] = useState(1)
+  const [key, setKey] = useState(1);
 
-  const customColor =[
-    {colorCode:"#f87171"},
-    {colorCode:"#facc15"},
-    {colorCode:"#60a5fa"},
-    {colorCode:"#48dc80"},
-    {colorCode:"#c084fc"},
-    {colorCode:"#f472b6"},
-  ]
+  const customColor = [
+    { colorCode: "#f87171" },
+    { colorCode: "#facc15" },
+    { colorCode: "#60a5fa" },
+    { colorCode: "#48dc80" },
+    { colorCode: "#c084fc" },
+    { colorCode: "#f472b6" },
+  ];
 
-  const handleColorBox = (code:string) => {
-setBg('')
-setBgColor(code)
-  }
+  const handleColorBox = (code: string) => {
+    setBg("");
+    setBgColor(code);
+  };
 
+  useEffect(() => {
+    console.log("rerending color ..");
 
-useEffect(() => {
-  console.log('rerending color ..');
-  
-setKey(bgColor as number)
-}, [bgColor, primaryColor])
+    setKey(bgColor as number);
+  }, [bgColor, primaryColor]);
 
   return (
     <>
@@ -38,7 +37,9 @@ setKey(bgColor as number)
       <Tabs defaultValue="color" className="max-w-[315px]">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="color">Color</TabsTrigger>
-          <TabsTrigger value="image" disabled={haveImg}>Image</TabsTrigger>
+          <TabsTrigger value="image" disabled={haveImg}>
+            Image
+          </TabsTrigger>
         </TabsList>
         <TabsContent value="color">
           <Card>
@@ -46,27 +47,38 @@ setKey(bgColor as number)
               <div className="space-y-1">
                 <div className="flex flex-row justify-between py-3">
                   {customColor.map((itm, indx) => {
-
-                    return <div className={`h-8 w-8  rounded-md cursor-pointer hover:border`} style={{backgroundColor: itm.colorCode}} key={indx} onClick={() => handleColorBox(itm.colorCode)}> </div>
+                    return (
+                      <div
+                        className={`h-8 w-8  rounded-md cursor-pointer hover:border`}
+                        style={{ backgroundColor: itm.colorCode }}
+                        key={indx}
+                        onClick={() => handleColorBox(itm.colorCode)}
+                      >
+                        {" "}
+                      </div>
+                    );
                   })}
-                  
-                  
                 </div>
-                
-                 { bgColor.length > 1 && <ColorSelector key={key}
+
+                {bgColor.length > 1 && (
+                  <ColorSelector
+                    key={key}
                     colorFor="BgColor"
                     defaultColor={bgColor}
-                  /> }
-                
+                  />
+                )}
+
                 <div className="space-y-1">
                   <Label htmlFor="username">Primary Color</Label>
-                  {primaryColor.length > 1 && <ColorSelector key={key}
-                    colorFor="PrimaryColor"
-                    defaultColor={primaryColor}
-                    />}
-                    </div>
+                  {primaryColor.length > 1 && (
+                    <ColorSelector
+                      key={key}
+                      colorFor="PrimaryColor"
+                      defaultColor={primaryColor}
+                    />
+                  )}
+                </div>
               </div>
-            
             </CardContent>
           </Card>
         </TabsContent>

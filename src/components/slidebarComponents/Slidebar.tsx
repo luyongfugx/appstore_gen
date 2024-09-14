@@ -8,11 +8,10 @@ function Slidebar() {
   return (
     <div className="h-screen relative w-[322px] overflow-hidden bg-white border-r py-4 px-3 flex flex-col gap-6">
       <FullNameHandle />
-      <ProfilePicComp />
-      <UsernameHandle />
-      <TabsComp/>
+      {/*  <ProfilePicComp />
+      <UsernameHandle /> */}
+      <TabsComp />
     </div>
-    
   );
 }
 
