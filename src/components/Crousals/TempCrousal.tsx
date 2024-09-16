@@ -9,11 +9,9 @@ interface TempCrousalProps {
 const TempCrousal: React.FC<TempCrousalProps> = ({ templateName }) => {
   const [MyTemplate, setMyTemplate] = useState<React.ReactElement | null>(null);
 
-  const { setCount, setLink } = useMyContext();
-
+  const { setCount, setLink, templateDatas, lang, outPutSize } = useMyContext();
   const importTemplate = async () => {
     setCount(1);
-
     try {
       const Component = await import(`./${templateName}`);
       const Template = Component.default;
@@ -25,9 +23,6 @@ const TempCrousal: React.FC<TempCrousalProps> = ({ templateName }) => {
 
   useEffect(() => {
     importTemplate();
-    // setLink(templateName)
-
-    // WINDOW RELOAD ALERT FUCTION
     const handleBeforeUnload = (event: BeforeUnloadEvent) => {
       const message = "You will be Re-directed to home page!";
       event.returnValue = message; // Standard for most browsers
@@ -42,9 +37,20 @@ const TempCrousal: React.FC<TempCrousalProps> = ({ templateName }) => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, [templateName]);
+  const scale = 5;
+
   return (
     <Suspense fallback={<div>Loading....</div>}>
-      <div className="h-[699px] w-[322px] overflow-hidden">{MyTemplate}</div>
+      {/* <div>{outPutSize.name}</div> */}
+      <div
+        className=" overflow-hidden"
+        style={{
+          width: outPutSize.width / scale,
+          height: outPutSize.height / scale,
+        }}
+      >
+        {MyTemplate}
+      </div>
     </Suspense>
   );
 };

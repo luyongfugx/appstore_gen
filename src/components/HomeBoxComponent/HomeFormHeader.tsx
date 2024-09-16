@@ -17,39 +17,9 @@ import Image from "next/image";
 import downloadImages from "@/lib/ImageToZip";
 
 function HomeFormHeader() {
-  const { count, crouLength, lang } = useMyContext();
+  const { count, crouLength, lang, outPutSize } = useMyContext();
   const [loading, setLoading] = useState(false);
   const [img, setImg] = useState<string[]>([]);
-  const pdfRef = useRef();
-  // new jsPDF({
-  //   unit: "pt", // Specify the unit as points
-  //   format: [355, 480], // Set the page size
-  //   orientation: "portrait",
-  // })
-
-  const saveAsPdf = async () => {
-    try {
-      setLoading(true);
-      // const pdfWidth = pdfRef.current.internal.pageSize.getWidth();
-      // const pdfHeight = pdfRef.current.internal.pageSize.getHeight();
-      // for (let i = 0; i <= img?.length; i++) {
-      //   await pdfRef.current.addImage(
-      //     img[i],
-      //     "JPEG",
-      //     0,
-      //     0,
-      //     pdfWidth,
-      //     pdfHeight
-      //   );
-      //   if (i !== crouLength - 1) pdfRef.current.addPage();
-      // }
-    } catch (error) {
-      console.error("Error converting HTML to image:", error);
-    } finally {
-      setLoading(false);
-      // pdfRef.current.save("download.pdf");
-    }
-  };
   const convertImg = async () => {
     setLoading(true);
     setImg([]);
@@ -61,8 +31,7 @@ function HomeFormHeader() {
           logging: true,
           useCORS: true,
           background: "transparent",
-
-          scale: 4,
+          scale: 5,
         });
         const imgUrl = await dataUrl.toDataURL("image/jpeg");
         if (imgUrl) setImg((v: any) => [...v, imgUrl]);
@@ -75,33 +44,28 @@ function HomeFormHeader() {
   };
 
   const saveAsImg = () => {
-    downloadImages(img);
+    const fileName = outPutSize.name + "_" + lang;
+    downloadImages(img, fileName);
   };
   return (
     <div className="flex flex-row w-full items-center justify-between">
-      <h1 className="text-lg  font-mono font-medium">
-        screen {count} {lang}
-      </h1>
+      <h1 className="text-lg  font-mono font-medium">screen</h1>
       <div className="">
         <Dialog>
           <DialogTrigger asChild>
-            <Button
-              variant={"ghost"}
-              // isLoading={loading}
-              onClick={convertImg}
-              className="p-2"
-            >
+            <Button variant={"ghost"} onClick={convertImg} className="p-2">
               <FileDown className="h-5 w-5 " />
             </Button>
           </DialogTrigger>
-          <DialogContent className="w-auto">
+          <DialogContent className="min-w-[800px] ">
             <DialogHeader>
-              <DialogTitle>Ready to download ?</DialogTitle>
-              <DialogDescription>
-                Click on the button below in which format you want to download
-                it.
+              <DialogTitle className="flex justify-center">
+                Ready to download ?
+              </DialogTitle>
+              <DialogDescription className="flex justify-center">
+                {outPutSize.name + "," + lang}
               </DialogDescription>
-              <div className="flex flex-wrap gap-3 w-full relative">
+              <div className="flex  gap-3  relative justify-center">
                 {img.map((itm, indx) => {
                   return (
                     <Image
@@ -111,7 +75,7 @@ function HomeFormHeader() {
                       priority
                       alt="emage"
                       height={200}
-                      width={110}
+                      width={300}
                       className="aspect-auto"
                     />
                   );
@@ -122,12 +86,9 @@ function HomeFormHeader() {
                   </div>
                 )}
               </div>
-              <div className="w-full p-2 flex flex-row items-center gap-4">
+              <div className="w-full p-2 flex flex-row items-center gap-4 justify-center">
                 <Button isLoading={loading} onClick={saveAsImg}>
-                  Save as JPEG
-                </Button>
-                <Button isLoading={loading} onClick={saveAsPdf}>
-                  Save as PDF
+                  Download
                 </Button>
               </div>
             </DialogHeader>

@@ -13,11 +13,11 @@ interface HomeBoxProps {
 const HomeBox: React.FC<HomeBoxProps> = ({ mySlug }) => {
   return (
     <div className="p-4 w-full  max-w-[78%] bg-transparent h-full flex flex-col items-center justify-center">
-      <div className="p-3 h-fit w-[800px] flex bg-white  border border-input rounded-md">
+      <div className="p-3 h-fit w-[800px] flex bg-white  border border-input rounded-md mt-32">
         {/* LEFT SIDE  */}
         <div className="flex flex-col h-full p-3 gap-6 w-[40%]">
           <HomeFormHeader />
-          <TitleAndDescForm />
+          <TitleAndDescForm templateName={mySlug} />
           <AddImage />
         </div>
         {/* RIGHT SIDE  */}

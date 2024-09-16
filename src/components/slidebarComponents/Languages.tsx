@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { Label } from "../ui/label";
-import { Input } from "../ui/input";
 import { useMyContext } from "@/lib/Context";
 import { Check, ChevronDown } from "lucide-react";
 
@@ -21,8 +20,7 @@ import {
 } from "@/components/ui/popover";
 
 import { Button } from "@/components/ui/Button";
-
-function FullNameHandle() {
+function Languages() {
   const languages = [
     {
       value: "cn",
@@ -55,13 +53,10 @@ function FullNameHandle() {
       flag: "🇮🇹",
     },
   ];
-  const { setCrousalHandle, crousalHandle, setLang, lang } = useMyContext();
+  const { setLang, lang } = useMyContext();
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("en");
-  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setCrousalHandle((v: any) => ({ ...v, ["fullname"]: value }));
-  };
+
   return (
     <div className="grid w-full max-w-sm items-center gap-1.5">
       <Label htmlFor="fullname">language</Label>
@@ -112,16 +107,8 @@ function FullNameHandle() {
           </Command>
         </PopoverContent>
       </Popover>
-      {/* <Input
-        type="text"
-        id="fullname"
-        name="fullname"
-        placeholder="John Michle"
-        defaultValue={crousalHandle.fullname}
-        onChange={handleInput}
-      /> */}
     </div>
   );
 }
 
-export default FullNameHandle;
+export default Languages;

@@ -24,13 +24,6 @@ function TabsComp() {
     setBg("");
     setBgColor(code);
   };
-
-  useEffect(() => {
-    console.log("rerending color ..");
-
-    setKey(bgColor as number);
-  }, [bgColor, primaryColor]);
-
   return (
     <>
       <Label htmlFor="name">Background</Label>
@@ -62,7 +55,7 @@ function TabsComp() {
 
                 {bgColor.length > 1 && (
                   <ColorSelector
-                    key={key}
+                    key={"BgColor"}
                     colorFor="BgColor"
                     defaultColor={bgColor}
                   />
@@ -72,7 +65,7 @@ function TabsComp() {
                   <Label htmlFor="username">Primary Color</Label>
                   {primaryColor.length > 1 && (
                     <ColorSelector
-                      key={key}
+                      key={"PrimaryColor"}
                       colorFor="PrimaryColor"
                       defaultColor={primaryColor}
                     />

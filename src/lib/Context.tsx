@@ -1,15 +1,43 @@
 import React, { createContext, useContext, useState } from "react";
 import defaultImage from "../../public/banner.png";
+import { defaultTemplateDatas } from "@/conf/templateData";
 interface userHandletypes {
   fullname: string;
   username: string;
 }
+
+interface OutPutSize {
+  name: string;
+  width: number;
+  height: number;
+}
+
 interface slideDatatypes {
+  className?: string;
   Title?: string;
   subtitle?: string;
   description?: string;
+  banner: boolean;
   bannerUrl?: string;
 }
+
+export type ScreenDatatype = {
+  className?: string;
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  banner: boolean;
+  bannerUrl?: string;
+};
+export type TemplateData = {
+  screenData?: Record<string, ScreenDatatype[]>;
+  arrow?: boolean;
+  defaultBg?: string;
+  primaryColor?: string;
+};
+//{templateOne:TemplateData,templateTow:TemplateData}
+export type TemplateDatas = Record<string, TemplateData>;
+
 interface showFormTypes {
   title?: boolean;
   subtitle?: boolean;
@@ -19,13 +47,19 @@ interface DataContextTypes {
   crousalHandle: userHandletypes;
   lang: any;
   setLang: (n: any) => void;
+
+  outPutSize: OutPutSize;
+  setOutPutSize: (n: OutPutSize) => void;
+
+  templateDatas: TemplateDatas;
+  setTemplateDatas: (template: any) => void;
+  slideData: any;
+  setSlideData: (v: any) => void;
   setCrousalHandle: (v: any) => void;
   count: number;
   setCount: (n: any) => void;
   crouLength: number;
   setCrouLength: (n: number) => void;
-  slideData: Map<string, Array<slideDatatypes>>;
-  setSlideData: (v: any) => void;
   bgColor: any;
   setBgColor: (v: any) => void;
   primaryColor: any;
@@ -62,11 +96,20 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
     fullname: "John Michle",
     username: "john_michle_123",
   });
+
+  const [templateDatas, setTemplateDatas] =
+    useState<TemplateDatas>(defaultTemplateDatas);
   const [count, setCount] = useState<number>(0);
+  const [outPutSize, setOutPutSize] = useState<OutPutSize>({
+    name: "ios5.5",
+    width: 1242,
+    height: 2208,
+  });
+
   const [crouLength, setCrouLength] = useState<number>(1);
   const [bgColor, setBgColor] = useState("");
   const [bg, setBg] = useState("");
-  const [primaryColor, setPrimaryColor] = useState("");
+  const [primaryColor, setPrimaryColor] = useState("#fff");
   const [secondaryColor, setSecondaryColor] = useState("");
   const [slideData, setSlideData] = useState<
     Map<string, Array<slideDatatypes>>
@@ -105,9 +148,13 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
       value={{
         crousalHandle,
         haveImg,
+        outPutSize,
+        setOutPutSize,
         setHaveImg,
         lang,
         setLang,
+        templateDatas,
+        setTemplateDatas,
         link,
         setLink,
         setCrousalHandle,

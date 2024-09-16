@@ -36,7 +36,9 @@ function NextBackBtn() {
       >
         <ArrowLeft className="h-4 w-4" />
       </Button>
-      <span className="text-base font-medium">Slides {count} / {crouLength}</span>
+      <span className="text-base font-medium">
+        Slides {count} / {crouLength}
+      </span>
       <Button onClick={() => handleBtn("next")} disabled={count === crouLength}>
         <ArrowRight className="h-4 w-4" />
       </Button>

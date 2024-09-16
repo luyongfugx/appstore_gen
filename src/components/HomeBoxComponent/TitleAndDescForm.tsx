@@ -7,45 +7,41 @@ import { useMyContext } from "@/lib/Context";
 import { Button } from "../ui/Button";
 import { title } from "process";
 
-function TitleAndDescForm() {
-  const { count, crouLength, showForm, slideData, lang } = useMyContext();
-  const [values, setValues] = useState({
-    title: "please wait...",
-    subtitle: "please wait...",
-    description: "please wait...",
-  });
-
-  useEffect(() => {
-    console.log(slideData);
-    if (slideData[lang]) {
-      const title = slideData[lang].title;
-      const subtitle = slideData[lang].subtitle;
-      const description = slideData[lang].description;
-      const newData = {
-        title: title,
-        subtitle: subtitle,
-        description: description,
-      };
-      setValues(newData);
-    }
-
-    // const Title = document.getElementById(`title${count}`);
-    // const subtitle = document.getElementById(`subtitle${count}`);
-    // const description = document.getElementById(`description${count}`);
-  }, [count, crouLength, lang, slideData]);
-
+function TitleAndDescForm({ templateName }) {
+  const {
+    count,
+    crouLength,
+    showForm,
+    slideData,
+    lang,
+    templateDatas,
+    setTemplateDatas,
+  } = useMyContext();
+  const tempData = templateDatas[templateName];
   const handleInput = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const name = event.target.name;
     const value = event.target.value;
-    const data = document.getElementById(`${name}${count}`);
-    if (data?.innerHTML !== undefined) data.innerHTML = value;
-    setValues(() => ({
-      ...values,
-      [name]: value,
-    }));
+    const item = tempData.screenData![lang][count > 1 ? count - 1 : 0];
+    item[name] = value;
+    templateDatas[templateName] = tempData;
+    const newTemplateDatas = { ...templateDatas };
+    setTemplateDatas(newTemplateDatas);
   };
+
+  const title = templateDatas[templateName]
+    ? tempData.screenData![lang][count > 1 ? count - 1 : 0].title
+    : "please wait...";
+
+  const subtitle = templateDatas[templateName]
+    ? tempData.screenData![lang][count > 1 ? count - 1 : 0].subtitle
+    : "please wait...";
+
+  const description = templateDatas[templateName]
+    ? tempData.screenData![lang][count > 1 ? count - 1 : 0].description
+    : "please wait...";
+  // useEffect(() => {}, [templateDatas]);
 
   return (
     <>
@@ -57,9 +53,7 @@ function TitleAndDescForm() {
             name="title"
             id="title"
             placeholder="title..."
-            value={
-              slideData[lang] ? slideData[lang][count].title : "please wait...3"
-            }
+            value={title}
             onChange={handleInput}
           />
         </div>
@@ -72,7 +66,7 @@ function TitleAndDescForm() {
             id="subtitle"
             placeholder="subtitle..."
             className="h-fit"
-            value={values.subtitle}
+            value={subtitle}
             onChange={handleInput}
           />
         </div>
@@ -85,7 +79,7 @@ function TitleAndDescForm() {
             name="description"
             id="description"
             className="resize-none"
-            value={values.description}
+            value={description}
             onChange={handleInput}
           />
         </div>
