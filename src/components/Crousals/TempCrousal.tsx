@@ -9,7 +9,8 @@ interface TempCrousalProps {
 const TempCrousal: React.FC<TempCrousalProps> = ({ templateName }) => {
   const [MyTemplate, setMyTemplate] = useState<React.ReactElement | null>(null);
 
-  const { setCount, setLink, templateDatas, lang, outPutSize } = useMyContext();
+  const { setCount, crouLength, setLink, templateDatas, lang, outPutSize } =
+    useMyContext();
   const importTemplate = async () => {
     setCount(1);
     try {
@@ -43,11 +44,11 @@ const TempCrousal: React.FC<TempCrousalProps> = ({ templateName }) => {
     <Suspense fallback={<div>Loading....</div>}>
       {/* <div>{outPutSize.name}</div> */}
       <div
-        className=" overflow-hidden"
-        style={{
-          width: outPutSize.width / scale,
-          height: outPutSize.height / scale,
-        }}
+        className=" overflow-scroll flex justify-start w-[100%]"
+        // style={{
+        //   width: outPutSize.width / scale,
+        //   height: outPutSize.height / scale,
+        // }}
       >
         {MyTemplate}
       </div>

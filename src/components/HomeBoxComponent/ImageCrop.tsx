@@ -1,6 +1,5 @@
 "use client";
 import { useMyContext } from "@/lib/Context";
-import Image, { ImageProps } from "next/image";
 import {
   Dialog,
   DialogContent,
@@ -21,10 +20,20 @@ import { Slider } from "@/components/ui/slider";
 
 interface ImageCropTypes {
   setFor?: string;
+  templateName?: string;
 }
 
-const ImageCrop: React.FC<ImageCropTypes> = ({ setFor }) => {
-  const { setUserImg, setBg, setMyImg } = useMyContext();
+const ImageCrop: React.FC<ImageCropTypes> = ({ setFor, templateName }) => {
+  const {
+    setUserImg,
+    setBg,
+    lang,
+    count,
+    setMyImg,
+    outPutSize,
+    templateDatas,
+    setTemplateDatas,
+  } = useMyContext();
 
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [rotation, setRotation] = useState(0);
@@ -41,13 +50,13 @@ const ImageCrop: React.FC<ImageCropTypes> = ({ setFor }) => {
 
   useEffect(() => {
     if (setFor === "banner") {
-      setX(16);
-      setY(9);
+      setX(outPutSize.width);
+      setY(outPutSize.height);
     } else if (setFor === "background") {
       setX(9);
       setY(16);
     }
-  }, [src]);
+  }, [src, outPutSize]);
   const showCroppedImage = async () => {
     try {
       const croppedImage = await getCroppedImg(
@@ -60,6 +69,13 @@ const ImageCrop: React.FC<ImageCropTypes> = ({ setFor }) => {
       if (setFor === "userImg") {
         setUserImg(croppedImage);
       } else if (setFor === "banner") {
+        // console.log("templateName:" + templateName);
+        const tempData = templateDatas[templateName ?? ""];
+        const item: any = tempData.screenData![lang][count > 1 ? count - 1 : 0];
+        item.bannerUrl = croppedImage;
+        templateDatas[templateName ?? ""] = tempData;
+        const newTemplateDatas = { ...templateDatas };
+        setTemplateDatas(newTemplateDatas);
         setMyImg(croppedImage);
       } else {
         setBg(croppedImage);
@@ -71,8 +87,20 @@ const ImageCrop: React.FC<ImageCropTypes> = ({ setFor }) => {
 
   const selectImage = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files !== null) {
-      const img: File = event?.target?.files[0];
-      setSrc(URL.createObjectURL(img));
+      const file: File = event?.target?.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        const img = new Image();
+        img.onload = () => {
+          // if (setFor === "banner") {
+          setX(img.width);
+          setY(img.height);
+          // }
+        };
+        img.src = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+      setSrc(URL.createObjectURL(file));
     }
   };
 
@@ -96,7 +124,7 @@ const ImageCrop: React.FC<ImageCropTypes> = ({ setFor }) => {
 
           {src ? (
             <>
-              <div className="relative w-full h-[200px]">
+              <div className="relative w-full h-[400px]">
                 <Cropper
                   image={src}
                   crop={crop}
@@ -142,7 +170,7 @@ const ImageCrop: React.FC<ImageCropTypes> = ({ setFor }) => {
                 type="button"
                 disabled={src.length < 1}
               >
-                Save changes
+                OK
               </Button>
             </DialogClose>
           </DialogFooter>
