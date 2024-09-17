@@ -2,7 +2,7 @@
 "use client";
 
 import { useMyContext } from "@/lib/Context";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import iosImg from "../../../public/ios.jpg";
 import TitleAndDescForm from "../HomeBoxComponent/TitleAndDescForm";
 import AddImage from "../HomeBoxComponent/AddImage";
