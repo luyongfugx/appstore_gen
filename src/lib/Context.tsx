@@ -36,6 +36,8 @@ interface DataContextTypes {
   count: number;
   setCount: (n: any) => void;
   crouLength: number;
+  editing: boolean;
+  setEditting: (n: boolean) => void;
   setCrouLength: (n: number) => void;
   SetCrousalValues: (lang: string, length: number) => void;
 }
@@ -54,7 +56,7 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
 
   const [crouLength, setCrouLength] = useState<number>(1);
   const [lang, setLang] = useState("en");
-
+  const [editing, setEditting] = useState(false);
   // CROUSAL VALUE SETTING FUNCTION
   const SetCrousalValues = (lang: string, length: number) => {
     setLang(lang);
@@ -63,6 +65,8 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <MyContext.Provider
       value={{
+        editing,
+        setEditting,
         outPutSize,
         setOutPutSize,
         lang,
