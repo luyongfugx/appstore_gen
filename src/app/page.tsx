@@ -8,8 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import templateone from "../../public/template1.jpg";
-import templateTwo from "../../public/template2.jpg";
+import templateone from "../../public/temp1.jpg";
 
 export default function Home() {
   return (
@@ -17,14 +16,13 @@ export default function Home() {
       <div className="">
         <Card>
           <CardHeader>
-            <CardTitle>Welcome to CrousalMaker</CardTitle>
+            <CardTitle>Welcome to appstore screen shot gen </CardTitle>
             <CardDescription>
               Click on the template you want to create.
             </CardDescription>
           </CardHeader>
           <CardContent className="flex flex-grid gap-3">
             <CrousalShowCard imgSrc={templateone} pageLink="/TemplateOne" />
-            <CrousalShowCard imgSrc={templateTwo} pageLink="/TemplateTwo" />
           </CardContent>
         </Card>
       </div>

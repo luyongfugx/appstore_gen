@@ -6,8 +6,8 @@ import Provider from "@/components/Provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Crousal Maker",
-  description: "Crousal Maker created by Taqui Imam",
+  title: "appstore screen shots ",
+  description: "appstore screen shots",
 };
 
 export default function RootLayout({

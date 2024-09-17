@@ -4,7 +4,6 @@ import Slidebar from "@/components/slidebarComponents/Slidebar";
 import React from "react";
 
 function page({ params }: { params: { slug: string } }) {
-  // console.log(params.slug);
   const param = params.slug;
   return (
     <>
