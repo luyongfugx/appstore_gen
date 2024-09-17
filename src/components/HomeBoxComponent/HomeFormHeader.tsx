@@ -30,7 +30,6 @@ function HomeFormHeader() {
         const dataUrl = await html2canvas(card as HTMLElement, {
           logging: true,
           useCORS: true,
-          background: "transparent",
           scale: 5,
         });
         const imgUrl = await dataUrl.toDataURL("image/jpeg");
