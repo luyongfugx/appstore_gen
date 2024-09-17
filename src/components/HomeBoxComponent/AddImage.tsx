@@ -4,17 +4,10 @@ import { Trash2 } from "lucide-react";
 import Image from "next/image";
 import { useMyContext } from "@/lib/Context";
 import ImageCrop from "./ImageCrop";
-
+import bannerImg from "../../../public/banner.png";
 function AddImage({ templateName }) {
-  const {
-    banner,
-    count,
-    setMyImg,
-    lang,
-    crouLength,
-    templateDatas,
-    setTemplateDatas,
-  } = useMyContext();
+  const { count, lang, crouLength, templateDatas, setTemplateDatas } =
+    useMyContext();
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -34,7 +27,7 @@ function AddImage({ templateName }) {
         <div className="space-y-1 flex flex-row justify-around ">
           <div className="bg-gray-400 h-14 aspect-video relative">
             <Image
-              src={item.bannerUrl == "" ? banner : item.bannerUrl}
+              src={item.bannerUrl || bannerImg}
               alt="banner"
               className=""
               fill={true}
@@ -42,12 +35,12 @@ function AddImage({ templateName }) {
           </div>
 
           <ImageCrop setFor="banner" templateName={templateName} />
-          <div className="p-1 rounded-md hover:bg-gray-50">
+          {/* <div className="p-1 rounded-md hover:bg-gray-50">
             <Trash2
               className="h-6 w-6 text-red-500"
               onClick={() => setMyImg(banner)}
             />
-          </div>
+          </div> */}
         </div>
       )}
     </>

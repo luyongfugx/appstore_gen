@@ -13,7 +13,7 @@ function page({ params }: { params: { slug: string } }) {
       </header>
       <div className="h-12"></div>
       <main className="h-full w-full flex  items-start justify-start">
-        <Slidebar />
+        <Slidebar templateName={param} />
         <HomeBox mySlug={param} />
       </main>
     </>

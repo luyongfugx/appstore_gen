@@ -2,61 +2,36 @@
 "use client";
 
 import { useMyContext } from "@/lib/Context";
-import { ArrowRight } from "lucide-react";
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import UserHandleCard from "./UserHandleCard";
-import bannerImg from "../../../public/banner.png";
 import iosImg from "../../../public/ios.jpg";
 import TitleAndDescForm from "../HomeBoxComponent/TitleAndDescForm";
 import AddImage from "../HomeBoxComponent/AddImage";
+
 function TemplateOne() {
-  const {
-    templateDatas,
-    slideData,
-    setSlideData,
-    setCrouLength,
-    bgColor,
-    setBgColor,
-    primaryColor,
-    setPrimaryColor,
-    SetCrousalValues,
-    myImg,
-    bg,
-    count,
-    setHaveImg,
-    banner,
-    lang,
-    outPutSize,
-    setShowForm,
-  } = useMyContext();
+  const { templateDatas, setCrouLength, count, lang, outPutSize } =
+    useMyContext();
 
   const scale = 5;
+  const templateName = "TemplateOne";
   const onCrousalLoad = () => {
-    const tempD = templateDatas["TemplateOne"];
+    const tempD = templateDatas[templateName];
     setCrouLength(tempD.screenData![lang].length);
-    setBgColor(tempD.defaultBg);
-    setPrimaryColor(tempD.primaryColor);
   };
-
-  // OPENING USE-EFFECT
   useEffect(() => {
-    setHaveImg(false);
     onCrousalLoad();
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [templateDatas]);
 
   // CUSTOM INDX
   let indxCount = 0;
-  const tempData = templateDatas["TemplateOne"];
+  const tempData = templateDatas[templateName];
 
   return (
     <>
       {tempData.screenData![lang].map((val, indx) => {
         indxCount = indxCount + 1;
         return (
-          <div className="flex">
+          <div className="flex" key={indx}>
             <div
               className={`${
                 indx == count - 1
@@ -70,16 +45,16 @@ function TemplateOne() {
                 id={`slide${indxCount}`}
                 className={`rounded-sm  overflow-hidden`}
                 style={
-                  bg.length > 1
+                  tempData.bg && tempData?.bg.length > 1
                     ? {
-                        backgroundImage: "url(" + bg + ")",
+                        backgroundImage: "url(" + tempData?.bg + ")",
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                         width: outPutSize.width / scale,
                         height: outPutSize.height / scale,
                       }
                     : {
-                        backgroundColor: tempData.defaultBg,
+                        backgroundColor: tempData.bgColor,
                         width: outPutSize.width / scale,
                         height: outPutSize.height / scale,
                       }
@@ -87,11 +62,11 @@ function TemplateOne() {
               >
                 <div
                   className={`p-2 h-full w-full  relative   rounded-sm flex flex-col items-center justify-center `}
-                  style={{ borderColor: primaryColor }}
+                  style={{ borderColor: tempData.primaryColor }}
                 >
                   <div
                     className="h-full w-full flex justify-start flex-col"
-                    style={{ color: primaryColor }}
+                    style={{ color: tempData.primaryColor }}
                   >
                     <span
                       id={`title${indxCount}  `}
@@ -100,7 +75,7 @@ function TemplateOne() {
                           ? " text-3xl text-center font-bold w-full whitespace-pre-wrap"
                           : "hidden"
                       }
-                      style={{ color: primaryColor }}
+                      style={{ color: tempData.primaryColor }}
                     >
                       {val?.title}
                     </span>
@@ -112,7 +87,7 @@ function TemplateOne() {
                           ? "text-lg text-start font-medium w-full whitespace-pre-wrap mb-2"
                           : "hidden"
                       }
-                      style={{ color: primaryColor }}
+                      style={{ color: tempData.primaryColor }}
                     >
                       {val.subtitle}
                     </span>
@@ -141,8 +116,8 @@ function TemplateOne() {
             </div>
             {indx == count - 1 && (
               <div className="flex flex-col h-full p-3 gap-6 w-[40%]">
-                <TitleAndDescForm templateName={"TemplateOne"} />
-                <AddImage templateName={"TemplateOne"} />
+                <TitleAndDescForm templateName={templateName} />
+                <AddImage templateName={templateName} />
               </div>
             )}
           </div>

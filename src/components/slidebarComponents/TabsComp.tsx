@@ -7,10 +7,19 @@ import { useMyContext } from "@/lib/Context";
 import ImageCrop from "../HomeBoxComponent/ImageCrop";
 import ColorSelector from "./ColorSelector";
 
-function TabsComp() {
-  const { bgColor, primaryColor, setBgColor, setBg, haveImg } = useMyContext();
-  const [key, setKey] = useState(1);
+function TabsComp({ templateName }) {
+  const {
+    count,
+    crouLength,
 
+    lang,
+
+    templateDatas,
+    setTemplateDatas,
+  } = useMyContext();
+
+  const tempData = templateDatas[templateName];
+  const [key, setKey] = useState(1);
   const customColor = [
     { colorCode: "#f87171" },
     { colorCode: "#facc15" },
@@ -21,8 +30,17 @@ function TabsComp() {
   ];
 
   const handleColorBox = (code: string) => {
-    setBg("");
-    setBgColor(code);
+    const value = code;
+    let parsed = "#fff";
+
+    tempData.bgColor = value;
+    // parsed = tinycolor(tempData.bgColor).toHexString();
+
+    templateDatas[templateName] = tempData;
+    const newTemplateDatas = { ...templateDatas };
+    setTemplateDatas(newTemplateDatas);
+    // setBg("");
+    // setBgColor(code);
   };
   return (
     <>
@@ -30,9 +48,7 @@ function TabsComp() {
       <Tabs defaultValue="color" className="max-w-[315px]">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="color">Color</TabsTrigger>
-          <TabsTrigger value="image" disabled={haveImg}>
-            Image
-          </TabsTrigger>
+          <TabsTrigger value="image">Image</TabsTrigger>
         </TabsList>
         <TabsContent value="color">
           <Card>
@@ -53,23 +69,22 @@ function TabsComp() {
                   })}
                 </div>
 
-                {bgColor.length > 1 && (
-                  <ColorSelector
-                    key={"BgColor"}
-                    colorFor="BgColor"
-                    defaultColor={bgColor}
-                  />
-                )}
+                <ColorSelector
+                  key={"BgColor"}
+                  colorFor="BgColor"
+                  templateName={templateName}
+                  defaultColor={tempData.bgColor}
+                />
 
                 <div className="space-y-1">
                   <Label htmlFor="username">Primary Color</Label>
-                  {primaryColor.length > 1 && (
-                    <ColorSelector
-                      key={"PrimaryColor"}
-                      colorFor="PrimaryColor"
-                      defaultColor={primaryColor}
-                    />
-                  )}
+
+                  <ColorSelector
+                    templateName={templateName}
+                    key={"PrimaryColor"}
+                    colorFor="PrimaryColor"
+                    defaultColor={tempData.primaryColor}
+                  />
                 </div>
               </div>
             </CardContent>
@@ -80,7 +95,7 @@ function TabsComp() {
             <CardContent className="space-y-2 ">
               <Label className="text-xs">Image(Recommended: 1200x1500)</Label>
               <div className="space-y-1">
-                <ImageCrop setFor="background" />
+                <ImageCrop setFor="background" templateName={templateName} />
               </div>
               <div className="space-y-1"></div>
             </CardContent>

@@ -72,7 +72,8 @@ export const defaultTemplateDatas: TemplateDatas = {
       ],
     },
     arrow: true,
-    defaultBg: "#000",
+    bg: "",
+    bgColor: "#000",
     primaryColor: "#fff",
   },
 };

@@ -8,15 +8,7 @@ import { Button } from "../ui/Button";
 import { title } from "process";
 
 function TitleAndDescForm({ templateName }) {
-  const {
-    count,
-    crouLength,
-    showForm,
-    slideData,
-    lang,
-    templateDatas,
-    setTemplateDatas,
-  } = useMyContext();
+  const { count, lang, templateDatas, setTemplateDatas } = useMyContext();
   const tempData = templateDatas[templateName];
   const handleInput = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -45,45 +37,44 @@ function TitleAndDescForm({ templateName }) {
 
   return (
     <>
-      {showForm.title === true && (
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="title">Title</Label>
-          <Input
-            type="text"
-            name="title"
-            id="title"
-            placeholder="title..."
-            value={title}
-            onChange={handleInput}
-          />
-        </div>
-      )}
-      {showForm.subtitle === true && (
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="subtitle">Subtitle</Label>
-          <Textarea
-            name="subtitle"
-            id="subtitle"
-            placeholder="subtitle..."
-            className="h-fit"
-            value={subtitle}
-            onChange={handleInput}
-          />
-        </div>
-      )}
-      {showForm.description === true && (
-        <div className="grid w-full gap-1.5">
-          <Label htmlFor="description">Description</Label>
-          <Textarea
-            placeholder="Type your description here."
-            name="description"
-            id="description"
-            className="resize-none"
-            value={description}
-            onChange={handleInput}
-          />
-        </div>
-      )}
+      <div className="grid w-full max-w-sm items-center gap-1.5" key={"title"}>
+        <Label htmlFor="title">Title</Label>
+        <Input
+          type="text"
+          name="title"
+          id="title"
+          placeholder="title..."
+          value={title}
+          onChange={handleInput}
+        />
+      </div>
+
+      <div
+        className="grid w-full max-w-sm items-center gap-1.5"
+        key={"Subtitle"}
+      >
+        <Label htmlFor="subtitle">Subtitle</Label>
+        <Textarea
+          name="subtitle"
+          id="subtitle"
+          placeholder="subtitle..."
+          className="h-fit"
+          value={subtitle}
+          onChange={handleInput}
+        />
+      </div>
+
+      <div className="grid w-full gap-1.5" key={"desc"}>
+        <Label htmlFor="description">Description</Label>
+        <Textarea
+          placeholder="Type your description here."
+          name="description"
+          id="description"
+          className="resize-none"
+          value={description}
+          onChange={handleInput}
+        />
+      </div>
     </>
   );
 }

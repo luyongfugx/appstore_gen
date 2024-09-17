@@ -24,16 +24,8 @@ interface ImageCropTypes {
 }
 
 const ImageCrop: React.FC<ImageCropTypes> = ({ setFor, templateName }) => {
-  const {
-    setUserImg,
-    setBg,
-    lang,
-    count,
-    setMyImg,
-    outPutSize,
-    templateDatas,
-    setTemplateDatas,
-  } = useMyContext();
+  const { lang, count, outPutSize, templateDatas, setTemplateDatas } =
+    useMyContext();
 
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [rotation, setRotation] = useState(0);
@@ -66,9 +58,7 @@ const ImageCrop: React.FC<ImageCropTypes> = ({ setFor, templateName }) => {
       );
       // @ts-ignore
       setCroppedImage(croppedImage);
-      if (setFor === "userImg") {
-        setUserImg(croppedImage);
-      } else if (setFor === "banner") {
+      if (setFor === "banner") {
         // console.log("templateName:" + templateName);
         const tempData = templateDatas[templateName ?? ""];
         const item: any = tempData.screenData![lang][count > 1 ? count - 1 : 0];
@@ -76,9 +66,15 @@ const ImageCrop: React.FC<ImageCropTypes> = ({ setFor, templateName }) => {
         templateDatas[templateName ?? ""] = tempData;
         const newTemplateDatas = { ...templateDatas };
         setTemplateDatas(newTemplateDatas);
-        setMyImg(croppedImage);
+        //setMyImg(croppedImage);
       } else {
-        setBg(croppedImage);
+        const tempData = templateDatas[templateName ?? ""];
+        if (tempData) {
+          tempData.bg = croppedImage as string;
+          templateDatas[templateName ?? ""] = tempData;
+          const newTemplateDatas = { ...templateDatas };
+          setTemplateDatas(newTemplateDatas);
+        }
       }
     } catch (e) {
       console.error(e);
@@ -117,7 +113,10 @@ const ImageCrop: React.FC<ImageCropTypes> = ({ setFor, templateName }) => {
             Upload{" "}
           </Button>
         </DialogTrigger>
-        <DialogContent className=" w-fit min-w-[350px] flex flex-col items-center ">
+        <DialogContent
+          className=" w-fit min-w-[350px] flex flex-col items-center "
+          aria-description="x"
+        >
           <DialogHeader>
             <DialogTitle>Crop</DialogTitle>
           </DialogHeader>
@@ -143,9 +142,11 @@ const ImageCrop: React.FC<ImageCropTypes> = ({ setFor, templateName }) => {
                 <Slider
                   defaultValue={[0]}
                   min={1}
-                  max={100}
+                  max={10}
                   step={0.1}
-                  onValueChange={setZoom}
+                  onValueChange={(nums) => {
+                    setZoom(nums[0]);
+                  }}
                 />
               </div>
               <div className="p-2 flex flex-col mt-2 w-full gap-2">
@@ -155,7 +156,9 @@ const ImageCrop: React.FC<ImageCropTypes> = ({ setFor, templateName }) => {
                   defaultValue={[0]}
                   max={100}
                   step={1}
-                  onValueChange={setRotation}
+                  onValueChange={(nums) => {
+                    setRotation(nums[0]);
+                  }}
                 />
               </div>
             </>

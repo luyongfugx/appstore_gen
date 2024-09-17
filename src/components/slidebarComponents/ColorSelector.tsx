@@ -6,50 +6,67 @@ import { useMyContext } from "@/lib/Context";
 interface ColorSelectorProps {
   defaultColor?: string;
   colorFor: string;
+  templateName: string;
 }
 const ColorSelector: React.FC<ColorSelectorProps> = ({
   defaultColor,
   colorFor,
+  templateName,
 }) => {
-  const { setBgColor, setPrimaryColor, setBg, primaryColor, bgColor } =
-    useMyContext();
+  const { templateDatas, setTemplateDatas } = useMyContext();
+
+  const tempData = templateDatas[templateName];
 
   const selectorRef = useRef<HTMLInputElement>(null);
 
   const onColorSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    setBg("");
+    let parsed = "#fff";
     if (colorFor === "BgColor") {
-      setBgColor(value);
+      tempData.bgColor = value;
+      parsed = tinycolor(tempData.bgColor).toHexString();
     } else if (colorFor === "PrimaryColor") {
-      setPrimaryColor(value);
+      tempData.primaryColor = value;
+      parsed = tinycolor(tempData.primaryColor).toHexString();
+      // setPrimaryColor(value);
+    }
+    templateDatas[templateName] = tempData;
+    const newTemplateDatas = { ...templateDatas };
+    setTemplateDatas(newTemplateDatas);
+    if (selectorRef?.current?.value !== undefined) {
+      selectorRef.current.value = parsed;
     }
   };
   useEffect(() => {
     let parsed = "#fff";
     if (colorFor === "BgColor") {
-      setBgColor(bgColor);
-      parsed = tinycolor(bgColor).toHexString();
+      parsed = tinycolor(tempData.bgColor).toHexString();
     } else if (colorFor === "PrimaryColor") {
-      setPrimaryColor(primaryColor);
-      parsed = tinycolor(primaryColor).toHexString();
+      parsed = tinycolor(tempData.primaryColor).toHexString();
     }
     if (selectorRef?.current?.value !== undefined) {
       selectorRef.current.value = parsed;
     }
-  }, [colorFor, bgColor, primaryColor]);
+  }, [colorFor]);
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setBg("");
+    //setBg("");
     const value = event.target.value;
+    let parsed = "#fff";
     if (colorFor === "BgColor") {
-      setBgColor(value);
+      tempData.bgColor = value;
+      parsed = tinycolor(tempData.bgColor).toHexString();
     } else if (colorFor === "PrimaryColor") {
-      setPrimaryColor(value);
+      tempData.primaryColor = value;
+      parsed = tinycolor(tempData.primaryColor).toHexString();
+      // setPrimaryColor(value);
     }
-    const parsed = tinycolor(value).toHexString();
-    if (selectorRef?.current?.value !== undefined)
+    templateDatas[templateName] = tempData;
+    const newTemplateDatas = { ...templateDatas };
+    setTemplateDatas(newTemplateDatas);
+    if (selectorRef?.current?.value !== undefined) {
       selectorRef.current.value = parsed;
+    }
   };
 
   return (
@@ -57,13 +74,16 @@ const ColorSelector: React.FC<ColorSelectorProps> = ({
       <Input
         type="text"
         onChange={handleInput}
-        value={colorFor === "BgColor" ? bgColor : primaryColor}
-        defaultValue={colorFor === "BgColor" ? bgColor : primaryColor}
+        value={
+          colorFor === "BgColor" ? tempData.bgColor : tempData.primaryColor
+        }
         className="w-full"
       />
       <Input
         type="color"
-        defaultValue={colorFor === "BgColor" ? bgColor : primaryColor}
+        defaultValue={
+          colorFor === "BgColor" ? tempData.bgColor : tempData.primaryColor
+        }
         ref={selectorRef}
         onChange={onColorSelect}
         className="absolute p-0 border-none outline-none  right-0 top-0 m-1 w-9 h-8"
