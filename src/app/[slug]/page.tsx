@@ -6,16 +6,15 @@ import React from "react";
 function page({ params }: { params: { slug: string } }) {
   const param = params.slug;
   return (
-    <>
-      <header className="py-5 bg-gray-200  fixed h-12 w-full flex justify-end ">
+    <div className="flex h-screen flex-col">
+      <header className="z-50 flex h-[60px] shrink-0 items-center border-b bg-background px-4">
         <NavHeader />
       </header>
-      <div className="h-12"></div>
-      <main className="h-full w-full flex  items-start justify-start">
+      <main className="flex h-full w-full overflow-hidden">
         <Slidebar templateName={param} />
         <HomeBox mySlug={param} />
       </main>
-    </>
+    </div>
   );
 }
 

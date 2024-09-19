@@ -44,64 +44,73 @@ function TabsComp({ templateName }) {
   };
   return (
     <>
-      <Label htmlFor="name">Background</Label>
-      <Tabs defaultValue="color" className="max-w-[315px]">
-        <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="color">Color</TabsTrigger>
-          <TabsTrigger value="image">Image</TabsTrigger>
-        </TabsList>
-        <TabsContent value="color">
-          <Card>
-            <CardContent className="space-y-2">
-              <div className="space-y-1">
-                <div className="flex flex-row justify-between py-3">
-                  {customColor.map((itm, indx) => {
-                    return (
-                      <div
-                        className={`h-8 w-8  rounded-md cursor-pointer hover:border`}
-                        style={{ backgroundColor: itm.colorCode }}
-                        key={indx}
-                        onClick={() => handleColorBox(itm.colorCode)}
-                      >
-                        {" "}
-                      </div>
-                    );
-                  })}
-                </div>
+      <div className="w-full max-w-sm items-center gap-1.5 justify-start ">
+        <h1 className="w-full text-center">background</h1>
+        <div className="w-full flex justify-center mt-2">
+          <Tabs defaultValue="color" className="w-[90%]">
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="color">Color</TabsTrigger>
+              <TabsTrigger value="image">Image</TabsTrigger>
+            </TabsList>
+            <TabsContent value="color">
+              <Card>
+                <CardContent className="space-y-2">
+                  <div className="space-y-1">
+                    <div className="flex flex-row justify-between py-3">
+                      {customColor.map((itm, indx) => {
+                        return (
+                          <div
+                            className={`h-8 w-8  rounded-md cursor-pointer hover:border`}
+                            style={{ backgroundColor: itm.colorCode }}
+                            key={indx}
+                            onClick={() => handleColorBox(itm.colorCode)}
+                          >
+                            {" "}
+                          </div>
+                        );
+                      })}
+                    </div>
 
-                <ColorSelector
-                  key={"BgColor"}
-                  colorFor="BgColor"
-                  templateName={templateName}
-                  defaultColor={tempData.bgColor}
-                />
+                    <ColorSelector
+                      key={"BgColor"}
+                      colorFor="BgColor"
+                      templateName={templateName}
+                      defaultColor={tempData.bgColor}
+                    />
 
-                <div className="space-y-1">
-                  <Label htmlFor="username">Primary Color</Label>
+                    <div className="space-y-1">
+                      <Label htmlFor="username">Primary Color</Label>
 
-                  <ColorSelector
-                    templateName={templateName}
-                    key={"PrimaryColor"}
-                    colorFor="PrimaryColor"
-                    defaultColor={tempData.primaryColor}
-                  />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-        <TabsContent value="image">
-          <Card>
-            <CardContent className="space-y-2 ">
-              <Label className="text-xs">Image(Recommended: 1200x1500)</Label>
-              <div className="space-y-1">
-                <ImageCrop setFor="background" templateName={templateName} />
-              </div>
-              <div className="space-y-1"></div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-      </Tabs>
+                      <ColorSelector
+                        templateName={templateName}
+                        key={"PrimaryColor"}
+                        colorFor="PrimaryColor"
+                        defaultColor={tempData.primaryColor}
+                      />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+            <TabsContent value="image">
+              <Card>
+                <CardContent className="space-y-2 ">
+                  <Label className="text-xs">
+                    Image(Recommended: 1200x1500)
+                  </Label>
+                  <div className="space-y-1">
+                    <ImageCrop
+                      setFor="background"
+                      templateName={templateName}
+                    />
+                  </div>
+                  <div className="space-y-1"></div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
+        </div>
+      </div>
     </>
   );
 }

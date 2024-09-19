@@ -12,11 +12,9 @@ interface HomeBoxProps {
 
 const HomeBox: React.FC<HomeBoxProps> = ({ mySlug }) => {
   return (
-    <div className="p-4  h-full w-[75%] flex flex-col">
-      <div className="p-3  flex bg-white  border border-input rounded-md">
-        <div className="flex h-full w-full items-start justify-start">
-          <TempCrousal templateName={mySlug} />
-        </div>
+    <div className="border-0 bg-secondary  flex-[68_1_0px] overflow-hidden">
+      <div className="inset-0 ml-[60px] mt-[160px] flex w-full justify-center overflow-hidden md:mt-[60px]">
+        <TempCrousal templateName={mySlug} />
       </div>
     </div>
   );

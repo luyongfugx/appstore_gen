@@ -15,6 +15,8 @@ import {
 } from "@/components/ui/dialog";
 import Image from "next/image";
 import downloadImages from "@/lib/ImageToZip";
+import Output from "./Output";
+import Languages from "./Languages";
 
 function NavHeader() {
   const { count, crouLength, lang, outPutSize } = useMyContext();
@@ -48,8 +50,13 @@ function NavHeader() {
     downloadImages(img, fileName);
   };
   return (
-    <div className="flex flex-row w-12 items-center mr-20">
-      <div className="">
+    <div className="flex w-full items-center">
+      <div className="flex w-32  items-center gap-2.5"></div>
+      <div className="flex-1 h-full flex justify-center gap-2.5">
+        <Output />
+        <Languages />
+      </div>
+      <div className="flex w-32 items-center justify-end gap-2.5">
         <Dialog>
           <DialogTrigger asChild>
             <Button onClick={convertImg} className="p-2">
