@@ -51,7 +51,7 @@ function NavHeader() {
   };
   return (
     <div className="flex w-full items-center">
-      <div className="flex w-32  items-center gap-2.5">
+      <div className="flex w-32  items-center gap-2.5 text-primary">
         <DownloadCloudIcon className="h-8 w-8 " />
       </div>
       <div className="flex-1 h-full flex justify-center gap-2.5">

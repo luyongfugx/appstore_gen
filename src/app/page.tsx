@@ -20,7 +20,9 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       <header className="px-4 lg:px-6 h-14 flex items-center">
         <Link className="flex items-center justify-center" href="#">
-          <span className="ml-2 text-lg font-bold">AppstoreScreenShots</span>
+          <span className="ml-2 text-lg font-bold text-primary">
+            AppstoreScreenShots
+          </span>
         </Link>
         <nav className="ml-auto flex gap-4 sm:gap-6">
           {/* <Link
@@ -44,20 +46,23 @@ export default function Home() {
         </nav>
       </header>
       <main className="flex-1">
-        <section className="w-full py-12 md:py-12 lg:py-24 xl:py-24">
+        <section className="w-full py-12 md:py-12 lg:py-24 xl:py-24 bg-primary text-primary-foreground">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-2">
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
                   Create stunning app screenshots in minutes
                 </h1>
-                <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
+                <p className="mx-auto max-w-[700px] md:text-xl">
                   Elevate your app's presence with professional-grade
                   screenshots. Choose from our templates or customize your own.
                 </p>
               </div>
-              <div className="space-x-4">
-                <Button>
+              <div className="space-x-4 ">
+                <Button
+                  style={{ width: 300, height: 48 }}
+                  className="bg-background text-primary hover:bg-background/90"
+                >
                   <Link href="/TemplateOne">Get Started</Link>
                 </Button>
               </div>
@@ -66,7 +71,7 @@ export default function Home() {
         </section>
         <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
           <div className="container px-4 md:px-6">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center mb-8">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center mb-8 text-primary">
               Choose from our templates
             </h2>
             <div className="flex gap-6 justify-center">
@@ -85,7 +90,7 @@ export default function Home() {
         </section>
         <section className="w-full py-12 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center mb-8">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center mb-8 text-primary">
               What our customers say
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -116,7 +121,9 @@ export default function Home() {
                     <p className="text-gray-500 dark:text-gray-400 mb-2">
                       {testimonial.comment}
                     </p>
-                    <p className="font-semibold">{testimonial.name}</p>
+                    <p className="font-semibold text-primary">
+                      {testimonial.name}
+                    </p>
                   </CardContent>
                 </Card>
               ))}
