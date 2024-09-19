@@ -7,8 +7,9 @@ import { Analytics } from "@vercel/analytics/react";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "appstore screen shots ",
-  description: "appstore screen shots",
+  title: "AppstoreScreenShots  ",
+  description:
+    "appstore ,screenshots, appscreens , Screenshot Creator,Create stunning App Store and Google Play marketing assets ",
 };
 
 export default function RootLayout({
