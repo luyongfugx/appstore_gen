@@ -54,7 +54,7 @@ export default function Home() {
                   Create stunning app screenshots in minutes
                 </h1>
                 <p className="mx-auto max-w-[700px] md:text-xl">
-                  Elevate your app‘s presence with professional-grade
+                  Elevate your app&apos;s presence with professional-grade
                   screenshots. Choose from our templates or customize your own.
                 </p>
               </div>
