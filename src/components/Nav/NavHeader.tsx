@@ -2,7 +2,7 @@
 import { useMyContext } from "@/lib/Context";
 import React, { useRef, useState } from "react";
 import { Button } from "../ui/Button";
-import { FileDown, ImageDown, Loader2 } from "lucide-react";
+import { DownloadCloudIcon, FileDown, ImageDown, Loader2 } from "lucide-react";
 import html2canvas from "html2canvas";
 // import { jsPDF } from "jspdf";
 import {
@@ -51,7 +51,9 @@ function NavHeader() {
   };
   return (
     <div className="flex w-full items-center">
-      <div className="flex w-32  items-center gap-2.5"></div>
+      <div className="flex w-32  items-center gap-2.5">
+        <DownloadCloudIcon className="h-8 w-8 " />
+      </div>
       <div className="flex-1 h-full flex justify-center gap-2.5">
         <Output />
         <Languages />
@@ -60,7 +62,8 @@ function NavHeader() {
         <Dialog>
           <DialogTrigger asChild>
             <Button onClick={convertImg} className="p-2">
-              <ImageDown className="h-8 w-8 " />
+              <ImageDown className="h-8 w-8 " />{" "}
+              <div className="ml-2">Download</div>
             </Button>
           </DialogTrigger>
           <DialogContent className="min-w-[800px] ">

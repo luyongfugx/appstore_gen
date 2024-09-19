@@ -44,7 +44,7 @@ function TemplateOne() {
             <div
               className={`${
                 indx == count - 1
-                  ? "border-red-500 border-dashed border-2 mr-2 overflow-hidden relative"
+                  ? "border-blue-500  border-2 mr-2 overflow-hidden relative"
                   : "mr-2 overflow-hidden relative"
               } `}
               key={indx}
