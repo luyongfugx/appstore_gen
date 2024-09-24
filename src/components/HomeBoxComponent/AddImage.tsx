@@ -27,7 +27,7 @@ function AddImage({ templateName }) {
         <div className="space-y-1 flex flex-row justify-around ">
           <div className="bg-gray-400 h-14 aspect-video relative">
             <Image
-              src={item.bannerUrl || bannerImg}
+              src={item.url || bannerImg}
               alt="banner"
               className=""
               fill={true}

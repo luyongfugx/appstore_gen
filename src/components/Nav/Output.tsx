@@ -43,7 +43,7 @@ function Output() {
   ];
   const { setOutPutSize, outPutSize } = useMyContext();
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("ios5.5");
+  const [value, setValue] = React.useState("ios6.5");
   return (
     <div className="items-center  justify-center flex">
       {<div className="text-left flex mr-2">output size:</div>}

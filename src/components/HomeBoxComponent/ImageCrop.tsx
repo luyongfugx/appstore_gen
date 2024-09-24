@@ -62,7 +62,7 @@ const ImageCrop: React.FC<ImageCropTypes> = ({ setFor, templateName }) => {
         // console.log("templateName:" + templateName);
         const tempData = templateDatas[templateName ?? ""];
         const item: any = tempData.screenData![lang][count > 1 ? count - 1 : 0];
-        item.bannerUrl = croppedImage;
+        item.banner.url = croppedImage;
         templateDatas[templateName ?? ""] = tempData;
         const newTemplateDatas = { ...templateDatas };
         setTemplateDatas(newTemplateDatas);

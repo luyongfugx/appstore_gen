@@ -8,15 +8,8 @@ import ImageCrop from "../HomeBoxComponent/ImageCrop";
 import ColorSelector from "./ColorSelector";
 
 function TabsComp({ templateName }) {
-  const {
-    count,
-    crouLength,
-
-    lang,
-
-    templateDatas,
-    setTemplateDatas,
-  } = useMyContext();
+  const { count, crouLength, lang, templateDatas, setTemplateDatas } =
+    useMyContext();
 
   const tempData = templateDatas[templateName];
   const [key, setKey] = useState(1);
@@ -95,9 +88,7 @@ function TabsComp({ templateName }) {
             <TabsContent value="image">
               <Card>
                 <CardContent className="space-y-2 ">
-                  <Label className="text-xs">
-                    Image(Recommended: 1200x1500)
-                  </Label>
+                  <Label className="text-xs">Image</Label>
                   <div className="space-y-1">
                     <ImageCrop
                       setFor="background"

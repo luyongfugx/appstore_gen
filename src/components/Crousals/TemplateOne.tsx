@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { useMyContext } from "@/lib/Context";
+import { boxData, useMyContext } from "@/lib/Context";
 import React, { useEffect } from "react";
 import iosImg from "../../../public/ios.jpg";
 import TitleAndDescForm from "../HomeBoxComponent/TitleAndDescForm";
@@ -18,6 +18,9 @@ function TemplateOne() {
     outPutSize,
     setEditting,
     editing,
+    editingItem,
+    setEdittingItem,
+    setTemplateDatas,
   } = useMyContext();
   const scale = 5;
   const templateName = "TemplateOne";
@@ -30,27 +33,34 @@ function TemplateOne() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [templateDatas]);
 
+  const setTextValue = (name: string, value: string, index: number) => {
+    const item: boxData[] =
+      tempData.screenData![lang][count > 1 ? count - 1 : 0];
+    item[index].value = value;
+    templateDatas[templateName] = tempData;
+    const newTemplateDatas = { ...templateDatas };
+    setTemplateDatas(newTemplateDatas);
+  };
   // CUSTOM INDX
   let indxCount = 0;
   const tempData = templateDatas[templateName];
 
   return (
     <>
-      {tempData.screenData![lang].map((val, indx) => {
+      {tempData.screenData![lang].map((valArray, ix) => {
         indxCount = indxCount + 1;
-        const x = indx + 1;
         return (
-          <div className="flex" key={indx}>
+          <div className="flex" key={ix}>
             <div
               className={`${
-                indx == count - 1
+                ix == count - 1
                   ? "border-blue-500  border-2 mr-2 overflow-hidden relative"
                   : "mr-2 overflow-hidden relative"
               } `}
-              key={indx}
+              key={ix}
             >
               <div
-                key={indx}
+                key={ix}
                 id={`slide${indxCount}`}
                 className={`rounded-sm  overflow-hidden`}
                 style={
@@ -70,69 +80,62 @@ function TemplateOne() {
                 }
               >
                 <div
-                  className={`p-2 h-full w-full  relative   rounded-sm flex flex-col items-center justify-center `}
+                  key={ix}
+                  className={`p-2 rounded-sm  h-full w-full  relative `}
                   style={{ borderColor: tempData.primaryColor }}
                 >
-                  <div
-                    className="h-full w-full flex justify-start flex-col"
-                    style={{ color: tempData.primaryColor }}
-                  >
-                    <span
-                      id={`title${indxCount}  `}
-                      className={
-                        val?.title !== null
-                          ? " text-3xl text-center font-bold w-full whitespace-pre-wrap"
-                          : "hidden"
-                      }
-                      style={{ color: tempData.primaryColor }}
-                    >
-                      {val?.title}
-                    </span>
-
-                    <span
-                      id={`subtitle${indxCount}`}
-                      className={
-                        val.subtitle !== null
-                          ? "text-lg text-start font-medium w-full whitespace-pre-wrap mb-2"
-                          : "hidden"
-                      }
-                      style={{ color: tempData.primaryColor }}
-                    >
-                      {val.subtitle}
-                    </span>
-
-                    <div
-                      id={`image${indxCount}`}
-                      className={
-                        val?.banner
-                          ? "relative flex w-full justify-center items-center "
-                          : "hidden"
-                      }
-                    >
-                      <img
-                        className="rounded-sm"
-                        src={val.bannerUrl || iosImg.src}
-                        alt="banners"
-                        height={"auto"}
-                        width={"80%"}
-                        id={`slideImg${indxCount}`}
-                      />
-                    </div>
-                  </div>
+                  {valArray.map((val, indx) => {
+                    const x = indx + 1;
+                    return (
+                      <div
+                        key={indx}
+                        contentEditable
+                        onBlur={(evt) => {
+                          setTextValue(val.name, evt.target.innerText, indx);
+                          setEdittingItem("");
+                        }}
+                        id={`${val.name}${indxCount}  `}
+                        onClick={() => {
+                          setEdittingItem(val.name);
+                          setCount(ix + 1);
+                        }}
+                        className={
+                          val?.value !== null
+                            ? `${
+                                editingItem == val.name && ix === count - 1
+                                  ? "border-green-500  border-2"
+                                  : ""
+                              } text-${val?.font?.size} font-${
+                                val?.font?.weight
+                              }  whitespace-pre-wrap cursor-text absolute  overflow-hidden  `
+                            : "hidden"
+                        }
+                        style={{
+                          color: val?.font?.color,
+                          top: val.box.y,
+                          width: val.box.w,
+                          height: val.box.h,
+                          left: val.box.x,
+                        }}
+                      >
+                        {val?.value}
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
 
               <Button
                 onClick={() => {
                   setEditting(true);
-                  setCount(x);
+                  setCount(ix + 1);
                 }}
-                className="absolute flex justify-center items-center right-2 w-10 h-10 rounded-full top-2 bg-gray-500"
+                className="absolute flex justify-center items-center right-2 w-10 h-10 rounded-full top-2"
               >
-                <Edit2Icon className=" h-8 w-8 text-white" />
+                <Edit2Icon className=" h-8 w-8 " />
               </Button>
             </div>
-            {indx == count - 1 && editing && (
+            {ix == count - 1 && editing && (
               <div className="flex flex-col h-full p-3 gap-6 w-[40%]">
                 <TitleAndDescForm templateName={templateName} />
                 <AddImage templateName={templateName} />

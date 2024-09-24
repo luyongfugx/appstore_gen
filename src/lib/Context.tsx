@@ -7,17 +7,44 @@ interface OutPutSize {
   width: number;
   height: number;
 }
+interface box {
+  x: number;
+  y: number;
+  w: any;
+  h: any;
+}
+interface fontStyle {
+  color?: string;
+  size?: string;
+  weight?: string;
+}
+// interface TextData {
+//   name: string;
+//   box: box;
+//   font: fontStyle;
+// }
 
-export type ScreenDatatype = {
-  className?: string;
-  title?: string;
-  subtitle?: string;
-  description?: string;
-  banner: boolean;
-  bannerUrl?: string;
-};
+// interface ImageData {
+//   url?: string;
+//   box: box;
+// }
+
+export interface boxData {
+  type: string;
+  name: string;
+  box: box;
+  font?: fontStyle;
+  value?: string;
+}
+// export type ScreenDatatype = {
+//   className?: string;
+//   title?: TextData;
+//   subtitle?: TextData;
+//   description?: TextData;
+//   banner?: ImageData;
+// };
 export type TemplateData = {
-  screenData?: Record<string, ScreenDatatype[]>;
+  screenData?: Record<string, boxData[][]>;
   arrow?: boolean;
   bg?: string;
   bgColor?: string;
@@ -38,6 +65,9 @@ interface DataContextTypes {
   crouLength: number;
   editing: boolean;
   setEditting: (n: boolean) => void;
+
+  editingItem: string;
+  setEdittingItem: (n: string) => void;
   setCrouLength: (n: number) => void;
   SetCrousalValues: (lang: string, length: number) => void;
 }
@@ -57,6 +87,7 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
   const [crouLength, setCrouLength] = useState<number>(1);
   const [lang, setLang] = useState("en");
   const [editing, setEditting] = useState(false);
+  const [editingItem, setEdittingItem] = useState<string>("title");
   // CROUSAL VALUE SETTING FUNCTION
   const SetCrousalValues = (lang: string, length: number) => {
     setLang(lang);
@@ -65,6 +96,8 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <MyContext.Provider
       value={{
+        editingItem,
+        setEdittingItem,
         editing,
         setEditting,
         outPutSize,
