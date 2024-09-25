@@ -8,14 +8,14 @@ export const defaultTemplateDatas: TemplateDatas = {
             name: "title",
             font: {
               color: "#fff",
-              size: "3xl",
+              size: "base",
               weight: "normal",
             },
             value: "Stand out from the crowd.",
             box: {
               x: 0,
               y: 0,
-              w: "80%",
+              w: "100%",
               h: 100,
             },
             type: "text",
@@ -25,7 +25,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             name: "subtitle",
             font: {
               color: "#fff",
-              size: "3xl",
+              size: "sm",
               weight: "normal",
             },
             value: "Stand out from the crowd.",
@@ -44,7 +44,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             name: "title",
             font: {
               color: "#fff",
-              size: "3xl",
+              size: "base",
               weight: "normal",
             },
             value: "Stand out from the crowd.",
@@ -61,7 +61,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             name: "subtitle",
             font: {
               color: "#fff",
-              size: "3xl",
+              size: "sm",
               weight: "normal",
             },
             value: "Stand out from the crowd.",
@@ -79,7 +79,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             name: "banner",
             font: {
               color: "#fff",
-              size: "3xl",
+              size: "base",
               weight: "normal",
             },
             value: "./ios.jpg",
@@ -100,7 +100,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             name: "title",
             font: {
               color: "#fff",
-              size: "3xl",
+              size: "base",
               weight: "normal",
             },
             value: "TimeGps Camera ",
@@ -116,7 +116,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             name: "subtitle",
             font: {
               color: "#fff",
-              size: "3xl",
+              size: "base",
               weight: "normal",
             },
             value: "the best watermask camera",
@@ -134,7 +134,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             name: "title",
             font: {
               color: "#fff",
-              size: "3xl",
+              size: "base",
               weight: "normal",
             },
             value: "work lite ",
@@ -150,7 +150,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             name: "subtitle",
             font: {
               color: "#fff",
-              size: "3xl",
+              size: "base",
               weight: "normal",
             },
             value: "work lite ",
@@ -167,7 +167,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             name: "banner",
             font: {
               color: "#fff",
-              size: "3xl",
+              size: "base",
               weight: "normal",
             },
             value: "./ios.jpg",

@@ -114,7 +114,7 @@ function TemplateOne() {
                           zIndex: val.zIndex,
                           top: val.box.y,
                           width: val.box.w,
-                          height: val.box.h,
+                          // height: val.box.h,
                           left: val.box.x,
                         }}
                       >
