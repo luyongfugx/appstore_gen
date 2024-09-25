@@ -18,12 +18,8 @@ function NextBackBtn() {
     if (nextSlide?.style !== undefined && prevSlide?.style !== undefined) {
       if (type === "next") {
         setCount((n: any) => n + 1);
-        // prevSlide.style.display = "none";
-        // nextSlide.style.display = "block";
       } else {
         setCount((n: any) => n - 1);
-        // nextSlide.style.display = "block";
-        // prevSlide.style.display = "none";
       }
     }
   };

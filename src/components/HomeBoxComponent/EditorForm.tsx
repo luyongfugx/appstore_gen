@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useEffect, useState } from "react";
 import { Label } from "../ui/label";
@@ -6,8 +7,10 @@ import { Textarea } from "../ui/textarea";
 import { useMyContext } from "@/lib/Context";
 import { Button } from "../ui/Button";
 import { title } from "process";
-
-function TitleAndDescForm({ templateName }) {
+import Image from "next/image";
+import ImageCrop from "./ImageCrop";
+import bannerImg from "../../../public/banner.png";
+function EditorForm({ templateName }) {
   const { count, lang, templateDatas, setTemplateDatas } = useMyContext();
   const tempData = templateDatas[templateName];
   const handleInput = (
@@ -22,27 +25,13 @@ function TitleAndDescForm({ templateName }) {
     const newTemplateDatas = { ...templateDatas };
     setTemplateDatas(newTemplateDatas);
   };
-
-  // const title = templateDatas[templateName]
-  //   ? tempData.screenData![lang][count > 1 ? count - 1 : 0].title?.text
-  //   : "please wait...";
-
-  // const subtitle = templateDatas[templateName]
-  //   ? tempData.screenData![lang][count > 1 ? count - 1 : 0].subtitle?.text
-  //   : "please wait...";
-
-  // const description = templateDatas[templateName]
-  //   ? tempData.screenData![lang][count > 1 ? count - 1 : 0].description?.text
-  //   : "please wait...";
-  // useEffect(() => {}, [templateDatas]);
-
   const items = templateDatas[templateName]
     ? tempData.screenData![lang][count > 1 ? count - 1 : 0]
     : [];
   return (
     <>
       {items.map((item, indx) => {
-        return (
+        return item.type === "text" ? (
           <div
             className="grid w-full max-w-sm items-center gap-1.5"
             key={item.name}
@@ -59,10 +48,23 @@ function TitleAndDescForm({ templateName }) {
               }}
             />
           </div>
+        ) : (
+          <div className=" flex-col  justify-around w-full ">
+            <div className="bg-gray-400 max-h-52 aspect-video relative flex justify-center w-full">
+              <img src={item.value} alt="banner" className="" />
+            </div>
+            <div className="flex justify-center w-full mt-4">
+              <ImageCrop
+                setFor="banner"
+                indx={indx}
+                templateName={templateName}
+              />
+            </div>
+          </div>
         );
       })}
     </>
   );
 }
 
-export default TitleAndDescForm;
+export default EditorForm;

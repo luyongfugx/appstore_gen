@@ -4,10 +4,9 @@
 import { boxData, useMyContext } from "@/lib/Context";
 import React, { useEffect } from "react";
 import iosImg from "../../../public/ios.jpg";
-import TitleAndDescForm from "../HomeBoxComponent/TitleAndDescForm";
-import AddImage from "../HomeBoxComponent/AddImage";
 import { Edit2Icon } from "lucide-react";
 import { Button } from "../ui/Button";
+import EditorForm from "../HomeBoxComponent/EditorForm";
 function TemplateOne() {
   const {
     templateDatas,
@@ -86,7 +85,7 @@ function TemplateOne() {
                 >
                   {valArray.map((val, indx) => {
                     const x = indx + 1;
-                    return (
+                    return val.type == "text" ? (
                       <div
                         key={indx}
                         contentEditable
@@ -107,11 +106,12 @@ function TemplateOne() {
                                   : ""
                               } text-${val?.font?.size} font-${
                                 val?.font?.weight
-                              }  whitespace-pre-wrap cursor-text absolute  overflow-hidden  `
+                              }  whitespace-pre-wrap cursor-text absolute  overflow-hidden ] `
                             : "hidden"
                         }
                         style={{
                           color: val?.font?.color,
+                          zIndex: val.zIndex,
                           top: val.box.y,
                           width: val.box.w,
                           height: val.box.h,
@@ -119,6 +119,40 @@ function TemplateOne() {
                         }}
                       >
                         {val?.value}
+                      </div>
+                    ) : (
+                      <div
+                        id={`${val.name}${indxCount}  `}
+                        key={indx}
+                        onClick={() => {
+                          setEdittingItem(val.name);
+                          setCount(ix + 1);
+                        }}
+                        className={
+                          val?.value
+                            ? `  absolute flex w-full justify-center items-start `
+                            : "hidden"
+                        }
+                        style={{
+                          top: val.box.y,
+                          left: val.box.x,
+                          zIndex: val.zIndex,
+                        }}
+                      >
+                        <img
+                          className={`${
+                            editingItem == val.name && ix === count - 1
+                              ? "border-green-500  border-2"
+                              : ""
+                          } rounded-sm`}
+                          src={val?.value || iosImg.src}
+                          alt={val?.value}
+                          id={`slideImg${indxCount}`}
+                          style={{
+                            width: val.box.w,
+                            height: val.box.h,
+                          }}
+                        />
                       </div>
                     );
                   })}
@@ -137,8 +171,8 @@ function TemplateOne() {
             </div>
             {ix == count - 1 && editing && (
               <div className="flex flex-col h-full p-3 gap-6 w-[40%]">
-                <TitleAndDescForm templateName={templateName} />
-                <AddImage templateName={templateName} />
+                <EditorForm templateName={templateName} />
+                {/* <AddImage templateName={templateName} /> */}
               </div>
             )}
           </div>

@@ -1,9 +1,8 @@
 import React from "react";
-import TitleAndDescForm from "./TitleAndDescForm";
+import TitleAndDescForm from "./EditorForm";
 
 import NextBackBtn from "./NextBackBtn";
 import HomeFormHeader from "./HomeFormHeader";
-import AddImage from "./AddImage";
 import TempCrousal from "../Crousals/TempCrousal";
 
 interface HomeBoxProps {

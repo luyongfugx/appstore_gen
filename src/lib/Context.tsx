@@ -35,6 +35,7 @@ export interface boxData {
   box: box;
   font?: fontStyle;
   value?: string;
+  zIndex?: number;
 }
 // export type ScreenDatatype = {
 //   className?: string;

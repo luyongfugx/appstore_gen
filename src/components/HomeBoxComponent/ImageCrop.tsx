@@ -21,9 +21,14 @@ import { Slider } from "@/components/ui/slider";
 interface ImageCropTypes {
   setFor?: string;
   templateName?: string;
+  indx?: number;
 }
 
-const ImageCrop: React.FC<ImageCropTypes> = ({ setFor, templateName }) => {
+const ImageCrop: React.FC<ImageCropTypes> = ({
+  setFor,
+  templateName,
+  indx,
+}) => {
   const { lang, count, outPutSize, templateDatas, setTemplateDatas } =
     useMyContext();
 
@@ -61,8 +66,9 @@ const ImageCrop: React.FC<ImageCropTypes> = ({ setFor, templateName }) => {
       if (setFor === "banner") {
         // console.log("templateName:" + templateName);
         const tempData = templateDatas[templateName ?? ""];
-        const item: any = tempData.screenData![lang][count > 1 ? count - 1 : 0];
-        item.banner.url = croppedImage;
+        const item: any =
+          tempData.screenData![lang][count > 1 ? count - 1 : 0][indx!];
+        item.value = croppedImage;
         templateDatas[templateName ?? ""] = tempData;
         const newTemplateDatas = { ...templateDatas };
         setTemplateDatas(newTemplateDatas);
