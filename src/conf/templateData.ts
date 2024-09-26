@@ -31,9 +31,9 @@ export const defaultTemplateDatas: TemplateDatas = {
             value: "Stand out from the crowd.",
             box: {
               x: 0,
-              y: 100,
+              y: 400,
               w: "100%",
-              h: 100,
+              h: 300,
             },
             type: "text",
             zIndex: 1,
