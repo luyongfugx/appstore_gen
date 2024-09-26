@@ -17,6 +17,10 @@ function TemplateOne() {
     setCount,
     outPutSize,
     setEditting,
+    moveableId,
+    setMoveableId,
+    editId,
+    setEditId,
     editing,
     editingItem,
     setEdittingItem,
@@ -46,8 +50,7 @@ function TemplateOne() {
   let indxCount = 0;
   const tempData = templateDatas[templateName];
   const [checkInput, setCheckInput] = useState(false);
-  const [moveableId, setMoveableId] = useState<string>("");
-  const [editId, setEditId] = useState<string>("");
+
   return (
     <>
       {tempData.screenData![lang].map((valArray, ix) => {
@@ -248,9 +251,6 @@ function TemplateOne() {
                           setEdittingItem(val.name);
                           setCount(ix + 1);
                           setEditting(true);
-                          // setMoveableId(moveId);
-                          // // setEdittingItem(val.name);
-                          // setCount(ix + 1);
                         }}
                         onDoubleClick={(e: any) => {
                           setMoveableId(moveId);
@@ -296,16 +296,6 @@ function TemplateOne() {
                   })}
                 </div>
               </div>
-
-              {/* <Button
-                onClick={() => {
-                  setEditting(true);
-                  setCount(ix + 1);
-                }}
-                className="absolute flex justify-center items-center right-2 w-10 h-10 rounded-full top-2"
-              >
-                <Edit2Icon className=" h-8 w-8 " />
-              </Button> */}
             </div>
             {ix == count - 1 && editing && (
               <div className="flex flex-col h-full p-3 gap-6 w-[40%]">

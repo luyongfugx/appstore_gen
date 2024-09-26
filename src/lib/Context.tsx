@@ -66,9 +66,12 @@ interface DataContextTypes {
   crouLength: number;
   editing: boolean;
   setEditting: (n: boolean) => void;
-
-  editingItem: string;
   setEdittingItem: (n: string) => void;
+  editingItem: string;
+  editId: string;
+  setEditId: (n: string) => void;
+  moveableId: string;
+  setMoveableId: (n: string) => void;
   setCrouLength: (n: number) => void;
   SetCrousalValues: (lang: string, length: number) => void;
 }
@@ -84,7 +87,8 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
     width: 1242,
     height: 2268,
   });
-
+  const [moveableId, setMoveableId] = useState<string>("");
+  const [editId, setEditId] = useState<string>("");
   const [crouLength, setCrouLength] = useState<number>(1);
   const [lang, setLang] = useState("en");
   const [editing, setEditting] = useState(false);
@@ -97,6 +101,10 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <MyContext.Provider
       value={{
+        editId,
+        setEditId,
+        moveableId,
+        setMoveableId,
         editingItem,
         setEdittingItem,
         editing,
