@@ -33,8 +33,6 @@ function TabsComp({ templateName }) {
     templateDatas[templateName] = tempData;
     const newTemplateDatas = { ...templateDatas };
     setTemplateDatas(newTemplateDatas);
-    // setBg("");
-    // setBgColor(code);
   };
   return (
     <>

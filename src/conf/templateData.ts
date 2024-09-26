@@ -9,7 +9,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             font: {
               color: "#fff",
               size: 24,
-              family: "palatino",
+              family: "Palatino",
               weight: "normal",
               bold: true,
               italic: true,
@@ -30,7 +30,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             name: "subtitle",
             font: {
               color: "#fff",
-              family: "palatino",
+              family: "Palatino",
               size: 16,
               weight: "normal",
               bold: true,
@@ -53,7 +53,7 @@ export const defaultTemplateDatas: TemplateDatas = {
           {
             name: "title",
             font: {
-              family: "palatino",
+              family: "Palatino",
               color: "#fff",
               size: 24,
               weight: "normal",
@@ -78,7 +78,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               color: "#fff",
               size: 16,
               weight: "normal",
-              family: "arial",
+              family: "Palatino",
               bold: true,
               italic: true,
               underline: true,
@@ -101,7 +101,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               color: "#fff",
               size: 24,
               weight: "normal",
-              family: "arial",
+              family: "Arial",
               bold: true,
               italic: true,
               underline: true,
@@ -171,7 +171,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               color: "#fff",
               size: 24,
               weight: "normal",
-              family: "Arial",
+              family: "Palatino",
               bold: true,
               italic: true,
               underline: true,

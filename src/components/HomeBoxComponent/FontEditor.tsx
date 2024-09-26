@@ -213,8 +213,8 @@ const FontEditorToolbar: React.FC<FontProps> = ({
               {fontFamilies.map((font) => (
                 <SelectItem
                   key={font}
-                  // value={font}
-                  value={font.toLowerCase().replace(/\s+/g, "-")}
+                  value={font}
+                  // value={font.toLowerCase().replace(/\s+/g, "-")}
                 >
                   {font}
                 </SelectItem>
