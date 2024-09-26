@@ -56,7 +56,7 @@ const FontEditorToolbar: React.FC<FontProps> = ({
       : [];
 
     items.forEach((im, indx) => {
-      const mId = im.name + count + "" + indx;
+      const mId = im.name + "_" + count + "_" + indx;
       if (mId === moveableId) {
         setItem(im);
         setIx(indx);
@@ -97,7 +97,7 @@ const FontEditorToolbar: React.FC<FontProps> = ({
       ? tempData.screenData![lang][count > 1 ? count - 1 : 0]
       : [];
     items.forEach((im, indx) => {
-      const mId = im.name + count + "" + indx;
+      const mId = im.name + "_" + count + "_" + indx;
       if (mId === moveableId) {
         im.font!.family = family;
         setItem(im);
@@ -113,7 +113,7 @@ const FontEditorToolbar: React.FC<FontProps> = ({
       ? tempData.screenData![lang][count > 1 ? count - 1 : 0]
       : [];
     items.forEach((im, indx) => {
-      const mId = im.name + count + "" + indx;
+      const mId = im.name + "_" + count + "_" + indx;
       if (mId === moveableId) {
         im.font!.bold = false;
         im.font!.italic = false;
@@ -151,7 +151,7 @@ const FontEditorToolbar: React.FC<FontProps> = ({
       ? tempData.screenData![lang][count > 1 ? count - 1 : 0]
       : [];
     items.forEach((im, indx) => {
-      const mId = im.name + count + "" + indx;
+      const mId = im.name + "_" + count + "_" + indx;
       if (mId === moveableId) {
         im.font!.align = align;
         setItem(im);
@@ -167,7 +167,7 @@ const FontEditorToolbar: React.FC<FontProps> = ({
       ? tempData.screenData![lang][count > 1 ? count - 1 : 0]
       : [];
     items.forEach((im, indx) => {
-      const mId = im.name + count + "" + indx;
+      const mId = im.name + "_" + count + "_" + indx;
       if (mId === moveableId) {
         im.font!.size = size;
         setItem(im);

@@ -149,7 +149,20 @@ function TemplateOne() {
                       clientX,
                       clientY,
                     }: any) => {
-                      console.log("onResize", target);
+                      // console.log("onResize", target);
+                      //  const moveId = `${val.name}_${ic}_${indx}`;
+                      const nArray = moveableId.split("_");
+                      const name = nArray[0];
+                      const ic1 = parseInt(nArray[1]);
+                      const indx1 = parseInt(nArray[2]);
+                      const item: boxData[] =
+                        tempData.screenData![lang][ic1 > 1 ? ic1 - 1 : 0];
+                      item[indx1].box.w = width;
+                      item[indx1].box.h = height;
+                      templateDatas[templateName] = tempData;
+                      const newTemplateDatas = { ...templateDatas };
+                      setTemplateDatas(newTemplateDatas);
+                      // console.log(name, ic1, indx1);
                       delta[0] && (target!.style.width = `${width}px`);
                       delta[1] && (target!.style.height = `${height}px`);
                     }}
@@ -228,12 +241,12 @@ function TemplateOne() {
                 >
                   {valArray.map((val, indx) => {
                     const x = indx + 1;
-                    const moveId = `${val.name}${ic}${indx}`;
+                    const moveId = `${val.name}_${ic}_${indx}`;
                     return val.type == "text" ? (
                       <div
                         className={
                           val?.value !== null
-                            ? `  whitespace-pre-wrap flex justify-${val.font?.align} `
+                            ? ` flex absolute justify-${val.font?.align} `
                             : "hidden"
                         }
                         key={indx}
@@ -268,7 +281,10 @@ function TemplateOne() {
                           fontFamily: val?.font?.family,
                           fontStyle: val.font?.italic ? "italic" : "normal",
                           fontWeight: val.font?.bold ? "bolder" : "lighter",
-
+                          textAlign: "center",
+                          top: val.box.y,
+                          left: val.box.x,
+                          width: val.box.w,
                           textDecoration: val.font?.underline
                             ? "underline"
                             : "auto",
@@ -277,7 +293,7 @@ function TemplateOne() {
                         {val?.value}
                       </div>
                     ) : (
-                      <img
+                      <div
                         id={moveId}
                         key={indx}
                         onClick={() => {
@@ -286,27 +302,118 @@ function TemplateOne() {
                           setMoveableId(moveId);
                           setCount(ix + 1);
                         }}
-                        className={`${
-                          editingItem == val.name && ix === count - 1
-                            ? "border-green-500  border-2"
-                            : ""
-                        } rounded-sm`}
-                        src={val?.value || iosImg.src}
-                        alt={val?.value}
+                        className={`rounded-sm absolute `}
                         style={{
                           top: val.box.y,
                           left: val.box.x,
                           width: val.box.w,
                           height: val.box.h,
                         }}
-                      />
+                      >
+                        <div
+                          className={`rounded-sm relative`}
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                          }}
+                        >
+                          <div
+                            className="absolute  p-1"
+                            style={{
+                              top: 0,
+                              left: 0,
+                              width: "100%",
+                              height: val.box.h,
+                            }}
+                          >
+                            <img
+                              className={`absolute`}
+                              src={val?.value || iosImg.src}
+                              alt={val?.value}
+                              style={{
+                                borderRadius: 28,
+                                top: 0,
+                                left: 5,
+                                width: val.box.w - 10,
+                                height: val.box.h,
+                              }}
+                            />
+                          </div>
+                          <div
+                            className="rounded-sm absolute"
+                            style={{
+                              top: 0,
+                              left: 0,
+                              width: "100%",
+                              height: "100%",
+                            }}
+                          >
+                            <div>
+                              <svg
+                                viewBox="0 0 1403 2814"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                {" "}
+                                <g clipPath="url(#clip0_86_55)">
+                                  {" "}
+                                  <rect
+                                    x="50"
+                                    y="30"
+                                    width="1303"
+                                    height="2754"
+                                    rx="170"
+                                    stroke="currentColor"
+                                    strokeWidth="60"
+                                  ></rect>{" "}
+                                  <rect
+                                    x="500"
+                                    y="119"
+                                    width="404"
+                                    height="112"
+                                    rx="56"
+                                    fill="currentColor"
+                                  ></rect>{" "}
+                                  <path
+                                    d="M0 800C0 788.954 8.95431 780 20 780V780V1010V1010C8.95431 1010 0 1001.05 0 990V800Z"
+                                    fill="currentColor"
+                                  ></path>{" "}
+                                  <path
+                                    d="M0 1080C0 1068.95 8.95431 1060 20 1060V1060V1290V1290C8.95431 1290 0 1281.05 0 1270V1080Z"
+                                    fill="currentColor"
+                                  ></path>{" "}
+                                  <path
+                                    d="M0 550C0 538.954 8.95431 530 20 530V530V650V650C8.95431 650 0 641.046 0 630V550Z"
+                                    fill="currentColor"
+                                  ></path>{" "}
+                                  <path
+                                    d="M1383 967V967C1394.05 967 1403 975.954 1403 987V1277C1403 1288.05 1394.05 1297 1383 1297V1297V967Z"
+                                    fill="currentColor"
+                                  ></path>{" "}
+                                </g>{" "}
+                                <defs>
+                                  {" "}
+                                  <clipPath id="clip0_86_55">
+                                    {" "}
+                                    <rect
+                                      width="1403"
+                                      height="2814"
+                                      fill="white"
+                                    ></rect>{" "}
+                                  </clipPath>{" "}
+                                </defs>{" "}
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     );
                   })}
                 </div>
               </div>
             </div>
             {ix == count - 1 && editing && (
-              <div className="flex flex-col h-full p-3 gap-6 w-[40%]">
+              <div className="flex flex-col h-full p-3 gap-6 w-[40%] ">
                 <EditorForm templateName={templateName} />
               </div>
             )}

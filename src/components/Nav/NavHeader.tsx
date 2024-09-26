@@ -19,10 +19,13 @@ import Output from "./Output";
 import Languages from "./Languages";
 
 function NavHeader() {
-  const { count, crouLength, lang, outPutSize } = useMyContext();
+  const { count, crouLength, lang, outPutSize, setEditting, setMoveableId } =
+    useMyContext();
   const [loading, setLoading] = useState(false);
   const [img, setImg] = useState<string[]>([]);
   const convertImg = async () => {
+    setEditting(false);
+    setMoveableId("");
     setLoading(true);
     setImg([]);
     try {
@@ -66,7 +69,7 @@ function NavHeader() {
               <div className="ml-2">Download</div>
             </Button>
           </DialogTrigger>
-          <DialogContent className="min-w-[800px] ">
+          <DialogContent className="max-w-[90%] min-w-[600px] ">
             <DialogHeader>
               <DialogTitle className="flex justify-center">
                 Ready to download ?
@@ -74,7 +77,7 @@ function NavHeader() {
               <DialogDescription className="flex justify-center">
                 {outPutSize.name + "," + lang}
               </DialogDescription>
-              <div className="flex  gap-3   justify-start overflow-x-scroll">
+              <div className="flex  gap-3   justify-start overflow-auto max-w-[90%] min-w-[600px]">
                 {img.map((itm, indx) => {
                   return (
                     <Image

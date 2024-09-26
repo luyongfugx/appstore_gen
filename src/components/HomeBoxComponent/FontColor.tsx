@@ -20,7 +20,7 @@ const FontColorSelector: React.FC<ColorSelectorProps> = ({ templateName }) => {
       ? tempData.screenData![lang][count > 1 ? count - 1 : 0]
       : [];
     items.forEach((im, indx) => {
-      const mId = im.name + count + "" + indx;
+      const mId = im.name + "_" + count + "_" + indx;
       if (mId === moveableId) {
         setItem(im);
         setIx(indx);
@@ -53,7 +53,7 @@ const FontColorSelector: React.FC<ColorSelectorProps> = ({ templateName }) => {
       : [];
 
     items.forEach((im, indx) => {
-      const mId = im.name + count + "" + indx;
+      const mId = im.name + "_" + count + "_" + indx;
       if (mId === moveableId) {
         im.font!.color = value;
         setItem(im);
@@ -79,7 +79,7 @@ const FontColorSelector: React.FC<ColorSelectorProps> = ({ templateName }) => {
       : [];
 
     items.forEach((im, indx) => {
-      const mId = im.name + count + "" + indx;
+      const mId = im.name + "_" + count + "_" + indx;
       if (mId === moveableId) {
         im.font!.color = value;
         setItem(im);
@@ -102,7 +102,7 @@ const FontColorSelector: React.FC<ColorSelectorProps> = ({ templateName }) => {
       : [];
 
     items.forEach((im, indx) => {
-      const mId = im.name + count + "" + indx;
+      const mId = im.name + "_" + count + "_" + indx;
       if (mId === moveableId) {
         im.font!.color = value;
         setItem(im);

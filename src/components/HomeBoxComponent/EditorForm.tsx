@@ -18,28 +18,6 @@ function EditorForm({ templateName }) {
   const { count, lang, templateDatas, setTemplateDatas, moveableId } =
     useMyContext();
 
-  // const customColor = [
-  //   { colorCode: "#f87171" },
-  //   { colorCode: "#facc15" },
-  //   { colorCode: "#60a5fa" },
-  //   { colorCode: "#48dc80" },
-  //   { colorCode: "#c084fc" },
-  //   { colorCode: "#f472b6" },
-  // ];
-  // const handleInput = (
-  //   event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  //   indx: number
-  // ) => {
-  //   const name = event.target.name;
-  //   const value = event.target.value;
-  //   const item = tempData.screenData![lang][count > 1 ? count - 1 : 0];
-  //   item[indx].value = value;
-  //   templateDatas[templateName] = tempData;
-  //   const newTemplateDatas = { ...templateDatas };
-
-  //   setTemplateDatas(newTemplateDatas);
-  // };
-
   const [item, setItem] = useState<any>();
   const [ix, setIx] = useState<number>(0);
 
@@ -49,7 +27,7 @@ function EditorForm({ templateName }) {
       ? tempData.screenData![lang][count > 1 ? count - 1 : 0]
       : [];
     items.forEach((im, indx) => {
-      const mId = im.name + count + "" + indx;
+      const mId = im.name + "_" + count + "_" + indx;
       if (mId === moveableId) {
         setItem(im);
         setIx(indx);
@@ -76,7 +54,6 @@ function EditorForm({ templateName }) {
               <div className="space-y-1">
                 <FontColorSelector
                   key={"BgColor"}
-                  // colorFor="BgColor"
                   templateName={templateName}
                 />
               </div>
