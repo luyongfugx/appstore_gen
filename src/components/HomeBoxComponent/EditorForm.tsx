@@ -18,27 +18,27 @@ function EditorForm({ templateName }) {
   const { count, lang, templateDatas, setTemplateDatas, moveableId } =
     useMyContext();
 
-  const customColor = [
-    { colorCode: "#f87171" },
-    { colorCode: "#facc15" },
-    { colorCode: "#60a5fa" },
-    { colorCode: "#48dc80" },
-    { colorCode: "#c084fc" },
-    { colorCode: "#f472b6" },
-  ];
-  const handleInput = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    indx: number
-  ) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    const item = tempData.screenData![lang][count > 1 ? count - 1 : 0];
-    item[indx].value = value;
-    templateDatas[templateName] = tempData;
-    const newTemplateDatas = { ...templateDatas };
+  // const customColor = [
+  //   { colorCode: "#f87171" },
+  //   { colorCode: "#facc15" },
+  //   { colorCode: "#60a5fa" },
+  //   { colorCode: "#48dc80" },
+  //   { colorCode: "#c084fc" },
+  //   { colorCode: "#f472b6" },
+  // ];
+  // const handleInput = (
+  //   event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  //   indx: number
+  // ) => {
+  //   const name = event.target.name;
+  //   const value = event.target.value;
+  //   const item = tempData.screenData![lang][count > 1 ? count - 1 : 0];
+  //   item[indx].value = value;
+  //   templateDatas[templateName] = tempData;
+  //   const newTemplateDatas = { ...templateDatas };
 
-    setTemplateDatas(newTemplateDatas);
-  };
+  //   setTemplateDatas(newTemplateDatas);
+  // };
 
   const [item, setItem] = useState<any>();
   const [ix, setIx] = useState<number>(0);
