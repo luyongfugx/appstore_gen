@@ -233,7 +233,7 @@ function TemplateOne() {
                       <div
                         className={
                           val?.value !== null
-                            ? ` text-${val?.font?.size} font-${val?.font?.weight}  whitespace-pre-wrap  `
+                            ? `  whitespace-pre-wrap flex justify-${val.font?.align} `
                             : "hidden"
                         }
                         key={indx}
@@ -264,6 +264,14 @@ function TemplateOne() {
                         }}
                         style={{
                           color: val?.font?.color,
+                          fontSize: val?.font?.size,
+                          fontFamily: val?.font?.family,
+                          fontStyle: val.font?.italic ? "italic" : "normal",
+                          fontWeight: val.font?.bold ? "bolder" : "lighter",
+
+                          textDecoration: val.font?.underline
+                            ? "underline"
+                            : "auto",
                         }}
                       >
                         {val?.value}

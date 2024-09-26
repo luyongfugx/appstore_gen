@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { useMyContext } from "@/lib/Context";
 import ImageCrop from "../HomeBoxComponent/ImageCrop";
 import ColorSelector from "./ColorSelector";
+import tinycolor from "tinycolor2";
 
 function TabsComp({ templateName }) {
   const { count, crouLength, lang, templateDatas, setTemplateDatas } =
@@ -27,7 +28,7 @@ function TabsComp({ templateName }) {
     let parsed = "#fff";
 
     tempData.bgColor = value;
-    // parsed = tinycolor(tempData.bgColor).toHexString();
+    parsed = tinycolor(tempData.bgColor).toHexString();
 
     templateDatas[templateName] = tempData;
     const newTemplateDatas = { ...templateDatas };
@@ -70,17 +71,6 @@ function TabsComp({ templateName }) {
                       templateName={templateName}
                       defaultColor={tempData.bgColor}
                     />
-
-                    <div className="space-y-1">
-                      <Label htmlFor="username">Primary Color</Label>
-
-                      <ColorSelector
-                        templateName={templateName}
-                        key={"PrimaryColor"}
-                        colorFor="PrimaryColor"
-                        defaultColor={tempData.primaryColor}
-                      />
-                    </div>
                   </div>
                 </CardContent>
               </Card>

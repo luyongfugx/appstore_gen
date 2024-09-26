@@ -8,8 +8,13 @@ export const defaultTemplateDatas: TemplateDatas = {
             name: "title",
             font: {
               color: "#fff",
-              size: "base",
+              size: 24,
+              family: "palatino",
               weight: "normal",
+              bold: true,
+              italic: true,
+              underline: true,
+              align: "center",
             },
             value: "Stand out from the crowd.",
             box: {
@@ -25,8 +30,13 @@ export const defaultTemplateDatas: TemplateDatas = {
             name: "subtitle",
             font: {
               color: "#fff",
-              size: "sm",
+              family: "palatino",
+              size: 16,
               weight: "normal",
+              bold: true,
+              italic: true,
+              underline: true,
+              align: "center",
             },
             value: "Stand out from the crowd.",
             box: {
@@ -43,9 +53,14 @@ export const defaultTemplateDatas: TemplateDatas = {
           {
             name: "title",
             font: {
+              family: "palatino",
               color: "#fff",
-              size: "base",
+              size: 24,
               weight: "normal",
+              bold: true,
+              italic: true,
+              underline: true,
+              align: "center",
             },
             value: "Stand out from the crowd.",
             box: {
@@ -61,8 +76,13 @@ export const defaultTemplateDatas: TemplateDatas = {
             name: "subtitle",
             font: {
               color: "#fff",
-              size: "sm",
+              size: 16,
               weight: "normal",
+              family: "arial",
+              bold: true,
+              italic: true,
+              underline: true,
+              align: "center",
             },
             value: "Stand out from the crowd.",
             zIndex: 1,
@@ -79,8 +99,13 @@ export const defaultTemplateDatas: TemplateDatas = {
             name: "banner",
             font: {
               color: "#fff",
-              size: "base",
+              size: 24,
               weight: "normal",
+              family: "arial",
+              bold: true,
+              italic: true,
+              underline: true,
+              align: "center",
             },
             value: "./ios.jpg",
             box: {
@@ -100,8 +125,13 @@ export const defaultTemplateDatas: TemplateDatas = {
             name: "title",
             font: {
               color: "#fff",
-              size: "base",
+              size: 24,
               weight: "normal",
+              family: "Arial",
+              bold: true,
+              italic: true,
+              underline: true,
+              align: "center",
             },
             value: "TimeGps Camera ",
             box: {
@@ -116,8 +146,13 @@ export const defaultTemplateDatas: TemplateDatas = {
             name: "subtitle",
             font: {
               color: "#fff",
-              size: "base",
+              size: 24,
               weight: "normal",
+              family: "Arial",
+              bold: true,
+              italic: true,
+              underline: true,
+              align: "center",
             },
             value: "the best watermask camera",
             box: {
@@ -134,8 +169,13 @@ export const defaultTemplateDatas: TemplateDatas = {
             name: "title",
             font: {
               color: "#fff",
-              size: "base",
+              size: 24,
               weight: "normal",
+              family: "Arial",
+              bold: true,
+              italic: true,
+              underline: true,
+              align: "center",
             },
             value: "work lite ",
             box: {
@@ -150,8 +190,13 @@ export const defaultTemplateDatas: TemplateDatas = {
             name: "subtitle",
             font: {
               color: "#fff",
-              size: "base",
+              size: 24,
               weight: "normal",
+              family: "Palatino",
+              bold: true,
+              italic: true,
+              underline: true,
+              align: "center",
             },
             value: "work lite ",
             box: {
@@ -167,8 +212,13 @@ export const defaultTemplateDatas: TemplateDatas = {
             name: "banner",
             font: {
               color: "#fff",
-              size: "base",
+              size: 24,
               weight: "normal",
+              family: "Arial",
+              bold: true,
+              italic: true,
+              underline: true,
+              align: "center",
             },
             value: "./ios.jpg",
             box: {

@@ -13,10 +13,21 @@ interface box {
   w: any;
   h: any;
 }
+// fontFamily?: string;
+// fontSize?: number;
+// fontBold?: string;
+// fontItalic?: string;
+// fontUnderline?: string;
+// fontAlign?: string;
 interface fontStyle {
+  family?: string;
   color?: string;
-  size?: string;
+  size?: number;
   weight?: string;
+  bold?: boolean;
+  italic?: boolean;
+  underline?: boolean;
+  align?: string;
 }
 // interface TextData {
 //   name: string;
