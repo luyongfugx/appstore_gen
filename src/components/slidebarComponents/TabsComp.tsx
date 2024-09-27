@@ -7,10 +7,20 @@ import { useMyContext } from "@/lib/Context";
 import ImageCrop from "../HomeBoxComponent/ImageCrop";
 import ColorSelector from "./ColorSelector";
 import tinycolor from "tinycolor2";
+import EditorForm from "../HomeBoxComponent/EditorForm";
+import { Separator } from "../ui/separator";
 
 function TabsComp({ templateName }) {
-  const { count, crouLength, lang, templateDatas, setTemplateDatas } =
-    useMyContext();
+  const {
+    count,
+    crouLength,
+    lang,
+    templateDatas,
+    setTemplateDatas,
+    editing,
+    moveableId,
+    editingItem,
+  } = useMyContext();
 
   const tempData = templateDatas[templateName];
   const [key, setKey] = useState(1);
@@ -34,6 +44,23 @@ function TabsComp({ templateName }) {
     const newTemplateDatas = { ...templateDatas };
     setTemplateDatas(newTemplateDatas);
   };
+
+  const [item, setItem] = useState<any>();
+  const [ix, setIx] = useState<number>(0);
+
+  useEffect(() => {
+    const tempData = templateDatas[templateName];
+    const items = templateDatas[templateName]
+      ? tempData.screenData![lang][count > 1 ? count - 1 : 0]
+      : [];
+    items.forEach((im, indx) => {
+      const mId = im.name + "_" + count + "_" + indx;
+      if (mId === moveableId) {
+        setItem(im);
+        setIx(indx);
+      }
+    });
+  }, [moveableId, item, ix, count, templateDatas, lang, templateName]);
   return (
     <>
       <div className="w-full max-w-sm items-center gap-1.5 justify-start ">
@@ -89,6 +116,17 @@ function TabsComp({ templateName }) {
             </TabsContent>
           </Tabs>
         </div>
+        {editing && (
+          <>
+            <Separator className="my-4" />
+            <h1 className="w-full text-center">
+              {item && item.type === "text" ? "fontStyle" : "image"}
+            </h1>
+            <div className="w-full flex justify-center mt-2 ">
+              <EditorForm templateName={templateName} />
+            </div>
+          </>
+        )}
       </div>
     </>
   );

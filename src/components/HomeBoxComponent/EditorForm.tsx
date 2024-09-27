@@ -37,32 +37,29 @@ function EditorForm({ templateName }) {
   return (
     <>
       {item && item.type === "text" ? (
-        <Card className="w-[300px] p-4">
-          <Tabs defaultValue="font" className="w-full">
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="font">font</TabsTrigger>
-              <TabsTrigger value="color">color</TabsTrigger>
-            </TabsList>
-            <TabsContent value="font">
-              <FontEditorToolbar
-                name={item.name}
-                indx={ix}
-                templateName={templateName}
-              />
-            </TabsContent>
-            <TabsContent value="color">
-              <div className="space-y-1">
-                <FontColorSelector
-                  key={"BgColor"}
-                  templateName={templateName}
-                />
-              </div>
-            </TabsContent>
-          </Tabs>
-        </Card>
+        // <Card className="w-[300px] p-4">
+        <Tabs defaultValue="font" className="w-[90%]">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="font">font</TabsTrigger>
+            <TabsTrigger value="color">color</TabsTrigger>
+          </TabsList>
+          <TabsContent value="font">
+            <FontEditorToolbar
+              name={item.name}
+              indx={ix}
+              templateName={templateName}
+            />
+          </TabsContent>
+          <TabsContent value="color">
+            <div className="space-y-1">
+              <FontColorSelector key={"BgColor"} templateName={templateName} />
+            </div>
+          </TabsContent>
+        </Tabs>
       ) : (
+        // </Card>
         item && (
-          <div className=" flex-col  justify-around w-full ">
+          <div className=" flex-col  justify-around w-[90%] ">
             <div className="bg-gray-400 max-h-52 aspect-video relative flex justify-center w-full">
               <img src={item.value} alt="banner" className="" />
             </div>

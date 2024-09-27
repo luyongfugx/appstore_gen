@@ -412,11 +412,11 @@ function TemplateOne() {
                 </div>
               </div>
             </div>
-            {ix == count - 1 && editing && (
+            {/* {ix == count - 1 && editing && (
               <div className="flex flex-col h-full p-3 gap-6 w-[40%] ">
                 <EditorForm templateName={templateName} />
               </div>
-            )}
+            )} */}
           </div>
         );
       })}
