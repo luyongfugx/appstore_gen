@@ -28,6 +28,21 @@ function Languages() {
       flag: "🇨🇳",
     },
     {
+      value: "vn",
+      label: "Vietnam",
+      flag: "🇻🇳",
+    },
+    {
+      value: "id",
+      label: "Indonesia",
+      flag: "🇮🇩",
+    },
+    {
+      value: "ph",
+      label: "Philippines",
+      flag: "🇵🇭",
+    },
+    {
       value: "en",
       label: "English",
       flag: "🇬🇧",
