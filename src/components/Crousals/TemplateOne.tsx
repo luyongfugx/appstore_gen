@@ -354,9 +354,7 @@ function TemplateOne() {
                                 fill="none"
                                 xmlns="http://www.w3.org/2000/svg"
                               >
-                                {" "}
                                 <g clipPath="url(#clip0_86_55)">
-                                  {" "}
                                   <rect
                                     x="50"
                                     y="30"
@@ -365,7 +363,7 @@ function TemplateOne() {
                                     rx="170"
                                     stroke="currentColor"
                                     strokeWidth="60"
-                                  ></rect>{" "}
+                                  ></rect>
                                   <rect
                                     x="500"
                                     y="119"
@@ -373,35 +371,33 @@ function TemplateOne() {
                                     height="112"
                                     rx="56"
                                     fill="currentColor"
-                                  ></rect>{" "}
+                                  ></rect>
                                   <path
                                     d="M0 800C0 788.954 8.95431 780 20 780V780V1010V1010C8.95431 1010 0 1001.05 0 990V800Z"
                                     fill="currentColor"
-                                  ></path>{" "}
+                                  ></path>
                                   <path
                                     d="M0 1080C0 1068.95 8.95431 1060 20 1060V1060V1290V1290C8.95431 1290 0 1281.05 0 1270V1080Z"
                                     fill="currentColor"
-                                  ></path>{" "}
+                                  ></path>
                                   <path
                                     d="M0 550C0 538.954 8.95431 530 20 530V530V650V650C8.95431 650 0 641.046 0 630V550Z"
                                     fill="currentColor"
-                                  ></path>{" "}
+                                  ></path>
                                   <path
                                     d="M1383 967V967C1394.05 967 1403 975.954 1403 987V1277C1403 1288.05 1394.05 1297 1383 1297V1297V967Z"
                                     fill="currentColor"
-                                  ></path>{" "}
-                                </g>{" "}
+                                  ></path>
+                                </g>
                                 <defs>
-                                  {" "}
                                   <clipPath id="clip0_86_55">
-                                    {" "}
                                     <rect
                                       width="1403"
                                       height="2814"
                                       fill="white"
-                                    ></rect>{" "}
-                                  </clipPath>{" "}
-                                </defs>{" "}
+                                    ></rect>
+                                  </clipPath>
+                                </defs>
                               </svg>
                             </div>
                           </div>
