@@ -42,7 +42,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./ios.jpg",
+            value: "./shot0.jpg",
             box: {
               x: (248 - 156) / 2,
               y: 100,
@@ -76,28 +76,6 @@ export const defaultTemplateDatas: TemplateDatas = {
             type: "text",
             zIndex: 1,
           },
-          // {
-          //   name: "subtitle",
-          //   font: {
-          //     color: "#fff",
-          //     size: 16,
-          //     weight: "normal",
-          //     family: "Palatino",
-          //     bold: true,
-          //     italic: false,
-          //     underline: false,
-          //     align: "center",
-          //   },
-          //   value: "Stand out from the crowd.",
-          //   zIndex: 1,
-          //   box: {
-          //     x: 0,
-          //     y: 100,
-          //     w: "100%",
-          //     h: 100,
-          //   },
-          //   type: "text",
-          // },
 
           {
             name: "banner",
@@ -111,7 +89,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./ios.jpg",
+            value: "./shot1.jpg",
             box: {
               x: (248 - 156) / 2,
               y: 100,
@@ -157,7 +135,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./ios.jpg",
+            value: "./shot2.jpg",
             box: {
               x: (248 - 156) / 2,
               y: 100,
@@ -226,7 +204,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./ios.jpg",
+            value: "./shot3.jpg",
             box: {
               x: (248 - 156) / 2,
               y: 100,
@@ -280,7 +258,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./ios.jpg",
+            value: "./shot0.jpg",
             box: {
               x: (248 - 156) / 2,
               y: 100,
@@ -314,28 +292,6 @@ export const defaultTemplateDatas: TemplateDatas = {
             type: "text",
             zIndex: 1,
           },
-          // {
-          //   name: "subtitle",
-          //   font: {
-          //     color: "#fff",
-          //     size: 16,
-          //     weight: "normal",
-          //     family: "Palatino",
-          //     bold: true,
-          //     italic: false,
-          //     underline: false,
-          //     align: "center",
-          //   },
-          //   value: "Stand out from the crowd.",
-          //   zIndex: 1,
-          //   box: {
-          //     x: 0,
-          //     y: 100,
-          //     w: "100%",
-          //     h: 100,
-          //   },
-          //   type: "text",
-          // },
 
           {
             name: "banner",
@@ -349,7 +305,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./ios.jpg",
+            value: "./shot1.jpg",
             box: {
               x: (248 - 156) / 2,
               y: 100,
@@ -395,7 +351,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./ios.jpg",
+            value: "./shot2.jpg",
             box: {
               x: (248 - 156) / 2,
               y: 100,
@@ -464,7 +420,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./ios.jpg",
+            value: "./shot3.jpg",
             box: {
               x: (248 - 156) / 2,
               y: 100,
@@ -516,7 +472,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./ios.jpg",
+            value: "./shot0.jpg",
             box: {
               x: (248 - 156) / 2,
               y: 100,
@@ -585,7 +541,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./ios.jpg",
+            value: "./shot1.jpg",
             box: {
               x: (248 - 156) / 2,
               y: 100,
@@ -631,7 +587,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./ios.jpg",
+            value: "./shot2.jpg",
             box: {
               x: (248 - 156) / 2,
               y: 100,
@@ -700,7 +656,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./ios.jpg",
+            value: "./shot3.jpg",
             box: {
               x: (248 - 156) / 2,
               y: 100,
@@ -748,7 +704,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./ios.jpg",
+            value: "./shot0.jpg",
             box: {
               x: (248 - 156) / 2,
               y: 100,
@@ -782,28 +738,6 @@ export const defaultTemplateDatas: TemplateDatas = {
             type: "text",
             zIndex: 1,
           },
-          // {
-          //   name: "subtitle",
-          //   font: {
-          //     color: "#fff",
-          //     size: 16,
-          //     weight: "normal",
-          //     family: "Palatino",
-          //     bold: true,
-          //     italic: false,
-          //     underline: false,
-          //     align: "center",
-          //   },
-          //   value: "Stand out from the crowd.",
-          //   zIndex: 1,
-          //   box: {
-          //     x: 0,
-          //     y: 100,
-          //     w: "100%",
-          //     h: 100,
-          //   },
-          //   type: "text",
-          // },
 
           {
             name: "banner",
@@ -817,7 +751,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./ios.jpg",
+            value: "./shot1.jpg",
             box: {
               x: (248 - 156) / 2,
               y: 100,
@@ -863,7 +797,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./ios.jpg",
+            value: "./shot2.jpg",
             box: {
               x: (248 - 156) / 2,
               y: 100,
@@ -932,7 +866,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./ios.jpg",
+            value: "./shot3.jpg",
             box: {
               x: (248 - 156) / 2,
               y: 100,
@@ -980,7 +914,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./ios.jpg",
+            value: "./shot0.jpg",
             box: {
               x: (248 - 156) / 2,
               y: 100,
@@ -1027,7 +961,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./ios.jpg",
+            value: "./shot1.jpg",
             box: {
               x: (248 - 156) / 2,
               y: 100,
@@ -1073,7 +1007,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./ios.jpg",
+            value: "./shot2.jpg",
             box: {
               x: (248 - 156) / 2,
               y: 100,
@@ -1142,7 +1076,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./ios.jpg",
+            value: "./shot3.jpg",
             box: {
               x: (248 - 156) / 2,
               y: 100,
