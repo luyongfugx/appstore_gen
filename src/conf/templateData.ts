@@ -45,7 +45,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot0.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -92,7 +92,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot1.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -138,7 +138,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot2.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -207,7 +207,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot3.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -255,7 +255,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot0.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -302,7 +302,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot1.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -348,7 +348,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot2.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -417,7 +417,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot3.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -465,7 +465,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot0.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -512,7 +512,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot1.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -558,7 +558,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot2.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -627,7 +627,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot3.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -675,7 +675,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot0.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -722,7 +722,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot1.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -768,7 +768,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot2.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -814,7 +814,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot3.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -862,7 +862,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot0.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -909,7 +909,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot1.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -977,7 +977,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot2.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -1046,7 +1046,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot3.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -1094,7 +1094,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot0.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -1141,7 +1141,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot1.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -1187,7 +1187,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot2.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -1256,7 +1256,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot3.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -1310,7 +1310,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot0.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -1357,7 +1357,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot1.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -1403,7 +1403,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot2.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -1472,7 +1472,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot3.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -1524,7 +1524,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot0.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -1593,7 +1593,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot1.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -1639,7 +1639,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot2.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -1708,7 +1708,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot3.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -1756,7 +1756,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot0.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -1803,7 +1803,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot1.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -1849,7 +1849,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot2.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -1918,7 +1918,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot3.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -1966,7 +1966,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot0.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -2013,7 +2013,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot1.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -2059,7 +2059,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot2.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,
@@ -2128,7 +2128,7 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot3.jpg",
             box: {
-              x: (248 - 210) / 2,
+              x: (264 - 210) / 2,
               y: 100,
               w: 210,
               h: 420,

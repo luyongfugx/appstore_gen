@@ -44,7 +44,7 @@ function NavHeader({ templateName }) {
         const canvas = await html2canvas(card as HTMLElement, {
           logging: true,
           useCORS: true,
-          background: tempData.bgColor,
+          // background: tempData.bgColor,
           scale: 5,
         });
         //resize to outPutSize
