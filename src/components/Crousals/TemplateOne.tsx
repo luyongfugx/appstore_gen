@@ -333,9 +333,9 @@ function TemplateOne() {
                               style={{
                                 borderRadius: 28,
                                 top: 0,
-                                left: 5,
-                                width: val.box.w - 10,
-                                height: val.box.h,
+                                left: 10,
+                                width: val.box.w - 20,
+                                height: val.box.h - 5,
                               }}
                             />
                           </div>

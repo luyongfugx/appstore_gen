@@ -47,26 +47,31 @@ function Languages() {
       label: "English",
       flag: "🇬🇧",
     },
-    // {
-    //   value: "es",
-    //   label: "Español",
-    //   flag: "🇪🇸",
-    // },
-    // {
-    //   value: "fr",
-    //   label: "Français",
-    //   flag: "🇫🇷",
-    // },
-    // {
-    //   value: "de",
-    //   label: "Deutsch",
-    //   flag: "🇩🇪",
-    // },
-    // {
-    //   value: "it",
-    //   label: "Italiano",
-    //   flag: "🇮🇹",
-    // },
+    {
+      value: "th",
+      label: "Thailand",
+      flag: "🇹🇭",
+    },
+    {
+      value: "ms",
+      label: "Malaysia",
+      flag: "🇲🇾",
+    },
+    {
+      value: "ru",
+      label: "Russia",
+      flag: "🇷🇺",
+    },
+    {
+      value: "fr",
+      label: "France",
+      flag: "🇫🇷",
+    },
+    {
+      value: "jp",
+      label: "Japan",
+      flag: "🇯🇵",
+    },
   ];
   const { setLang, lang } = useMyContext();
   const [open, setOpen] = React.useState(false);
