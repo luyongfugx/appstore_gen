@@ -8,7 +8,7 @@ function page({ params }: { params: { slug: string } }) {
   return (
     <div className="flex h-screen flex-col">
       <header className="z-50 flex h-[60px] shrink-0 items-center border-b bg-background px-4">
-        <NavHeader />
+        <NavHeader templateName={param} />
       </header>
       <main className="flex h-full w-full overflow-hidden">
         <Slidebar templateName={param} />

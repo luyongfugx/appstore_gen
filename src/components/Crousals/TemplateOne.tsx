@@ -69,7 +69,7 @@ function TemplateOne() {
               <div
                 key={ix}
                 id={`slide${indxCount}`}
-                className={`rounded-sm  overflow-hidden`}
+                className={`rounded-sm  overflow-hidden `}
                 style={
                   tempData.bg && tempData?.bg.length > 1
                     ? {

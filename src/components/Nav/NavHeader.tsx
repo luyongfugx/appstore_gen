@@ -1,6 +1,6 @@
 "use client";
 import { useMyContext } from "@/lib/Context";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button } from "../ui/Button";
 import { DownloadCloudIcon, FileDown, ImageDown, Loader2 } from "lucide-react";
 import html2canvas from "html2canvas";
@@ -18,11 +18,20 @@ import downloadImages from "@/lib/ImageToZip";
 import Output from "./Output";
 import Languages from "./Languages";
 
-function NavHeader() {
-  const { count, crouLength, lang, outPutSize, setEditting, setMoveableId } =
-    useMyContext();
+function NavHeader({ templateName }) {
+  const {
+    count,
+    crouLength,
+    lang,
+    outPutSize,
+    setEditting,
+    setMoveableId,
+    templateDatas,
+  } = useMyContext();
   const [loading, setLoading] = useState(false);
   const [img, setImg] = useState<string[]>([]);
+  const tempData = templateDatas[templateName];
+
   const convertImg = async () => {
     setEditting(false);
     setMoveableId("");
@@ -32,13 +41,21 @@ function NavHeader() {
       for (let i = 1; i <= crouLength; i++) {
         const card = document.getElementById(`slide${i}`);
         if (card?.style !== undefined) card.style.display = "flex";
-        const dataUrl = await html2canvas(card as HTMLElement, {
+        const canvas = await html2canvas(card as HTMLElement, {
           logging: true,
           useCORS: true,
-          //   background: "transparent",
+          background: tempData.bgColor,
           scale: 5,
         });
-        const imgUrl = await dataUrl.toDataURL("image/jpeg");
+        //resize to outPutSize
+        const resizeCanvas = document.createElement("canvas");
+        const ctx = resizeCanvas.getContext("2d");
+        resizeCanvas.width = outPutSize.width;
+        resizeCanvas.height = outPutSize.height;
+        ctx!.fillStyle = tempData.bgColor ?? "transparent";
+        ctx!.fillRect(0, 0, outPutSize.width, outPutSize.height);
+        ctx!.drawImage(canvas, 0, 0, canvas.width, canvas.height);
+        const imgUrl = resizeCanvas.toDataURL("image/jpeg");
         if (imgUrl) setImg((v: any) => [...v, imgUrl]);
       }
     } catch (error) {

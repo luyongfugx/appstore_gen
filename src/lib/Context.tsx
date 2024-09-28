@@ -96,7 +96,7 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
   const [outPutSize, setOutPutSize] = useState<OutPutSize>({
     name: "ios6.5",
     width: 1242,
-    height: 2268,
+    height: 2688,
   });
   const [moveableId, setMoveableId] = useState<string>("");
   const [editId, setEditId] = useState<string>("");

@@ -33,12 +33,12 @@ function Output() {
     },
     {
       data: {
-        name: "ios5.5",
-        width: 1242,
-        height: 2208,
+        name: "ios6.9",
+        width: 1320,
+        height: 2868,
       },
-      value: "ios5.5",
-      label: "ios5.5(1242*2208)",
+      value: "ios6.9",
+      label: "ios6.9(1320*2868)",
     },
   ];
   const { setOutPutSize, outPutSize } = useMyContext();
