@@ -8,12 +8,15 @@ import { Edit2Icon } from "lucide-react";
 import { Button } from "../ui/Button";
 import EditorForm from "../HomeBoxComponent/EditorForm";
 import Moveable from "react-moveable";
+import MockUp from "../screen/mockup";
 function TemplateOne() {
   const {
     templateDatas,
     setCrouLength,
     count,
     lang,
+    keepRatio,
+    setKeepRatio,
     setCount,
     outPutSize,
     setEditting,
@@ -131,7 +134,7 @@ function TemplateOne() {
                       console.log("onDragEnd", target, isDrag);
                     }}
                     /* When resize or scale, keeps a ratio of the width, height. */
-                    // keepRatio={true}
+                    keepRatio={keepRatio}
                     /* resizable*/
                     /* Only one of resizable, scalable, warpable can be used. */
                     resizable={true}
@@ -149,8 +152,6 @@ function TemplateOne() {
                       clientX,
                       clientY,
                     }: any) => {
-                      // console.log("onResize", target);
-                      //  const moveId = `${val.name}_${ic}_${indx}`;
                       const nArray = moveableId.split("_");
                       const name = nArray[0];
                       const ic1 = parseInt(nArray[1]);
@@ -162,7 +163,6 @@ function TemplateOne() {
                       templateDatas[templateName] = tempData;
                       const newTemplateDatas = { ...templateDatas };
                       setTemplateDatas(newTemplateDatas);
-                      // console.log(name, ic1, indx1);
                       delta[0] && (target!.style.width = `${width}px`);
                       delta[1] && (target!.style.height = `${height}px`);
                     }}
@@ -264,6 +264,7 @@ function TemplateOne() {
                           setEdittingItem(val.name);
                           setCount(ix + 1);
                           setEditting(true);
+                          setKeepRatio(false);
                         }}
                         onDoubleClick={(e: any) => {
                           setMoveableId(moveId);
@@ -301,16 +302,29 @@ function TemplateOne() {
                           setEdittingItem(val.name);
                           setMoveableId(moveId);
                           setCount(ix + 1);
+                          setKeepRatio(true);
                         }}
                         className={`rounded-sm absolute `}
                         style={{
                           top: val.box.y,
                           left: val.box.x,
-                          width: val.box.w,
-                          height: val.box.h,
+                          width: (1280 + 50) / 6,
+                          height: (2744 + 30) / 6,
                         }}
                       >
-                        <div
+                        <MockUp
+                          name={"ios6.5"}
+                          width={(1280 + 50) / 6}
+                          height={(2744 + 30) / 6}
+                          mockWidth={1280 + 50}
+                          mockHeight={2744 + 30}
+                          borderWidth={60}
+                          img={val.value!}
+                          btnWidth={20}
+                          // imgWidth={1280}
+                          // imgHeight={2744}
+                        />
+                        {/* <div
                           className={`rounded-sm relative`}
                           style={{
                             width: "100%",
@@ -318,7 +332,7 @@ function TemplateOne() {
                           }}
                         >
                           <div
-                            className="absolute  p-1"
+                            className="absolute"
                             style={{
                               top: 0,
                               left: 0,
@@ -331,12 +345,17 @@ function TemplateOne() {
                               src={val?.value || iosImg.src}
                               alt={val?.value}
                               style={{
-                                borderRadius: 28,
-                                top: 0,
-                                left: 10,
-                                width: val.box.w - 20,
-                                height: val.box.h - 5,
+                                top: 30 * (val.box.w / 2688),
+                                left: 30 * (val.box.h / 1242),
+                                width: val.box.w - 2 * 30 * (val.box.w / 1242),
+                                height: val.box.h - 2 * 30 * (val.box.h / 2688),
                               }}
+                              // style={{
+                              //   top: 30 * (val.box.w / 2688),
+                              //   left: 30 * (val.box.h / 1242),
+                              //   width: val.box.w - 2 * 30 * (val.box.w / 1242),
+                              //   height: val.box.h - 2 * 30 * (val.box.h / 2688),
+                              // }}
                             />
                           </div>
                           <div
@@ -350,7 +369,7 @@ function TemplateOne() {
                           >
                             <div>
                               <svg
-                                viewBox="0 0 1403 2814"
+                                viewBox="0 0 1342 2748"
                                 fill="none"
                                 xmlns="http://www.w3.org/2000/svg"
                               >
@@ -358,8 +377,8 @@ function TemplateOne() {
                                   <rect
                                     x="50"
                                     y="30"
-                                    width="1303"
-                                    height="2754"
+                                    width="1242"
+                                    height="2688"
                                     rx="170"
                                     stroke="currentColor"
                                     strokeWidth="60"
@@ -385,15 +404,15 @@ function TemplateOne() {
                                     fill="currentColor"
                                   ></path>
                                   <path
-                                    d="M1383 967V967C1394.05 967 1403 975.954 1403 987V1277C1403 1288.05 1394.05 1297 1383 1297V1297V967Z"
+                                    d="M1322 967V967C1394.05 967 1342 975.954 1342 987V1277C1342 1288.05 1394.05 1297 1322 1297V1297V967Z"
                                     fill="currentColor"
                                   ></path>
                                 </g>
                                 <defs>
                                   <clipPath id="clip0_86_55">
                                     <rect
-                                      width="1403"
-                                      height="2814"
+                                      width="1342"
+                                      height="2748"
                                       fill="white"
                                     ></rect>
                                   </clipPath>
@@ -401,7 +420,7 @@ function TemplateOne() {
                               </svg>
                             </div>
                           </div>
-                        </div>
+                        </div> */}
                       </div>
                     );
                   })}

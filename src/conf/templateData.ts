@@ -1756,10 +1756,10 @@ export const defaultTemplateDatas: TemplateDatas = {
             },
             value: "./shot0.jpg",
             box: {
-              x: (264 - 210) / 2,
+              x: (264 - 224) / 2,
               y: 100,
-              w: 210,
-              h: 420,
+              w: 224,
+              h: 464,
             },
             type: "image",
             zIndex: 0,

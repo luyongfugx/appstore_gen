@@ -48,6 +48,19 @@ export interface boxData {
   value?: string;
   zIndex?: number;
 }
+
+export interface MockUpData {
+  name: string;
+  width: number;
+  height: number;
+  mockWidth: number;
+  mockHeight: number;
+  borderWidth: number;
+  btnWidth: number;
+  img: string;
+  // imgWidth: number;
+  // imgHeight: number;
+}
 // export type ScreenDatatype = {
 //   className?: string;
 //   title?: TextData;
@@ -80,6 +93,8 @@ interface DataContextTypes {
   setEdittingItem: (n: string) => void;
   editingItem: string;
   editId: string;
+  keepRatio: boolean;
+  setKeepRatio: (n: boolean) => void;
   setEditId: (n: string) => void;
   moveableId: string;
   setMoveableId: (n: string) => void;
@@ -103,6 +118,7 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
   const [crouLength, setCrouLength] = useState<number>(1);
   const [lang, setLang] = useState("en");
   const [editing, setEditting] = useState(false);
+  const [keepRatio, setKeepRatio] = useState(false);
   const [editingItem, setEdittingItem] = useState<string>("title");
   // CROUSAL VALUE SETTING FUNCTION
   const SetCrousalValues = (lang: string, length: number) => {
@@ -112,6 +128,8 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <MyContext.Provider
       value={{
+        keepRatio,
+        setKeepRatio,
         editId,
         setEditId,
         moveableId,
