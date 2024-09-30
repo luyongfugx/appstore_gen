@@ -32,37 +32,40 @@ function NavHeader({ templateName }) {
   const [img, setImg] = useState<string[]>([]);
   const tempData = templateDatas[templateName];
 
-  const convertImg = async () => {
+  const convertImg = () => {
     setEditting(false);
     setMoveableId("");
     setLoading(true);
     setImg([]);
-    try {
-      for (let i = 1; i <= crouLength; i++) {
-        const card = document.getElementById(`slide${i}`);
-        if (card?.style !== undefined) card.style.display = "flex";
-        const canvas = await html2canvas(card as HTMLElement, {
-          logging: true,
-          useCORS: true,
-          // background: tempData.bgColor,
-          scale: 5,
-        });
-        //resize to outPutSize
-        const resizeCanvas = document.createElement("canvas");
-        const ctx = resizeCanvas.getContext("2d");
-        resizeCanvas.width = outPutSize.width;
-        resizeCanvas.height = outPutSize.height;
-        ctx!.fillStyle = tempData.bgColor ?? "transparent";
-        ctx!.fillRect(0, 0, outPutSize.width, outPutSize.height);
-        ctx!.drawImage(canvas, 0, 0, canvas.width, canvas.height);
-        const imgUrl = resizeCanvas.toDataURL("image/jpeg");
-        if (imgUrl) setImg((v: any) => [...v, imgUrl]);
+    setTimeout(async () => {
+      try {
+        for (let i = 1; i <= crouLength; i++) {
+          const card = document.getElementById(`slide${i}`);
+          if (card?.style !== undefined) card.style.display = "flex";
+          const canvas = await html2canvas(card as HTMLElement, {
+            logging: true,
+            useCORS: true,
+            allowTaint: true,
+            // background: tempData.bgColor,
+            scale: 5,
+          });
+          //resize to outPutSize
+          const resizeCanvas = document.createElement("canvas");
+          const ctx = resizeCanvas.getContext("2d");
+          resizeCanvas.width = outPutSize.width;
+          resizeCanvas.height = outPutSize.height;
+          ctx!.fillStyle = tempData.bgColor ?? "transparent";
+          ctx!.fillRect(0, 0, outPutSize.width, outPutSize.height);
+          ctx!.drawImage(canvas, 0, 0, canvas.width, canvas.height);
+          const imgUrl = resizeCanvas.toDataURL("image/jpeg");
+          if (imgUrl) setImg((v: any) => [...v, imgUrl]);
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
+    }, 200);
   };
 
   const saveAsImg = () => {

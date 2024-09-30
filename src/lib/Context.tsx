@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 import defaultImage from "../../public/banner.png";
 import { defaultTemplateDatas } from "@/conf/templateData";
+import { Island_Moments } from "next/font/google";
 
 interface OutPutSize {
   name: string;
@@ -58,6 +59,7 @@ export interface MockUpData {
   borderWidth: number;
   btnWidth: number;
   img: string;
+  showIsLand?: boolean;
   // imgWidth: number;
   // imgHeight: number;
 }

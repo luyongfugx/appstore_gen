@@ -321,6 +321,7 @@ function TemplateOne() {
                           borderWidth={60}
                           img={val.value!}
                           btnWidth={20}
+                          showIsLand={true}
                           // imgWidth={1280}
                           // imgHeight={2744}
                         />

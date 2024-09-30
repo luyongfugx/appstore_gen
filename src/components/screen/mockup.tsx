@@ -1,7 +1,7 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-import { MockUpData, useMyContext } from "@/lib/Context";
+import { MockUpData } from "@/lib/Context";
 
 function MockUp(mockData: MockUpData) {
   return (
@@ -78,22 +78,42 @@ function MockUp(mockData: MockUpData) {
                 }
                 height={mockData.mockHeight - mockData.borderWidth * 2}
               >
-                <div className="w-full h-full overflow-hidden">
+                <div
+                  className="w-full h-full overflow-hidden rounded-[120px]"
+                  style={{
+                    borderRadius: 120,
+                    height: mockData.mockHeight - mockData.borderWidth * 2,
+                    width:
+                      mockData.mockWidth -
+                      mockData.btnWidth * 2 -
+                      mockData.borderWidth * 2,
+                  }}
+                >
                   <img
+                    style={{
+                      borderRadius: 120,
+                      height: mockData.mockHeight - mockData.borderWidth * 2,
+                      width:
+                        mockData.mockWidth -
+                        mockData.btnWidth * 2 -
+                        mockData.borderWidth * 2,
+                    }}
                     src={mockData.img}
                     alt="Screen content"
                     className="object-cover w-full h-full rounded-[120px]"
                   />
                 </div>
               </foreignObject>
-              <rect
-                x="500"
-                y="119"
-                width="404"
-                height="112"
-                rx="56"
-                fill="currentColor"
-              ></rect>
+              {mockData.showIsLand && (
+                <rect
+                  x="500"
+                  y="119"
+                  width="404"
+                  height="112"
+                  rx="56"
+                  fill="currentColor"
+                ></rect>
+              )}
             </g>
             <defs>
               {

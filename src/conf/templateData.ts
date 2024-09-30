@@ -1,4 +1,6 @@
 import { TemplateDatas } from "@/lib/Context";
+import { shot0, shot01, shot1, shot2, shot3 } from "./defaultBase64";
+
 export const defaultTemplateDatas: TemplateDatas = {
   TemplateOne: {
     screenData: {
@@ -43,7 +45,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot0.jpg",
+            value: shot0,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -90,7 +92,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot1.jpg",
+            value: shot1,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -136,7 +138,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot2.jpg",
+            value: shot2,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -205,7 +207,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot3.jpg",
+            value: shot3,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -253,7 +255,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot0.jpg",
+            value: shot0,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -300,7 +302,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot1.jpg",
+            value: shot1,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -346,7 +348,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot2.jpg",
+            value: shot2,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -415,7 +417,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot3.jpg",
+            value: shot3,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -463,7 +465,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot0.jpg",
+            value: shot0,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -510,7 +512,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot1.jpg",
+            value: shot1,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -556,7 +558,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot2.jpg",
+            value: shot2,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -625,7 +627,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot3.jpg",
+            value: shot3,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -673,7 +675,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot0.jpg",
+            value: shot0,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -720,7 +722,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot1.jpg",
+            value: shot1,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -766,7 +768,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot2.jpg",
+            value: shot2,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -812,7 +814,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot3.jpg",
+            value: shot3,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -860,7 +862,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot0.jpg",
+            value: shot0,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -907,7 +909,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot1.jpg",
+            value: shot1,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -975,7 +977,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot2.jpg",
+            value: shot2,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -1044,7 +1046,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot3.jpg",
+            value: shot3,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -1092,7 +1094,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot0.jpg",
+            value: shot0,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -1139,7 +1141,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot1.jpg",
+            value: shot1,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -1185,7 +1187,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot2.jpg",
+            value: shot2,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -1254,7 +1256,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot3.jpg",
+            value: shot3,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -1308,7 +1310,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot0.jpg",
+            value: shot0,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -1355,7 +1357,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot1.jpg",
+            value: shot1,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -1401,7 +1403,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot2.jpg",
+            value: shot2,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -1470,7 +1472,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot3.jpg",
+            value: shot3,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -1522,7 +1524,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot0.jpg",
+            value: shot0,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -1591,7 +1593,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot1.jpg",
+            value: shot1,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -1637,7 +1639,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot2.jpg",
+            value: shot2,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -1706,7 +1708,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot3.jpg",
+            value: shot3,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -1754,7 +1756,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot0.jpg",
+            value: shot0,
             box: {
               x: (264 - 224) / 2,
               y: 100,
@@ -1801,7 +1803,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot1.jpg",
+            value: shot1,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -1847,7 +1849,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot2.jpg",
+            value: shot2,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -1916,7 +1918,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot3.jpg",
+            value: shot3,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -1964,7 +1966,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot0.jpg",
+            value: shot0,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -2011,7 +2013,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot1.jpg",
+            value: shot1,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -2057,7 +2059,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot2.jpg",
+            value: shot2,
             box: {
               x: (264 - 210) / 2,
               y: 100,
@@ -2126,7 +2128,7 @@ export const defaultTemplateDatas: TemplateDatas = {
               underline: false,
               align: "center",
             },
-            value: "./shot3.jpg",
+            value: shot3,
             box: {
               x: (264 - 210) / 2,
               y: 100,
