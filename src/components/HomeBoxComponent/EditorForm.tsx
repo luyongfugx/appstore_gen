@@ -44,7 +44,7 @@ function EditorForm({ templateName }) {
             <TabsTrigger value="color">color</TabsTrigger>
           </TabsList>
           <TabsContent value="font">
-            <FontEditorToolbar indx={ix} templateName={templateName} />
+            <FontEditorToolbar templateName={templateName} />
           </TabsContent>
           <TabsContent value="color">
             <div className="space-y-1">
