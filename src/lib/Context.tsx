@@ -13,6 +13,7 @@ interface box {
   y: number;
   w: any;
   h: any;
+  rotate?: number;
 }
 // fontFamily?: string;
 // fontSize?: number;

@@ -1,10 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { boxData, useMyContext } from "@/lib/Context";
+import { boxData, TemplateData, useMyContext } from "@/lib/Context";
 import React, { useEffect, useRef, useState } from "react";
 import iosImg from "../../../public/ios.jpg";
-import { AlignCenter, Edit2Icon } from "lucide-react";
+import {
+  AlignCenter,
+  BringToFront,
+  Copy,
+  Edit2Icon,
+  ImageDown,
+  SendToBack,
+  Trash2,
+} from "lucide-react";
 import { Button } from "../ui/Button";
 import EditorForm from "../HomeBoxComponent/EditorForm";
 import Moveable, { MoveableManagerInterface, Renderer } from "react-moveable";
@@ -37,21 +45,23 @@ function TemplateOne() {
   };
   useEffect(() => {
     onCrousalLoad();
+    setTempData(templateDatas[templateName]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [templateDatas]);
 
-  const setTextValue = (name: string, value: string, index: number) => {
+  const [tempData, setTempData] = useState<TemplateData>();
+  const setTextValue = (value: string, index: number) => {
     const item: boxData[] =
-      tempData.screenData![lang][count > 1 ? count - 1 : 0];
+      tempData!.screenData![lang][count > 1 ? count - 1 : 0];
     item[index].value = value;
-    templateDatas[templateName] = tempData;
+    templateDatas[templateName] = tempData!;
     const newTemplateDatas = { ...templateDatas };
     setTemplateDatas(newTemplateDatas);
   };
 
   // CUSTOM INDX
   let indxCount = 0;
-  const tempData = templateDatas[templateName];
+  // const tempData = templateDatas[templateName];
   const [checkInput, setCheckInput] = useState(false);
   interface CustomAbleProps {
     moveableId: string;
@@ -70,31 +80,15 @@ function TemplateOne() {
       return React.createElement(
         "div",
         {
-          onClick: () => {
-            const nArray = moveableId.split("_");
-            // const name = nArray[0];
-            const ic = parseInt(nArray[0]);
-            const indx = parseInt(nArray[1]);
-            delete tempData.screenData![lang][ic > 1 ? ic - 1 : 0][indx];
-            templateDatas[templateName] = tempData;
-            const newTemplateDatas = { ...templateDatas };
-            setTemplateDatas(newTemplateDatas);
-            setEditting(false);
-            setMoveableId("");
-            //console.log("delete moveableId:" + moveable.props.moveableId);
-          },
           class: "moveable-dimension",
           style: {
             cursor: "pointer",
             position: "absolute",
-            left: rect.width - 30,
-            top: -30,
-            width: 30,
-            height: 30,
+            left: rect.width - 4 * 32,
+            top: -32,
             background: "#4af",
             borderRadius: "4px",
             // padding: "2px 4px",
-
             color: "white",
             fontSize: "20px",
             whiteSpace: "nowrap",
@@ -109,14 +103,156 @@ function TemplateOne() {
         // </svg>
         <div
           style={{
-            width: 30,
-            height: 30,
             display: "flex",
             justifyContent: "center",
           }}
         >
-          {" "}
-          X
+          <div
+            style={{
+              width: 32,
+              height: 32,
+              display: "flex",
+              borderWidth: 1,
+              borderColor: "white",
+              padding: 2,
+              justifyContent: "center",
+            }}
+            onClick={() => {
+              const nArray = moveableId.split("_");
+              const ic = parseInt(nArray[0]);
+              const indx = parseInt(nArray[1]);
+              const nowItem =
+                tempData!.screenData![lang][ic > 1 ? ic - 1 : 0][indx];
+              const d = {
+                ...nowItem,
+              };
+              delete tempData!.screenData![lang][ic > 1 ? ic - 1 : 0][indx];
+              const newTemplateDatas = { ...templateDatas };
+              const tempData3 = newTemplateDatas[templateName];
+              tempData3.screenData![lang][ic > 1 ? ic - 1 : 0].unshift(d);
+              setTemplateDatas(newTemplateDatas);
+              setTimeout(() => {
+                const nId = ic + "_" + 0;
+                setMoveableId(nId);
+                setEditting(true);
+                setEdittingItem(
+                  tempData3.screenData![lang][ic > 1 ? ic - 1 : 0][0]
+                );
+              }, 200);
+            }}
+          >
+            <SendToBack className="h-7 w-7 " />
+          </div>
+          <div
+            style={{
+              width: 32,
+              height: 32,
+              borderWidth: 1,
+              borderColor: "white",
+              padding: 2,
+              display: "flex",
+              justifyContent: "center",
+            }}
+            onClick={() => {
+              const nArray = moveableId.split("_");
+              const ic = parseInt(nArray[0]);
+              const indx = parseInt(nArray[1]);
+              const nowItem =
+                tempData!.screenData![lang][ic > 1 ? ic - 1 : 0][indx];
+              const d = {
+                ...nowItem,
+              };
+              delete tempData!.screenData![lang][ic > 1 ? ic - 1 : 0][indx];
+              const newTemplateDatas = { ...templateDatas };
+              const tempData3 = newTemplateDatas[templateName];
+              tempData3.screenData![lang][ic > 1 ? ic - 1 : 0].push(d);
+              setTemplateDatas(newTemplateDatas);
+              setTimeout(() => {
+                const len =
+                  tempData3.screenData![lang][ic > 1 ? ic - 1 : 0].length - 1;
+                const nId = ic + "_" + len;
+                setMoveableId(nId);
+                setEditting(true);
+                setEdittingItem(
+                  tempData3.screenData![lang][ic > 1 ? ic - 1 : 0][indx + 1]
+                );
+              }, 200);
+            }}
+          >
+            <BringToFront className="h-7 w-7 " />
+          </div>
+          <div
+            style={{
+              width: 32,
+              height: 32,
+              display: "flex",
+              borderWidth: 1,
+              borderColor: "white",
+              padding: 2,
+              justifyContent: "center",
+            }}
+            onClick={() => {
+              const nArray = moveableId.split("_");
+              const ic = parseInt(nArray[0]);
+              const indx = parseInt(nArray[1]);
+              const nowItem =
+                tempData!.screenData![lang][ic > 1 ? ic - 1 : 0][indx];
+              const d = {
+                ...nowItem,
+              };
+              d.box = {
+                ...d.box,
+              };
+              d.box.x = d.box.x + 30;
+              d.box.y = d.box.y + 100;
+              const newTemplateDatas = { ...templateDatas };
+              const tempData3 = newTemplateDatas[templateName];
+              tempData3.screenData![lang][ic > 1 ? ic - 1 : 0].push(d);
+              setTemplateDatas(newTemplateDatas);
+              setTimeout(() => {
+                const len =
+                  tempData3.screenData![lang][ic > 1 ? ic - 1 : 0].length - 1;
+                const nId = ic + "_" + len;
+                setMoveableId(nId);
+                setEditting(true);
+                setEdittingItem(
+                  tempData3.screenData![lang][ic > 1 ? ic - 1 : 0][indx + 1]
+                );
+              }, 200);
+
+              // setCount(ix + 1);
+              //setKeepRatio(true);
+              //console.log("delete moveableId:" + moveable.props.moveableId);
+            }}
+          >
+            <Copy className="h-7 w-7 " />
+          </div>
+          <div
+            onClick={() => {
+              const nArray = moveableId.split("_");
+              // const name = nArray[0];
+              const ic = parseInt(nArray[0]);
+              const indx = parseInt(nArray[1]);
+              delete tempData!.screenData![lang][ic > 1 ? ic - 1 : 0][indx];
+              templateDatas[templateName] = tempData!;
+              const newTemplateDatas = { ...templateDatas };
+              setTemplateDatas(newTemplateDatas);
+              setEditting(false);
+              setMoveableId("");
+              //console.log("delete moveableId:" + moveable.props.moveableId);
+            }}
+            style={{
+              width: 32,
+              height: 32,
+              display: "flex",
+              borderWidth: 1,
+              borderColor: "white",
+              padding: 2,
+              justifyContent: "center",
+            }}
+          >
+            <Trash2 className="h-7 w-7 " />
+          </div>
         </div>
 
         // Math.round(rect.offsetWidth) + "X" + Math.round(rect.offsetHeight)
@@ -126,280 +262,310 @@ function TemplateOne() {
 
   return (
     <>
-      {tempData.screenData![lang].map((valArray, ix) => {
-        indxCount = indxCount + 1;
-        const ic = indxCount;
-        return (
-          <div className="flex" key={ix}>
-            <div
-              className={`${
-                ix == count - 1
-                  ? " mr-2 overflow-hidden relative"
-                  : "mr-2 overflow-hidden relative"
-              } `}
-              key={ix}
-            >
+      {tempData &&
+        tempData.screenData![lang].map((valArray, ix) => {
+          indxCount = indxCount + 1;
+          const ic = indxCount;
+          return (
+            <div className="flex" key={ix}>
               <div
+                className={`${
+                  ix == count - 1
+                    ? " mr-2 overflow-hidden relative"
+                    : "mr-2 overflow-hidden relative"
+                } `}
                 key={ix}
-                id={`slide${indxCount}`}
-                className={`rounded-sm  overflow-hidden `}
-                style={
-                  tempData.bg && tempData?.bg.length > 1
-                    ? {
-                        backgroundImage: "url(" + tempData?.bg + ")",
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                        width: outPutSize.width / scale,
-                        height: outPutSize.height / scale,
-                      }
-                    : {
-                        backgroundColor: tempData.bgColor,
-                        width: outPutSize.width / scale,
-                        height: outPutSize.height / scale,
-                      }
-                }
               >
-                {ix == count - 1 && editing && moveableId.length > 0 && (
-                  <Moveable
-                    ables={[DimensionViewable]}
-                    dimensionViewable={true}
-                    props={{
-                      moveableId: moveableId,
-                    }}
-                    target={document.getElementById(moveableId)}
-                    container={null}
-                    origin={true}
-                    checkInput={checkInput}
-                    onClick={(e: any) => {
-                      const target = e.inputEvent.target;
-                      if (e.isDouble && target) {
-                        target.focus();
-                        setCheckInput(true);
-                      }
-                    }}
-                    /* Resize event edges */
-                    edge={true}
-                    /* draggable */
-                    draggable={true}
-                    throttleDrag={0}
-                    onDragStart={({ target, clientX, clientY }) => {
-                      // console.log("onDragStart", target);
-                    }}
-                    onDrag={({
-                      target,
-                      beforeDelta,
-                      beforeDist,
-                      left,
-                      top,
-                      right,
-                      bottom,
-                      delta,
-                      dist,
-                      transform,
-                      clientX,
-                      clientY,
-                    }: any) => {
-                      //console.log("onDrag left, top", left, top);
-                      // target!.style.left = `${left}px`;
-                      // target!.style.top = `${top}px`;
-                      //console.log("onDrag translate", dist);
-                      target!.style.transform = transform;
-                    }}
-                    onDragEnd={({ target, isDrag, clientX, clientY }) => {
-                      // console.log("onDragEnd", target, isDrag);
-                    }}
-                    /* When resize or scale, keeps a ratio of the width, height. */
-                    keepRatio={keepRatio}
-                    /* resizable*/
-                    /* Only one of resizable, scalable, warpable can be used. */
-                    resizable={true}
-                    throttleResize={0}
-                    onResizeStart={({ target, clientX, clientY }) => {
-                      // console.log("onResizeStart", target);
-                    }}
-                    onResize={({
-                      target,
-                      width,
-                      height,
-                      dist,
-                      delta,
-                      direction,
-                      clientX,
-                      clientY,
-                    }: any) => {
-                      const nArray = moveableId.split("_");
-                      // const name = nArray[0];
-                      const ic1 = parseInt(nArray[0]);
-                      const indx1 = parseInt(nArray[1]);
-                      const item: boxData[] =
-                        tempData.screenData![lang][ic1 > 1 ? ic1 - 1 : 0];
-                      item[indx1].box.w = width;
-                      item[indx1].box.h = height;
-                      templateDatas[templateName] = tempData;
-                      const newTemplateDatas = { ...templateDatas };
-                      setTemplateDatas(newTemplateDatas);
-                      delta[0] && (target!.style.width = `${width}px`);
-                      delta[1] && (target!.style.height = `${height}px`);
-                    }}
-                    onResizeEnd={({ target, isDrag, clientX, clientY }) => {
-                      // console.log("onResizeEnd", target, isDrag);
-                    }}
-                    /* scalable */
-                    /* Only one of resizable, scalable, warpable can be used. */
-                    // scalable={true}
-                    // throttleScale={0}
-                    // onScaleStart={({ target, clientX, clientY }) => {
-                    //   console.log("onScaleStart", target);
-                    // }}
-                    // onScale={({
-                    //   target,
-                    //   scale,
-                    //   dist,
-                    //   delta,
-                    //   transform,
-                    //   clientX,
-                    //   clientY,
-                    // }: any) => {
-                    //   console.log("onScale scale", scale);
-                    //   target!.style.transform = transform;
-                    // }}
-                    // onScaleEnd={({ target, isDrag, clientX, clientY }) => {
-                    //   console.log("onScaleEnd", target, isDrag);
-                    // }}
-                    /* rotatable */
-                    rotatable={true}
-                    throttleRotate={0}
-                    onRotateStart={({ target, clientX, clientY }) => {
-                      //console.log("onRotateStart", target);
-                    }}
-                    onRotate={({
-                      target,
-                      delta,
-                      dist,
-                      transform,
-                      clientX,
-                      clientY,
-                    }: any) => {
-                      // console.log("onRotate", dist);
-                      target!.style.transform = transform;
-                    }}
-                    onRotateEnd={({ target, isDrag, clientX, clientY }) => {
-                      // console.log("onRotateEnd", target, isDrag);
-                    }}
-                    // Enabling pinchable lets you use events that
-                    // can be used in draggable, resizable, scalable, and rotateable.
-                    pinchable={true}
-                    onPinchStart={({ target, clientX, clientY, datas }) => {
-                      // pinchStart event occur before dragStart, rotateStart, scaleStart, resizeStart
-                      // console.log("onPinchStart");
-                    }}
-                    onPinch={({ target, clientX, clientY, datas }) => {
-                      // pinch event occur before drag, rotate, scale, resize
-                      //console.log("onPinch");
-                    }}
-                    onPinchEnd={({
-                      isDrag,
-                      target,
-                      clientX,
-                      clientY,
-                      datas,
-                    }) => {
-                      // pinchEnd event occur before dragEnd, rotateEnd, scaleEnd, resizeEnd
-                      // console.log("onPinchEnd");
-                    }}
-                  />
-                )}
                 <div
                   key={ix}
-                  className={`p-2 rounded-sm  h-full w-full  relative `}
-                  style={{ borderColor: tempData.primaryColor }}
-                >
-                  {valArray.map((val, indx) => {
-                    const x = indx + 1;
-                    //const moveId = `${val.name}_${ic}_${indx}`;
-                    const moveId = `${ic}_${indx}`;
-                    return val.type == "text" ? (
-                      <div
-                        className={
-                          val?.value !== null
-                            ? ` flex absolute justify-${val.font?.align} `
-                            : "hidden"
+                  id={`slide${indxCount}`}
+                  className={`rounded-sm  overflow-hidden `}
+                  style={
+                    tempData.bg && tempData?.bg.length > 1
+                      ? {
+                          backgroundImage: "url(" + tempData?.bg + ")",
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
+                          width: outPutSize.width / scale,
+                          height: outPutSize.height / scale,
                         }
-                        key={indx}
-                        contentEditable={editId == moveId ? true : false}
-                        onBlur={(evt) => {
-                          setTextValue(val.name, evt.target.innerText, indx);
-                          setEdittingItem("");
-                          setEditId("");
-                          setCheckInput(false);
-                          setMoveableId("");
-                        }}
-                        id={moveId}
-                        onClick={(e) => {
-                          setMoveableId(moveId);
-                          setEdittingItem(val);
-                          setCount(ix + 1);
-                          setEditting(true);
-                          setKeepRatio(false);
-                        }}
-                        onDoubleClick={(e: any) => {
-                          setMoveableId(moveId);
-                          setEditId(moveId);
-                          setEditting(true);
-                          setEdittingItem(val);
-                          setCount(ix + 1);
-                          setTimeout(() => {
-                            e.target.focus();
-                          });
-                        }}
-                        style={{
-                          color: val?.font?.color,
-                          fontSize: val?.font?.size,
-                          fontFamily: val?.font?.family,
-                          fontStyle: val.font?.italic ? "italic" : "normal",
-                          fontWeight: val.font?.bold ? "bolder" : "lighter",
-                          textAlign: "center",
-                          top: val.box.y,
-                          left: val.box.x,
-                          width: val.box.w,
-                          textDecoration: val.font?.underline
-                            ? "underline"
-                            : "auto",
-                        }}
-                      >
-                        {val?.value}
-                      </div>
-                    ) : (
-                      <div
-                        id={moveId}
-                        key={indx}
-                        onClick={() => {
-                          setEditting(true);
-                          setEdittingItem(val);
-                          setMoveableId(moveId);
-                          setCount(ix + 1);
-                          setKeepRatio(true);
-                        }}
-                        className={`rounded-sm absolute `}
-                        style={{
-                          top: val.box.y,
-                          left: val.box.x,
-                          width: (1280 + 50) / 6,
-                          height: (2744 + 30) / 6,
-                        }}
-                      >
-                        <MockUp
-                          name={"ios6.5"}
-                          width={(1280 + 50) / 6}
-                          height={(2744 + 30) / 6}
-                          mockWidth={1280 + 50}
-                          mockHeight={2744 + 30}
-                          borderWidth={60}
-                          img={val.value!}
-                          btnWidth={20}
-                          showIsLand={true}
-                        />
-                        {/* <div
+                      : {
+                          backgroundColor: tempData.bgColor,
+                          width: outPutSize.width / scale,
+                          height: outPutSize.height / scale,
+                        }
+                  }
+                >
+                  {ix == count - 1 && editing && moveableId.length > 0 && (
+                    <Moveable
+                      ables={[DimensionViewable]}
+                      dimensionViewable={true}
+                      props={{
+                        moveableId: moveableId,
+                      }}
+                      target={document.getElementById(moveableId)}
+                      container={null}
+                      origin={true}
+                      checkInput={checkInput}
+                      onClick={(e: any) => {
+                        const target = e.inputEvent.target;
+                        if (e.isDouble && target) {
+                          target.focus();
+                          setCheckInput(true);
+                        }
+                      }}
+                      /* Resize event edges */
+                      edge={true}
+                      /* draggable */
+                      draggable={true}
+                      throttleDrag={0}
+                      onDragStart={({ target, clientX, clientY }) => {
+                        // console.log("onDragStart", target);
+                      }}
+                      onDrag={({
+                        target,
+                        beforeDelta,
+                        beforeDist,
+                        left,
+                        top,
+                        right,
+                        bottom,
+                        delta,
+                        dist,
+                        transform,
+                        clientX,
+                        clientY,
+                      }: any) => {
+                        target!.style.left = `${left}px`;
+                        target!.style.top = `${top}px`;
+                        const nArray = moveableId.split("_");
+                        const ic1 = parseInt(nArray[0]);
+                        const indx1 = parseInt(nArray[1]);
+                        const item: boxData[] =
+                          tempData.screenData![lang][ic1 > 1 ? ic1 - 1 : 0];
+                        item[indx1].box.x = left;
+                        item[indx1].box.y = top;
+                        templateDatas[templateName] = tempData;
+                        const newTemplateDatas = { ...templateDatas };
+                        setTemplateDatas(newTemplateDatas);
+                      }}
+                      onDragEnd={({ target, isDrag, clientX, clientY }) => {
+                        // console.log("onDragEnd", target, isDrag);
+                      }}
+                      /* When resize or scale, keeps a ratio of the width, height. */
+                      keepRatio={keepRatio}
+                      /* resizable*/
+                      /* Only one of resizable, scalable, warpable can be used. */
+                      resizable={true}
+                      throttleResize={0}
+                      onResizeStart={({ target, clientX, clientY }) => {
+                        // console.log("onResizeStart", target);
+                      }}
+                      onResize={({
+                        target,
+                        width,
+                        height,
+                        dist,
+                        delta,
+                        direction,
+                        clientX,
+                        clientY,
+                      }: any) => {
+                        const nArray = moveableId.split("_");
+                        // const name = nArray[0];
+                        const ic1 = parseInt(nArray[0]);
+                        const indx1 = parseInt(nArray[1]);
+                        const item: boxData[] =
+                          tempData.screenData![lang][ic1 > 1 ? ic1 - 1 : 0];
+                        item[indx1].box.w = width;
+                        item[indx1].box.h = height;
+                        templateDatas[templateName] = tempData;
+                        const newTemplateDatas = { ...templateDatas };
+                        setTemplateDatas(newTemplateDatas);
+                        delta[0] && (target!.style.width = `${width}px`);
+                        delta[1] && (target!.style.height = `${height}px`);
+                      }}
+                      onResizeEnd={({ target, isDrag, clientX, clientY }) => {
+                        // console.log("onResizeEnd", target, isDrag);
+                      }}
+                      /* scalable */
+                      /* Only one of resizable, scalable, warpable can be used. */
+                      // scalable={true}
+                      // throttleScale={0}
+                      // onScaleStart={({ target, clientX, clientY }) => {
+                      //   console.log("onScaleStart", target);
+                      // }}
+                      // onScale={({
+                      //   target,
+                      //   scale,
+                      //   dist,
+                      //   delta,
+                      //   transform,
+                      //   clientX,
+                      //   clientY,
+                      // }: any) => {
+                      //   console.log("onScale scale", scale);
+                      //   target!.style.transform = transform;
+                      // }}
+                      // onScaleEnd={({ target, isDrag, clientX, clientY }) => {
+                      //   console.log("onScaleEnd", target, isDrag);
+                      // }}
+                      /* rotatable */
+                      rotatable={true}
+                      throttleRotate={0}
+                      onRotateStart={({ target, clientX, clientY }) => {
+                        //console.log("onRotateStart", target);
+                      }}
+                      onRotate={({
+                        target,
+                        delta,
+                        dist,
+                        transform,
+                        clientX,
+                        clientY,
+                      }: any) => {
+                        const nArray = moveableId.split("_");
+                        // const name = nArray[0];
+                        const ic1 = parseInt(nArray[0]);
+                        const indx1 = parseInt(nArray[1]);
+                        const item: boxData[] =
+                          tempData.screenData![lang][ic1 > 1 ? ic1 - 1 : 0];
+                        item[indx1].box.rotate = dist;
+                        templateDatas[templateName] = tempData;
+                        const newTemplateDatas = { ...templateDatas };
+                        setTemplateDatas(newTemplateDatas);
+                        // console.log(
+                        //   "onRotate",
+                        //   target,
+                        //   delta,
+                        //   dist,
+                        //   transform,
+                        //   clientX,
+                        //   clientY
+                        // );
+                        // target!.style.transform = transform;
+                      }}
+                      onRotateEnd={({ target, isDrag, clientX, clientY }) => {
+                        // console.log("onRotateEnd", target, isDrag);
+                      }}
+                      // Enabling pinchable lets you use events that
+                      // can be used in draggable, resizable, scalable, and rotateable.
+                      pinchable={true}
+                      onPinchStart={({ target, clientX, clientY, datas }) => {
+                        // pinchStart event occur before dragStart, rotateStart, scaleStart, resizeStart
+                        // console.log("onPinchStart");
+                      }}
+                      onPinch={({ target, clientX, clientY, datas }) => {
+                        // pinch event occur before drag, rotate, scale, resize
+                        //console.log("onPinch");
+                      }}
+                      onPinchEnd={({
+                        isDrag,
+                        target,
+                        clientX,
+                        clientY,
+                        datas,
+                      }) => {
+                        // pinchEnd event occur before dragEnd, rotateEnd, scaleEnd, resizeEnd
+                        // console.log("onPinchEnd");
+                      }}
+                    />
+                  )}
+                  <div
+                    key={ix}
+                    className={`p-2 rounded-sm  h-full w-full  relative `}
+                    style={{
+                      borderColor: tempData.primaryColor,
+                    }}
+                  >
+                    {valArray.map((val, indx) => {
+                      const x = indx + 1;
+                      //const moveId = `${val.name}_${ic}_${indx}`;
+                      const moveId = `${ic}_${indx}`;
+                      return val.type == "text" ? (
+                        <div
+                          className={
+                            val?.value !== null
+                              ? ` flex absolute justify-${val.font?.align} `
+                              : "hidden"
+                          }
+                          key={indx}
+                          contentEditable={editId == moveId ? true : false}
+                          onBlur={(evt) => {
+                            setTextValue(evt.target.innerText, indx);
+                            setEdittingItem("");
+                            setEditId("");
+                            setCheckInput(false);
+                            setMoveableId("");
+                          }}
+                          id={moveId}
+                          onClick={(e) => {
+                            setMoveableId(moveId);
+                            setEdittingItem(val);
+                            setCount(ix + 1);
+                            setEditting(true);
+                            setKeepRatio(false);
+                          }}
+                          onDoubleClick={(e: any) => {
+                            setMoveableId(moveId);
+                            setEditId(moveId);
+                            setEditting(true);
+                            setEdittingItem(val);
+                            setCount(ix + 1);
+                            setTimeout(() => {
+                              e.target.focus();
+                            });
+                          }}
+                          style={{
+                            color: val?.font?.color,
+                            fontSize: val?.font?.size,
+                            fontFamily: val?.font?.family,
+                            fontStyle: val.font?.italic ? "italic" : "normal",
+                            fontWeight: val.font?.bold ? "bolder" : "lighter",
+                            textAlign: "center",
+                            top: val.box.y,
+                            left: val.box.x,
+                            width: val.box.w,
+                            transform: "rotate(" + val.box.rotate + "deg)",
+                            textDecoration: val.font?.underline
+                              ? "underline"
+                              : "auto",
+                          }}
+                        >
+                          {val?.value}
+                        </div>
+                      ) : (
+                        <div
+                          id={moveId}
+                          key={indx}
+                          onClick={() => {
+                            setEditting(true);
+                            setEdittingItem(val);
+                            setMoveableId(moveId);
+                            setCount(ix + 1);
+                            setKeepRatio(true);
+                          }}
+                          className={`rounded-sm absolute `}
+                          style={{
+                            top: val.box.y,
+                            left: val.box.x,
+                            width: (1280 + 50) / 6,
+                            height: (2744 + 30) / 6,
+                            transform: "rotate(" + val.box.rotate + "deg)",
+                          }}
+                        >
+                          <MockUp
+                            name={"ios6.5"}
+                            width={(1280 + 50) / 6}
+                            height={(2744 + 30) / 6}
+                            mockWidth={1280 + 50}
+                            mockHeight={2744 + 30}
+                            borderWidth={60}
+                            img={val.value!}
+                            btnWidth={20}
+                            showIsLand={true}
+                          />
+                          {/* <div
                           className={`rounded-sm relative`}
                           style={{
                             width: "100%",
@@ -496,20 +662,20 @@ function TemplateOne() {
                             </div>
                           </div>
                         </div> */}
-                      </div>
-                    );
-                  })}
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
-            </div>
-            {/* {ix == count - 1 && editing && (
+              {/* {ix == count - 1 && editing && (
               <div className="flex flex-col h-full p-3 gap-6 w-[40%] ">
                 <EditorForm templateName={templateName} />
               </div>
             )} */}
-          </div>
-        );
-      })}
+            </div>
+          );
+        })}
     </>
   );
 }
