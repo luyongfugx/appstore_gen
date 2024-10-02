@@ -1,5 +1,5 @@
 import { TemplateDatas } from "@/lib/Context";
-import { shot0, shot01, shot1, shot2, shot3 } from "./defaultBase64";
+import { shot0, shot1, shot2, shot3 } from "./defaultBase64";
 
 export const defaultTemplateDatas: TemplateDatas = {
   TemplateOne: {

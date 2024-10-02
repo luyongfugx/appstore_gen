@@ -92,8 +92,8 @@ interface DataContextTypes {
   crouLength: number;
   editing: boolean;
   setEditting: (n: boolean) => void;
-  setEdittingItem: (n: string) => void;
-  editingItem: string;
+  setEdittingItem: (n: any) => void;
+  editingItem: any;
   editId: string;
   keepRatio: boolean;
   setKeepRatio: (n: boolean) => void;
@@ -121,7 +121,7 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
   const [lang, setLang] = useState("en");
   const [editing, setEditting] = useState(false);
   const [keepRatio, setKeepRatio] = useState(false);
-  const [editingItem, setEdittingItem] = useState<string>("title");
+  const [editingItem, setEdittingItem] = useState<any>();
   // CROUSAL VALUE SETTING FUNCTION
   const SetCrousalValues = (lang: string, length: number) => {
     setLang(lang);

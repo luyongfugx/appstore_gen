@@ -71,7 +71,17 @@ function TemplateOne() {
         "div",
         {
           onClick: () => {
-            console.log("moveableId:" + moveable.props.moveableId);
+            const nArray = moveableId.split("_");
+            // const name = nArray[0];
+            const ic = parseInt(nArray[0]);
+            const indx = parseInt(nArray[1]);
+            delete tempData.screenData![lang][ic > 1 ? ic - 1 : 0][indx];
+            templateDatas[templateName] = tempData;
+            const newTemplateDatas = { ...templateDatas };
+            setTemplateDatas(newTemplateDatas);
+            setEditting(false);
+            setMoveableId("");
+            //console.log("delete moveableId:" + moveable.props.moveableId);
           },
           class: "moveable-dimension",
           style: {
@@ -218,9 +228,9 @@ function TemplateOne() {
                       clientY,
                     }: any) => {
                       const nArray = moveableId.split("_");
-                      const name = nArray[0];
-                      const ic1 = parseInt(nArray[1]);
-                      const indx1 = parseInt(nArray[2]);
+                      // const name = nArray[0];
+                      const ic1 = parseInt(nArray[0]);
+                      const indx1 = parseInt(nArray[1]);
                       const item: boxData[] =
                         tempData.screenData![lang][ic1 > 1 ? ic1 - 1 : 0];
                       item[indx1].box.w = width;
@@ -306,7 +316,8 @@ function TemplateOne() {
                 >
                   {valArray.map((val, indx) => {
                     const x = indx + 1;
-                    const moveId = `${val.name}_${ic}_${indx}`;
+                    //const moveId = `${val.name}_${ic}_${indx}`;
+                    const moveId = `${ic}_${indx}`;
                     return val.type == "text" ? (
                       <div
                         className={
@@ -326,7 +337,7 @@ function TemplateOne() {
                         id={moveId}
                         onClick={(e) => {
                           setMoveableId(moveId);
-                          setEdittingItem(val.name);
+                          setEdittingItem(val);
                           setCount(ix + 1);
                           setEditting(true);
                           setKeepRatio(false);
@@ -335,7 +346,7 @@ function TemplateOne() {
                           setMoveableId(moveId);
                           setEditId(moveId);
                           setEditting(true);
-                          setEdittingItem(val.name);
+                          setEdittingItem(val);
                           setCount(ix + 1);
                           setTimeout(() => {
                             e.target.focus();
@@ -364,7 +375,7 @@ function TemplateOne() {
                         key={indx}
                         onClick={() => {
                           setEditting(true);
-                          setEdittingItem(val.name);
+                          setEdittingItem(val);
                           setMoveableId(moveId);
                           setCount(ix + 1);
                           setKeepRatio(true);

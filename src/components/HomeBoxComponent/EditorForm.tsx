@@ -27,7 +27,7 @@ function EditorForm({ templateName }) {
       ? tempData.screenData![lang][count > 1 ? count - 1 : 0]
       : [];
     items.forEach((im, indx) => {
-      const mId = im.name + "_" + count + "_" + indx;
+      const mId = count + "_" + indx;
       if (mId === moveableId) {
         setItem(im);
         setIx(indx);
@@ -44,11 +44,7 @@ function EditorForm({ templateName }) {
             <TabsTrigger value="color">color</TabsTrigger>
           </TabsList>
           <TabsContent value="font">
-            <FontEditorToolbar
-              name={item.name}
-              indx={ix}
-              templateName={templateName}
-            />
+            <FontEditorToolbar indx={ix} templateName={templateName} />
           </TabsContent>
           <TabsContent value="color">
             <div className="space-y-1">
