@@ -2,12 +2,12 @@
 "use client";
 
 import { boxData, useMyContext } from "@/lib/Context";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import iosImg from "../../../public/ios.jpg";
-import { Edit2Icon } from "lucide-react";
+import { AlignCenter, Edit2Icon } from "lucide-react";
 import { Button } from "../ui/Button";
 import EditorForm from "../HomeBoxComponent/EditorForm";
-import Moveable from "react-moveable";
+import Moveable, { MoveableManagerInterface, Renderer } from "react-moveable";
 import MockUp from "../screen/mockup";
 function TemplateOne() {
   const {
@@ -53,6 +53,66 @@ function TemplateOne() {
   let indxCount = 0;
   const tempData = templateDatas[templateName];
   const [checkInput, setCheckInput] = useState(false);
+  interface CustomAbleProps {
+    moveableId: string;
+  }
+
+  const DimensionViewable = {
+    name: "dimensionViewable",
+    props: ["moveableId"],
+    events: [],
+    css: ["moveable-dimension"],
+    render(
+      moveable: MoveableManagerInterface<CustomAbleProps>,
+      React: Renderer
+    ) {
+      const rect = moveable.getRect();
+      return React.createElement(
+        "div",
+        {
+          onClick: () => {
+            console.log("moveableId:" + moveable.props.moveableId);
+          },
+          class: "moveable-dimension",
+          style: {
+            cursor: "pointer",
+            position: "absolute",
+            left: rect.width - 30,
+            top: -30,
+            width: 30,
+            height: 30,
+            background: "#4af",
+            borderRadius: "4px",
+            // padding: "2px 4px",
+
+            color: "white",
+            fontSize: "20px",
+            whiteSpace: "nowrap",
+            fontWeight: "bold",
+            willChange: "transform",
+            // transform: "translate(-50%, 0px)",
+          },
+          key: "dimension-viewer",
+        },
+        // <svg aria-hidden="true" viewBox="0 0 24 24">
+        //   <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" />
+        // </svg>
+        <div
+          style={{
+            width: 30,
+            height: 30,
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          {" "}
+          X
+        </div>
+
+        // Math.round(rect.offsetWidth) + "X" + Math.round(rect.offsetHeight)
+      );
+    },
+  };
 
   return (
     <>
@@ -91,6 +151,11 @@ function TemplateOne() {
               >
                 {ix == count - 1 && editing && moveableId.length > 0 && (
                   <Moveable
+                    ables={[DimensionViewable]}
+                    dimensionViewable={true}
+                    props={{
+                      moveableId: moveableId,
+                    }}
                     target={document.getElementById(moveableId)}
                     container={null}
                     origin={true}
@@ -108,7 +173,7 @@ function TemplateOne() {
                     draggable={true}
                     throttleDrag={0}
                     onDragStart={({ target, clientX, clientY }) => {
-                      console.log("onDragStart", target);
+                      // console.log("onDragStart", target);
                     }}
                     onDrag={({
                       target,
@@ -124,14 +189,14 @@ function TemplateOne() {
                       clientX,
                       clientY,
                     }: any) => {
-                      console.log("onDrag left, top", left, top);
+                      //console.log("onDrag left, top", left, top);
                       // target!.style.left = `${left}px`;
                       // target!.style.top = `${top}px`;
-                      console.log("onDrag translate", dist);
+                      //console.log("onDrag translate", dist);
                       target!.style.transform = transform;
                     }}
                     onDragEnd={({ target, isDrag, clientX, clientY }) => {
-                      console.log("onDragEnd", target, isDrag);
+                      // console.log("onDragEnd", target, isDrag);
                     }}
                     /* When resize or scale, keeps a ratio of the width, height. */
                     keepRatio={keepRatio}
@@ -140,7 +205,7 @@ function TemplateOne() {
                     resizable={true}
                     throttleResize={0}
                     onResizeStart={({ target, clientX, clientY }) => {
-                      console.log("onResizeStart", target);
+                      // console.log("onResizeStart", target);
                     }}
                     onResize={({
                       target,
@@ -167,7 +232,7 @@ function TemplateOne() {
                       delta[1] && (target!.style.height = `${height}px`);
                     }}
                     onResizeEnd={({ target, isDrag, clientX, clientY }) => {
-                      console.log("onResizeEnd", target, isDrag);
+                      // console.log("onResizeEnd", target, isDrag);
                     }}
                     /* scalable */
                     /* Only one of resizable, scalable, warpable can be used. */
@@ -195,7 +260,7 @@ function TemplateOne() {
                     rotatable={true}
                     throttleRotate={0}
                     onRotateStart={({ target, clientX, clientY }) => {
-                      console.log("onRotateStart", target);
+                      //console.log("onRotateStart", target);
                     }}
                     onRotate={({
                       target,
@@ -205,22 +270,22 @@ function TemplateOne() {
                       clientX,
                       clientY,
                     }: any) => {
-                      console.log("onRotate", dist);
+                      // console.log("onRotate", dist);
                       target!.style.transform = transform;
                     }}
                     onRotateEnd={({ target, isDrag, clientX, clientY }) => {
-                      console.log("onRotateEnd", target, isDrag);
+                      // console.log("onRotateEnd", target, isDrag);
                     }}
                     // Enabling pinchable lets you use events that
                     // can be used in draggable, resizable, scalable, and rotateable.
                     pinchable={true}
                     onPinchStart={({ target, clientX, clientY, datas }) => {
                       // pinchStart event occur before dragStart, rotateStart, scaleStart, resizeStart
-                      console.log("onPinchStart");
+                      // console.log("onPinchStart");
                     }}
                     onPinch={({ target, clientX, clientY, datas }) => {
                       // pinch event occur before drag, rotate, scale, resize
-                      console.log("onPinch");
+                      //console.log("onPinch");
                     }}
                     onPinchEnd={({
                       isDrag,
@@ -230,7 +295,7 @@ function TemplateOne() {
                       datas,
                     }) => {
                       // pinchEnd event occur before dragEnd, rotateEnd, scaleEnd, resizeEnd
-                      console.log("onPinchEnd");
+                      // console.log("onPinchEnd");
                     }}
                   />
                 )}
@@ -322,8 +387,6 @@ function TemplateOne() {
                           img={val.value!}
                           btnWidth={20}
                           showIsLand={true}
-                          // imgWidth={1280}
-                          // imgHeight={2744}
                         />
                         {/* <div
                           className={`rounded-sm relative`}
