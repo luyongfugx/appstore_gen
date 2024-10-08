@@ -18,14 +18,15 @@ import downloadImages from "@/lib/ImageToZip";
 import Output from "./Output";
 import Languages from "./Languages";
 
-function NavHeader({ templateName }) {
+function NavHeader() {
   const {
     count,
     crouLength,
-    lang,
+    selectedLanguage,
     outPutSize,
     setEditting,
     setMoveableId,
+    templateName,
     templateDatas,
   } = useMyContext();
   const [loading, setLoading] = useState(false);
@@ -69,7 +70,7 @@ function NavHeader({ templateName }) {
   };
 
   const saveAsImg = () => {
-    const fileName = outPutSize.name + "_" + lang;
+    const fileName = outPutSize.name + "_" + selectedLanguage;
     downloadImages(img, fileName);
   };
   return (
@@ -95,7 +96,7 @@ function NavHeader({ templateName }) {
                 Ready to download ?
               </DialogTitle>
               <DialogDescription className="flex justify-center">
-                {outPutSize.name + "," + lang}
+                {outPutSize.name + "," + selectedLanguage}
               </DialogDescription>
               <div className="flex  gap-3   justify-start overflow-auto max-w-[90%] min-w-[600px]">
                 {img.map((itm, indx) => {

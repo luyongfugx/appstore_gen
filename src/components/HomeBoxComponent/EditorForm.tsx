@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
-import { useMyContext } from "@/lib/Context";
+import { TemplateData, useMyContext } from "@/lib/Context";
 import { Button } from "../ui/Button";
 import { title } from "process";
 import Image from "next/image";
@@ -15,16 +15,22 @@ import { Card } from "../ui/card";
 import FontEditorToolbar from "./FontEditor";
 import FontColorSelector from "./FontColor";
 function EditorForm({ templateName }) {
-  const { count, lang, templateDatas, setTemplateDatas, moveableId } =
-    useMyContext();
+  const {
+    count,
+    selectedLanguage,
+    templateDatas,
+    setTemplateDatas,
+    moveableId,
+  } = useMyContext();
 
   const [item, setItem] = useState<any>();
   const [ix, setIx] = useState<number>(0);
-
+  const [tempData, setTempData] = useState<TemplateData>();
   useEffect(() => {
     const tempData = templateDatas[templateName];
+    setTempData(tempData);
     const items = templateDatas[templateName]
-      ? tempData.screenData![lang][count > 1 ? count - 1 : 0]
+      ? tempData.screenData![selectedLanguage][count > 1 ? count - 1 : 0]
       : [];
     items.forEach((im, indx) => {
       const mId = count + "_" + indx;
@@ -33,7 +39,15 @@ function EditorForm({ templateName }) {
         setIx(indx);
       }
     });
-  }, [moveableId, item, ix, count, templateDatas, lang, templateName]);
+  }, [
+    moveableId,
+    item,
+    ix,
+    count,
+    templateDatas,
+    selectedLanguage,
+    templateName,
+  ]);
   return (
     <>
       {item && item.type === "text" ? (

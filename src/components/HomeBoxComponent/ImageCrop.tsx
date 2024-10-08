@@ -29,8 +29,13 @@ const ImageCrop: React.FC<ImageCropTypes> = ({
   templateName,
   indx,
 }) => {
-  const { lang, count, outPutSize, templateDatas, setTemplateDatas } =
-    useMyContext();
+  const {
+    selectedLanguage,
+    count,
+    outPutSize,
+    templateDatas,
+    setTemplateDatas,
+  } = useMyContext();
 
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [rotation, setRotation] = useState(0);
@@ -67,7 +72,9 @@ const ImageCrop: React.FC<ImageCropTypes> = ({
         // console.log("templateName:" + templateName);
         const tempData = templateDatas[templateName ?? ""];
         const item: any =
-          tempData.screenData![lang][count > 1 ? count - 1 : 0][indx!];
+          tempData.screenData![selectedLanguage][count > 1 ? count - 1 : 0][
+            indx!
+          ];
         item.value = croppedImage;
         templateDatas[templateName ?? ""] = tempData;
         const newTemplateDatas = { ...templateDatas };

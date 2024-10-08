@@ -20,60 +20,42 @@ import {
 } from "@/components/ui/popover";
 
 import { Button } from "@/components/ui/Button";
+import { languageOptions } from "@/conf/langs";
+
 function Languages() {
-  const languages = [
-    {
-      value: "cn",
-      label: "Chinese",
-      flag: "🇨🇳",
-    },
-    {
-      value: "vn",
-      label: "Vietnam",
-      flag: "🇻🇳",
-    },
-    {
-      value: "id",
-      label: "Indonesia",
-      flag: "🇮🇩",
-    },
-    {
-      value: "ph",
-      label: "Philippines",
-      flag: "🇵🇭",
-    },
-    {
-      value: "en",
-      label: "English",
-      flag: "🇬🇧",
-    },
-    {
-      value: "th",
-      label: "Thailand",
-      flag: "🇹🇭",
-    },
-    {
-      value: "ms",
-      label: "Malaysia",
-      flag: "🇲🇾",
-    },
-    {
-      value: "ru",
-      label: "Russia",
-      flag: "🇷🇺",
-    },
-    {
-      value: "fr",
-      label: "France",
-      flag: "🇫🇷",
-    },
-    {
-      value: "jp",
-      label: "Japan",
-      flag: "🇯🇵",
-    },
-  ];
-  const { setLang, lang } = useMyContext();
+  // const languages = [
+  //   { value: "en", label: "English", flag: "🇬🇧" },
+  //   { value: "es", label: "Spanish", flag: "🇪🇸" },
+  //   { value: "fr", label: "French", flag: "🇫🇷" },
+  //   { value: "de", label: "German", flag: "🇩🇪" },
+  //   { value: "it", label: "Italian", flag: "🇮🇹" },
+  //   { value: "pt", label: "Portuguese", flag: "🇵🇹" },
+  //   { value: "ru", label: "Russian", flag: "🇷🇺" },
+  //   { value: "zh", label: "Chinese", flag: "🇨🇳" },
+  //   { value: "ja", label: "Japanese", flag: "🇯🇵" },
+  //   { value: "ko", label: "Korean", flag: "🇰🇷" },
+  //   { value: "ar", label: "Arabic", flag: "🇸🇦" },
+  //   { value: "hi", label: "Hindi", flag: "🇮🇳" },
+  //   { value: "bn", label: "Bengali", flag: "🇧🇩" },
+  //   { value: "id", label: "Indonesian", flag: "🇮🇩" },
+  //   { value: "tr", label: "Turkish", flag: "🇹🇷" },
+  //   { value: "th", label: "Thai", flag: "🇹🇭" },
+  //   { value: "vi", label: "Vietlabelse", flag: "🇻🇳" },
+  //   { value: "nl", label: "Dutch", flag: "🇳🇱" },
+  //   { value: "pl", label: "Polish", flag: "🇵🇱" },
+  //   { value: "sv", label: "Swedish", flag: "🇸🇪" },
+  //   {
+  //     value: "ph",
+  //     label: "Philippines",
+  //     flag: "🇵🇭",
+  //   },
+  //   {
+  //     value: "ms",
+  //     label: "Malaysia",
+  //     flag: "🇲🇾",
+  //   },
+  // ];
+  const { setSelectedLanguage, selectedLanguage } = useMyContext();
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("en");
 
@@ -90,9 +72,11 @@ function Languages() {
               className="w-[200px] justify-between"
             >
               {value
-                ? languages.find((language) => language.value === value)?.flag +
+                ? languageOptions.find((language) => language.value === value)
+                    ?.flag +
                   " " +
-                  languages.find((language) => language.value === value)?.label
+                  languageOptions.find((language) => language.value === value)
+                    ?.label
                 : "Select language..."}
               <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
             </Button>
@@ -103,12 +87,12 @@ function Languages() {
               <CommandEmpty>No language found.</CommandEmpty>
               <CommandGroup>
                 <CommandList>
-                  {languages.map((language, i) => (
+                  {languageOptions.map((language, i) => (
                     <CommandItem
                       key={i}
                       onSelect={(currentValue) => {
                         setValue(currentValue === value ? "" : currentValue);
-                        setLang(currentValue);
+                        setSelectedLanguage(currentValue);
                         console.log("currentValue" + currentValue);
                         setOpen(false);
                       }}

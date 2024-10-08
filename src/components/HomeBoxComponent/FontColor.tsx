@@ -2,22 +2,27 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
 import tinycolor from "tinycolor2";
-import { useMyContext } from "@/lib/Context";
+import { TemplateData, useMyContext } from "@/lib/Context";
 interface ColorSelectorProps {
   templateName: string;
 }
 const FontColorSelector: React.FC<ColorSelectorProps> = ({ templateName }) => {
-  const { count, lang, templateDatas, setTemplateDatas, moveableId } =
-    useMyContext();
-
+  const {
+    count,
+    selectedLanguage,
+    templateDatas,
+    setTemplateDatas,
+    moveableId,
+  } = useMyContext();
+  const [tempData, setTempData] = useState<TemplateData>();
   const [item, setItem] = useState<any>();
   const [ix, setIx] = useState<number>(0);
-  const tempData = templateDatas[templateName];
+  // const tempData = templateDatas[templateName];
 
   useEffect(() => {
     const tempData = templateDatas[templateName];
     const items = templateDatas[templateName]
-      ? tempData.screenData![lang][count > 1 ? count - 1 : 0]
+      ? tempData.screenData![selectedLanguage][count > 1 ? count - 1 : 0]
       : [];
     items.forEach((im, indx) => {
       const mId = count + "_" + indx;
@@ -31,7 +36,15 @@ const FontColorSelector: React.FC<ColorSelectorProps> = ({ templateName }) => {
         }
       }
     });
-  }, [moveableId, item, ix, count, templateDatas, lang, templateName]);
+  }, [
+    moveableId,
+    item,
+    ix,
+    count,
+    templateDatas,
+    selectedLanguage,
+    templateName,
+  ]);
 
   const selectorRef = useRef<HTMLInputElement>(null);
   const customColor = [
@@ -49,7 +62,7 @@ const FontColorSelector: React.FC<ColorSelectorProps> = ({ templateName }) => {
     parsed = tinycolor(value).toHexString();
     const tempData = templateDatas[templateName];
     const items = templateDatas[templateName]
-      ? tempData.screenData![lang][count > 1 ? count - 1 : 0]
+      ? tempData.screenData![selectedLanguage][count > 1 ? count - 1 : 0]
       : [];
 
     items.forEach((im, indx) => {
@@ -75,7 +88,7 @@ const FontColorSelector: React.FC<ColorSelectorProps> = ({ templateName }) => {
     parsed = tinycolor(value).toHexString();
     const tempData = templateDatas[templateName];
     const items = templateDatas[templateName]
-      ? tempData.screenData![lang][count > 1 ? count - 1 : 0]
+      ? tempData.screenData![selectedLanguage][count > 1 ? count - 1 : 0]
       : [];
 
     items.forEach((im, indx) => {
@@ -98,7 +111,7 @@ const FontColorSelector: React.FC<ColorSelectorProps> = ({ templateName }) => {
     parsed = tinycolor(value).toHexString();
     const tempData = templateDatas[templateName];
     const items = templateDatas[templateName]
-      ? tempData.screenData![lang][count > 1 ? count - 1 : 0]
+      ? tempData.screenData![selectedLanguage][count > 1 ? count - 1 : 0]
       : [];
 
     items.forEach((im, indx) => {

@@ -17,7 +17,7 @@ import Image from "next/image";
 import downloadImages from "@/lib/ImageToZip";
 
 function HomeFormHeader() {
-  const { count, crouLength, lang, outPutSize } = useMyContext();
+  const { count, crouLength, selectedLanguage, outPutSize } = useMyContext();
   const [loading, setLoading] = useState(false);
   const [img, setImg] = useState<string[]>([]);
   const convertImg = async () => {
@@ -43,7 +43,7 @@ function HomeFormHeader() {
   };
 
   const saveAsImg = () => {
-    const fileName = outPutSize.name + "_" + lang;
+    const fileName = outPutSize.name + "_" + selectedLanguage;
     downloadImages(img, fileName);
   };
   return (
@@ -62,7 +62,7 @@ function HomeFormHeader() {
                 Ready to download ?
               </DialogTitle>
               <DialogDescription className="flex justify-center">
-                {outPutSize.name + "," + lang}
+                {outPutSize.name + "," + selectedLanguage}
               </DialogDescription>
               <div className="flex  gap-3  relative justify-center">
                 {img.map((itm, indx) => {

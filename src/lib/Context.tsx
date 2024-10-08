@@ -82,8 +82,12 @@ export type TemplateData = {
 export type TemplateDatas = Record<string, TemplateData>;
 
 interface DataContextTypes {
-  lang: any;
-  setLang: (n: any) => void;
+  // lang: any;
+  // setLang: (n: any) => void;
+  selectedLanguage: any;
+  setSelectedLanguage: (n: any) => void;
+  baseLanguage: any;
+  setBaseLanguage: (n: any) => void;
   outPutSize: OutPutSize;
   setOutPutSize: (n: OutPutSize) => void;
   templateDatas: TemplateDatas;
@@ -103,6 +107,8 @@ interface DataContextTypes {
   setMoveableId: (n: string) => void;
   setCrouLength: (n: number) => void;
   SetCrousalValues: (lang: string, length: number) => void;
+  templateName: string;
+  setTemplateName: (n: string) => void;
 }
 
 const MyContext = createContext<DataContextTypes | undefined>(undefined);
@@ -119,18 +125,24 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
   const [moveableId, setMoveableId] = useState<string>("");
   const [editId, setEditId] = useState<string>("");
   const [crouLength, setCrouLength] = useState<number>(1);
-  const [lang, setLang] = useState("en");
+  const [baseLanguage, setBaseLanguage] = useState("en");
+  const [selectedLanguage, setSelectedLanguage] = useState("en");
+  // const [selectedLanguage, setSelectedLanguage] = useState("all");
+
+  const [templateName, setTemplateName] = useState("TemplateOne");
   const [editing, setEditting] = useState(false);
   const [keepRatio, setKeepRatio] = useState(false);
   const [editingItem, setEdittingItem] = useState<any>();
-  // CROUSAL VALUE SETTING FUNCTION
+
   const SetCrousalValues = (lang: string, length: number) => {
-    setLang(lang);
+    setSelectedLanguage(lang);
     setCrouLength(length);
   };
   return (
     <MyContext.Provider
       value={{
+        templateName,
+        setTemplateName,
         keepRatio,
         setKeepRatio,
         editId,
@@ -143,8 +155,10 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
         setEditting,
         outPutSize,
         setOutPutSize,
-        lang,
-        setLang,
+        selectedLanguage,
+        setSelectedLanguage,
+        baseLanguage,
+        setBaseLanguage,
         templateDatas,
         setTemplateDatas,
         count,

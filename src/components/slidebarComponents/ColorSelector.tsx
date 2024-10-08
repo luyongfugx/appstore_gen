@@ -40,9 +40,9 @@ const ColorSelector: React.FC<ColorSelectorProps> = ({
   useEffect(() => {
     let parsed = "#fff";
     if (colorFor === "BgColor") {
-      parsed = tinycolor(tempData.bgColor).toHexString();
+      parsed = tinycolor(tempData && tempData.bgColor).toHexString();
     } else if (colorFor === "PrimaryColor") {
-      parsed = tinycolor(tempData.primaryColor).toHexString();
+      parsed = tinycolor(tempData && tempData.primaryColor).toHexString();
     }
     if (selectorRef?.current?.value !== undefined) {
       selectorRef.current.value = parsed;
@@ -55,10 +55,10 @@ const ColorSelector: React.FC<ColorSelectorProps> = ({
     let parsed = "#fff";
     if (colorFor === "BgColor") {
       tempData.bgColor = value;
-      parsed = tinycolor(tempData.bgColor).toHexString();
+      parsed = tinycolor(tempData && tempData.bgColor).toHexString();
     } else if (colorFor === "PrimaryColor") {
       tempData.primaryColor = value;
-      parsed = tinycolor(tempData.primaryColor).toHexString();
+      parsed = tinycolor(tempData && tempData.primaryColor).toHexString();
       // setPrimaryColor(value);
     }
     templateDatas[templateName] = tempData;
@@ -75,14 +75,18 @@ const ColorSelector: React.FC<ColorSelectorProps> = ({
         type="text"
         onChange={handleInput}
         value={
-          colorFor === "BgColor" ? tempData.bgColor : tempData.primaryColor
+          colorFor === "BgColor"
+            ? tempData && tempData.bgColor
+            : tempData && tempData.primaryColor
         }
         className="w-full"
       />
       <Input
         type="color"
         defaultValue={
-          colorFor === "BgColor" ? tempData.bgColor : tempData.primaryColor
+          colorFor === "BgColor"
+            ? tempData && tempData.bgColor
+            : tempData && tempData.primaryColor
         }
         ref={selectorRef}
         onChange={onColorSelect}

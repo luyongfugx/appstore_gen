@@ -10,19 +10,20 @@ import tinycolor from "tinycolor2";
 import EditorForm from "../HomeBoxComponent/EditorForm";
 import { Separator } from "../ui/separator";
 
-function TabsComp({ templateName }) {
+function TabsComp() {
   const {
     count,
     crouLength,
-    lang,
+    selectedLanguage,
     templateDatas,
     setTemplateDatas,
     editing,
+    templateName,
     moveableId,
     editingItem,
   } = useMyContext();
 
-  const tempData = templateDatas[templateName];
+  //const tempData = templateDatas[templateName];
   const [key, setKey] = useState(1);
   const customColor = [
     { colorCode: "#f87171" },
@@ -48,10 +49,12 @@ function TabsComp({ templateName }) {
   const [item, setItem] = useState<any>();
   const [ix, setIx] = useState<number>(0);
 
+  const [tempData, setTempData] = useState<any>();
   useEffect(() => {
     const tempData = templateDatas[templateName];
+    setTempData(tempData);
     const items = templateDatas[templateName]
-      ? tempData.screenData![lang][count > 1 ? count - 1 : 0]
+      ? tempData.screenData![selectedLanguage][count > 1 ? count - 1 : 0]
       : [];
     items.forEach((im, indx) => {
       const mId = count + "_" + indx;
@@ -60,7 +63,16 @@ function TabsComp({ templateName }) {
         setIx(indx);
       }
     });
-  }, [moveableId, item, ix, count, templateDatas, lang, templateName]);
+  }, [
+    moveableId,
+    item,
+    ix,
+    count,
+    templateDatas,
+    selectedLanguage,
+    templateName,
+    tempData,
+  ]);
   return (
     <>
       <div className="w-full max-w-sm items-center gap-1.5 justify-start ">
@@ -94,7 +106,7 @@ function TabsComp({ templateName }) {
                       key={"BgColor"}
                       colorFor="BgColor"
                       templateName={templateName}
-                      defaultColor={tempData.bgColor}
+                      defaultColor={tempData && tempData.bgColor}
                     />
                   </div>
                 </CardContent>

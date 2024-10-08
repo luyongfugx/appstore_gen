@@ -63,7 +63,7 @@ export default function Home() {
                   style={{ width: 300, height: 48 }}
                   className="bg-background text-primary hover:bg-background/90"
                 >
-                  <Link href="/TemplateOne">Get Started</Link>
+                  <Link href="/screen/TemplateOne">Get Started</Link>
                 </Button>
               </div>
             </div>
@@ -80,7 +80,7 @@ export default function Home() {
                   <CardContent className="p-0">
                     <CrousalShowCard
                       imgSrc={templateone}
-                      pageLink="/TemplateOne"
+                      pageLink="/screen/TemplateOne"
                     />
                   </CardContent>
                 </Card>

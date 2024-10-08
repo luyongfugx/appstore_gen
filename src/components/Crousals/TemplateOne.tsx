@@ -22,7 +22,7 @@ function TemplateOne() {
     templateDatas,
     setCrouLength,
     count,
-    lang,
+    selectedLanguage,
     keepRatio,
     setKeepRatio,
     setCount,
@@ -41,7 +41,7 @@ function TemplateOne() {
   const templateName = "TemplateOne";
   const onCrousalLoad = () => {
     const tempD = templateDatas[templateName];
-    setCrouLength(tempD.screenData![lang].length);
+    setCrouLength(tempD.screenData![selectedLanguage].length);
   };
   useEffect(() => {
     onCrousalLoad();
@@ -50,9 +50,10 @@ function TemplateOne() {
   }, [templateDatas]);
 
   const [tempData, setTempData] = useState<TemplateData>();
+  // const [rotate, setRotate] = useState<number>(0);
   const setTextValue = (value: string, index: number) => {
     const item: boxData[] =
-      tempData!.screenData![lang][count > 1 ? count - 1 : 0];
+      tempData!.screenData![selectedLanguage][count > 1 ? count - 1 : 0];
     item[index].value = value;
     templateDatas[templateName] = tempData!;
     const newTemplateDatas = { ...templateDatas };
@@ -65,11 +66,12 @@ function TemplateOne() {
   const [checkInput, setCheckInput] = useState(false);
   interface CustomAbleProps {
     moveableId: string;
+    // rotate: number;
   }
 
   const DimensionViewable = {
     name: "dimensionViewable",
-    props: ["moveableId"],
+    props: ["moveableId", "rotate"],
     events: [],
     css: ["moveable-dimension"],
     render(
@@ -84,10 +86,10 @@ function TemplateOne() {
           style: {
             cursor: "pointer",
             position: "absolute",
-            left: rect.width - 4 * 32,
-            top: -32,
+            left: rect.width - 4 * 24,
+            top: -24,
             background: "#4af",
-            borderRadius: "4px",
+            // borderRadius: "4px",
             // padding: "2px 4px",
             color: "white",
             fontSize: "20px",
@@ -95,6 +97,7 @@ function TemplateOne() {
             fontWeight: "bold",
             willChange: "transform",
             // transform: "translate(-50%, 0px)",
+            transform: "rotate(" + editingItem.box.rotate + "deg)",
           },
           key: "dimension-viewer",
         },
@@ -109,8 +112,8 @@ function TemplateOne() {
         >
           <div
             style={{
-              width: 32,
-              height: 32,
+              width: 24,
+              height: 24,
               display: "flex",
               borderWidth: 1,
               borderColor: "white",
@@ -122,31 +125,39 @@ function TemplateOne() {
               const ic = parseInt(nArray[0]);
               const indx = parseInt(nArray[1]);
               const nowItem =
-                tempData!.screenData![lang][ic > 1 ? ic - 1 : 0][indx];
+                tempData!.screenData![selectedLanguage][ic > 1 ? ic - 1 : 0][
+                  indx
+                ];
               const d = {
                 ...nowItem,
               };
-              delete tempData!.screenData![lang][ic > 1 ? ic - 1 : 0][indx];
+              delete tempData!.screenData![selectedLanguage][
+                ic > 1 ? ic - 1 : 0
+              ][indx];
               const newTemplateDatas = { ...templateDatas };
               const tempData3 = newTemplateDatas[templateName];
-              tempData3.screenData![lang][ic > 1 ? ic - 1 : 0].unshift(d);
+              tempData3.screenData![selectedLanguage][
+                ic > 1 ? ic - 1 : 0
+              ].unshift(d);
               setTemplateDatas(newTemplateDatas);
               setTimeout(() => {
                 const nId = ic + "_" + 0;
                 setMoveableId(nId);
                 setEditting(true);
                 setEdittingItem(
-                  tempData3.screenData![lang][ic > 1 ? ic - 1 : 0][0]
+                  tempData3.screenData![selectedLanguage][
+                    ic > 1 ? ic - 1 : 0
+                  ][0]
                 );
               }, 200);
             }}
           >
-            <SendToBack className="h-7 w-7 " />
+            <SendToBack className="h-5 w-5 " />
           </div>
           <div
             style={{
-              width: 32,
-              height: 32,
+              width: 24,
+              height: 24,
               borderWidth: 1,
               borderColor: "white",
               padding: 2,
@@ -158,33 +169,42 @@ function TemplateOne() {
               const ic = parseInt(nArray[0]);
               const indx = parseInt(nArray[1]);
               const nowItem =
-                tempData!.screenData![lang][ic > 1 ? ic - 1 : 0][indx];
+                tempData!.screenData![selectedLanguage][ic > 1 ? ic - 1 : 0][
+                  indx
+                ];
               const d = {
                 ...nowItem,
               };
-              delete tempData!.screenData![lang][ic > 1 ? ic - 1 : 0][indx];
+              delete tempData!.screenData![selectedLanguage][
+                ic > 1 ? ic - 1 : 0
+              ][indx];
               const newTemplateDatas = { ...templateDatas };
               const tempData3 = newTemplateDatas[templateName];
-              tempData3.screenData![lang][ic > 1 ? ic - 1 : 0].push(d);
+              tempData3.screenData![selectedLanguage][ic > 1 ? ic - 1 : 0].push(
+                d
+              );
               setTemplateDatas(newTemplateDatas);
               setTimeout(() => {
                 const len =
-                  tempData3.screenData![lang][ic > 1 ? ic - 1 : 0].length - 1;
+                  tempData3.screenData![selectedLanguage][ic > 1 ? ic - 1 : 0]
+                    .length - 1;
                 const nId = ic + "_" + len;
                 setMoveableId(nId);
                 setEditting(true);
                 setEdittingItem(
-                  tempData3.screenData![lang][ic > 1 ? ic - 1 : 0][indx + 1]
+                  tempData3.screenData![selectedLanguage][ic > 1 ? ic - 1 : 0][
+                    indx + 1
+                  ]
                 );
               }, 200);
             }}
           >
-            <BringToFront className="h-7 w-7 " />
+            <BringToFront className="h-5 w-5 " />
           </div>
           <div
             style={{
-              width: 32,
-              height: 32,
+              width: 24,
+              height: 24,
               display: "flex",
               borderWidth: 1,
               borderColor: "white",
@@ -196,7 +216,9 @@ function TemplateOne() {
               const ic = parseInt(nArray[0]);
               const indx = parseInt(nArray[1]);
               const nowItem =
-                tempData!.screenData![lang][ic > 1 ? ic - 1 : 0][indx];
+                tempData!.screenData![selectedLanguage][ic > 1 ? ic - 1 : 0][
+                  indx
+                ];
               const d = {
                 ...nowItem,
               };
@@ -207,16 +229,21 @@ function TemplateOne() {
               d.box.y = d.box.y + 100;
               const newTemplateDatas = { ...templateDatas };
               const tempData3 = newTemplateDatas[templateName];
-              tempData3.screenData![lang][ic > 1 ? ic - 1 : 0].push(d);
+              tempData3.screenData![selectedLanguage][ic > 1 ? ic - 1 : 0].push(
+                d
+              );
               setTemplateDatas(newTemplateDatas);
               setTimeout(() => {
                 const len =
-                  tempData3.screenData![lang][ic > 1 ? ic - 1 : 0].length - 1;
+                  tempData3.screenData![selectedLanguage][ic > 1 ? ic - 1 : 0]
+                    .length - 1;
                 const nId = ic + "_" + len;
                 setMoveableId(nId);
                 setEditting(true);
                 setEdittingItem(
-                  tempData3.screenData![lang][ic > 1 ? ic - 1 : 0][indx + 1]
+                  tempData3.screenData![selectedLanguage][ic > 1 ? ic - 1 : 0][
+                    indx + 1
+                  ]
                 );
               }, 200);
 
@@ -225,7 +252,7 @@ function TemplateOne() {
               //console.log("delete moveableId:" + moveable.props.moveableId);
             }}
           >
-            <Copy className="h-7 w-7 " />
+            <Copy className="h-5 w-5 " />
           </div>
           <div
             onClick={() => {
@@ -233,7 +260,9 @@ function TemplateOne() {
               // const name = nArray[0];
               const ic = parseInt(nArray[0]);
               const indx = parseInt(nArray[1]);
-              delete tempData!.screenData![lang][ic > 1 ? ic - 1 : 0][indx];
+              delete tempData!.screenData![selectedLanguage][
+                ic > 1 ? ic - 1 : 0
+              ][indx];
               templateDatas[templateName] = tempData!;
               const newTemplateDatas = { ...templateDatas };
               setTemplateDatas(newTemplateDatas);
@@ -242,8 +271,8 @@ function TemplateOne() {
               //console.log("delete moveableId:" + moveable.props.moveableId);
             }}
             style={{
-              width: 32,
-              height: 32,
+              width: 24,
+              height: 24,
               display: "flex",
               borderWidth: 1,
               borderColor: "white",
@@ -251,7 +280,7 @@ function TemplateOne() {
               justifyContent: "center",
             }}
           >
-            <Trash2 className="h-7 w-7 " />
+            <Trash2 className="h-5 w-5 " />
           </div>
         </div>
 
@@ -263,7 +292,7 @@ function TemplateOne() {
   return (
     <>
       {tempData &&
-        tempData.screenData![lang].map((valArray, ix) => {
+        tempData.screenData![selectedLanguage].map((valArray, ix) => {
           indxCount = indxCount + 1;
           const ic = indxCount;
           return (
@@ -342,7 +371,9 @@ function TemplateOne() {
                         const ic1 = parseInt(nArray[0]);
                         const indx1 = parseInt(nArray[1]);
                         const item: boxData[] =
-                          tempData.screenData![lang][ic1 > 1 ? ic1 - 1 : 0];
+                          tempData.screenData![selectedLanguage][
+                            ic1 > 1 ? ic1 - 1 : 0
+                          ];
                         item[indx1].box.x = left;
                         item[indx1].box.y = top;
                         templateDatas[templateName] = tempData;
@@ -376,7 +407,9 @@ function TemplateOne() {
                         const ic1 = parseInt(nArray[0]);
                         const indx1 = parseInt(nArray[1]);
                         const item: boxData[] =
-                          tempData.screenData![lang][ic1 > 1 ? ic1 - 1 : 0];
+                          tempData.screenData![selectedLanguage][
+                            ic1 > 1 ? ic1 - 1 : 0
+                          ];
                         item[indx1].box.w = width;
                         item[indx1].box.h = height;
                         templateDatas[templateName] = tempData;
@@ -429,11 +462,15 @@ function TemplateOne() {
                         const ic1 = parseInt(nArray[0]);
                         const indx1 = parseInt(nArray[1]);
                         const item: boxData[] =
-                          tempData.screenData![lang][ic1 > 1 ? ic1 - 1 : 0];
+                          tempData.screenData![selectedLanguage][
+                            ic1 > 1 ? ic1 - 1 : 0
+                          ];
                         item[indx1].box.rotate = dist;
+                        // setRotate(dist);
                         templateDatas[templateName] = tempData;
                         const newTemplateDatas = { ...templateDatas };
                         setTemplateDatas(newTemplateDatas);
+                        console.log("tram", transform);
                         // console.log(
                         //   "onRotate",
                         //   target,

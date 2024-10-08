@@ -37,8 +37,13 @@ interface FontProps {
   templateName: string;
 }
 const FontEditorToolbar: React.FC<FontProps> = ({ templateName }) => {
-  const { count, lang, templateDatas, setTemplateDatas, moveableId } =
-    useMyContext();
+  const {
+    count,
+    selectedLanguage,
+    templateDatas,
+    setTemplateDatas,
+    moveableId,
+  } = useMyContext();
 
   const [item, setItem] = useState<any>();
   const [ix, setIx] = useState<number>(0);
@@ -46,7 +51,7 @@ const FontEditorToolbar: React.FC<FontProps> = ({ templateName }) => {
   useEffect(() => {
     const tempData = templateDatas[templateName];
     const items = templateDatas[templateName]
-      ? tempData.screenData![lang][count > 1 ? count - 1 : 0]
+      ? tempData.screenData![selectedLanguage][count > 1 ? count - 1 : 0]
       : [];
 
     items.forEach((im, indx) => {
@@ -67,7 +72,15 @@ const FontEditorToolbar: React.FC<FontProps> = ({ templateName }) => {
         setFontStyles(fontStyles);
       }
     });
-  }, [moveableId, item, ix, count, templateDatas, lang, templateName]);
+  }, [
+    moveableId,
+    item,
+    ix,
+    count,
+    templateDatas,
+    selectedLanguage,
+    templateName,
+  ]);
   //   const [fontSize, setFontSize] = useState(item.font?.size ?? 12);
   const fontFamilies = [
     "Arial",
@@ -88,7 +101,7 @@ const FontEditorToolbar: React.FC<FontProps> = ({ templateName }) => {
   const setTempFontFamily = (family: string) => {
     const tempData = templateDatas[templateName];
     const items = templateDatas[templateName]
-      ? tempData.screenData![lang][count > 1 ? count - 1 : 0]
+      ? tempData.screenData![selectedLanguage][count > 1 ? count - 1 : 0]
       : [];
     items.forEach((im, indx) => {
       const mId = count + "_" + indx;
@@ -104,7 +117,7 @@ const FontEditorToolbar: React.FC<FontProps> = ({ templateName }) => {
   const setTempFontStyles = (fontStyles: string[]) => {
     const tempData = templateDatas[templateName];
     const items = templateDatas[templateName]
-      ? tempData.screenData![lang][count > 1 ? count - 1 : 0]
+      ? tempData.screenData![selectedLanguage][count > 1 ? count - 1 : 0]
       : [];
     items.forEach((im, indx) => {
       const mId = count + "_" + indx;
@@ -142,7 +155,7 @@ const FontEditorToolbar: React.FC<FontProps> = ({ templateName }) => {
   const setTempFontAlign = (align: string) => {
     const tempData = templateDatas[templateName];
     const items = templateDatas[templateName]
-      ? tempData.screenData![lang][count > 1 ? count - 1 : 0]
+      ? tempData.screenData![selectedLanguage][count > 1 ? count - 1 : 0]
       : [];
     items.forEach((im, indx) => {
       const mId = count + "_" + indx;
@@ -158,7 +171,7 @@ const FontEditorToolbar: React.FC<FontProps> = ({ templateName }) => {
   const setFontSize = (size: any) => {
     const tempData = templateDatas[templateName];
     const items = templateDatas[templateName]
-      ? tempData.screenData![lang][count > 1 ? count - 1 : 0]
+      ? tempData.screenData![selectedLanguage][count > 1 ? count - 1 : 0]
       : [];
     items.forEach((im, indx) => {
       const mId = count + "_" + indx;

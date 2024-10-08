@@ -3,6 +3,9 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Provider from "@/components/Provider";
 import { Analytics } from "@vercel/analytics/react";
+import NavHeader from "@/components/Nav/NavHeader";
+import Slidebar from "@/components/slidebarComponents/Slidebar";
+import { headers } from "next/headers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,10 +23,19 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // const currentUrl = headers().get("referer");
+  // let path;
+  // if (currentUrl) {
+  //   const paths = currentUrl!.split("/");
+  //   path = paths[paths.length - 1];
+  //   console.log(path);
+  // }
+  //console.log(currentUrl);
+
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Provider>{children}</Provider>
+        {children}
         <Analytics />
       </body>
     </html>
