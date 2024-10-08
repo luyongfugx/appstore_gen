@@ -21,6 +21,14 @@ import {
 
 import { Button } from "@/components/ui/Button";
 import { languageOptions } from "@/conf/langs";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { usePathname } from "next/navigation";
 
 function Languages() {
   // const languages = [
@@ -55,13 +63,39 @@ function Languages() {
   //     flag: "🇲🇾",
   //   },
   // ];
-  const { setSelectedLanguage, selectedLanguage } = useMyContext();
+  const {
+    setSelectedLanguage,
+    selectedLanguage,
+    setBaseLanguage,
+    baseLanguage,
+  } = useMyContext();
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("en");
 
   return (
     <div className="items-center  justify-center flex">
-      {<div className="text-left flex mr-2">languages:</div>}
+      <div className="text-left flex mr-2">
+        {
+          <div className="text-left flex mr-2 justify-center items-center">
+            Base Language:
+          </div>
+        }
+        <div className="flex justify-center">
+          <Select onValueChange={setBaseLanguage} value={baseLanguage}>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="base language" />
+            </SelectTrigger>
+            <SelectContent>
+              {languageOptions.map((lang) => (
+                <SelectItem key={lang.value} value={lang.value}>
+                  {lang.flag} {lang.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>{" "}
+        </div>
+      </div>
+      {<div className="text-left flex mr-2">Selected Language:</div>}
       <div className="flex justify-center">
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>
@@ -93,7 +127,7 @@ function Languages() {
                       onSelect={(currentValue) => {
                         setValue(currentValue === value ? "" : currentValue);
                         setSelectedLanguage(currentValue);
-                        console.log("currentValue" + currentValue);
+                        // console.log("currentValue" + currentValue);
                         setOpen(false);
                       }}
                       value={language.value}

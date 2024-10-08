@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState } from "react";
 import defaultImage from "../../public/banner.png";
 import { defaultTemplateDatas } from "@/conf/templateData";
 import { Island_Moments } from "next/font/google";
+import { languageOptions } from "@/conf/langs";
 
 interface OutPutSize {
   name: string;
@@ -96,6 +97,8 @@ interface DataContextTypes {
   setCount: (n: any) => void;
   crouLength: number;
   editing: boolean;
+  translations: any;
+  setTranslations: (n: any) => void;
   setEditting: (n: boolean) => void;
   setEdittingItem: (n: any) => void;
   editingItem: any;
@@ -133,7 +136,17 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
   const [editing, setEditting] = useState(false);
   const [keepRatio, setKeepRatio] = useState(false);
   const [editingItem, setEdittingItem] = useState<any>();
-
+  const [translations, setTranslations] = useState(
+    Object.fromEntries(
+      languageOptions.map((lang) => [
+        lang.value,
+        {
+          title: "title",
+          name: "name",
+        },
+      ])
+    )
+  );
   const SetCrousalValues = (lang: string, length: number) => {
     setSelectedLanguage(lang);
     setCrouLength(length);
@@ -141,6 +154,8 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <MyContext.Provider
       value={{
+        translations,
+        setTranslations,
         templateName,
         setTemplateName,
         keepRatio,
