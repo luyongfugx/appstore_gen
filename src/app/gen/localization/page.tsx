@@ -5,12 +5,22 @@ import { Input } from "@/components/ui/input";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { languageOptions } from "@/conf/langs";
 import { useMyContext } from "@/lib/Context";
-import { X } from "lucide-react";
-const genAI = new GoogleGenerativeAI("YOUR_API_KEY");
+import { Loader2, X } from "lucide-react";
+const genAI = new GoogleGenerativeAI("AIzaSyAs4y5XGQ24c-m-rf6_Pv8qcqEnd7cFCJQ");
 
 export default function Home() {
   const [languages] = useState(languageOptions.map((lang) => lang.value));
   const [key, setKey] = useState("");
+  const [translateAllFromBaseLoading, setTranslateAllFromBaseLoading] =
+    useState<boolean>(false);
+  const [translateKeyFromBaseLoading, setTranslateKeyFromBaseLoading] =
+    useState<boolean>(false);
+  const [translateKeyBaseToAllLoading, setTranslateKeyBaseToAllLoading] =
+    useState<boolean>(false);
+  const [translateBaseToAllLoading, setTranslateBaseToAllLoading] =
+    useState<boolean>(false);
+
+  const [traningKey, setTraningKey] = useState("");
   const { selectedLanguage, translations, setTranslations, baseLanguage } =
     useMyContext();
   const handleAddTranslation = () => {
@@ -99,45 +109,47 @@ export default function Home() {
   // };
 
   const translateAllFromBase = async () => {
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    const model = genAI.getGenerativeModel({
+      model: "gemini-1.5-flash",
+    });
     const updatedTranslations = { ...translations };
-
-    for (const lang of languages) {
-      if (lang !== baseLanguage) {
-        for (const [key, value] of Object.entries(translations[baseLanguage])) {
-          if (!updatedTranslations[lang][key]) {
-            try {
-              const prompt = `Translate the following text from ${baseLanguage} to ${lang}: "${value}"`;
-              const result = await model.generateContent(prompt);
-              const response = result.response;
-              const translatedText = response.text();
-              updatedTranslations[lang][key] = translatedText.replace(
-                /^["']|["']$/g,
-                ""
-              );
-            } catch (error) {
-              console.error(`Error translating ${key} to ${lang}:`, error);
-              updatedTranslations[lang][
-                key
-              ] = `[Translation Error: ${baseLanguage} -> ${lang}]`;
-            }
-          }
+    setTranslateAllFromBaseLoading(true);
+    if (selectedLanguage !== baseLanguage) {
+      for (const [key, value] of Object.entries(translations[baseLanguage])) {
+        try {
+          const prompt = `Translate the following text from ${baseLanguage} to ${selectedLanguage} and please return the translated text only : "${value}"`;
+          const result = await model.generateContent(prompt);
+          const response = result.response;
+          const translatedText = response.text();
+          updatedTranslations[selectedLanguage][key] = translatedText.replace(
+            /^["']|["']$/g,
+            ""
+          );
+        } catch (error) {
+          console.error(
+            `Error translating ${key} to ${selectedLanguage}:`,
+            error
+          );
+          updatedTranslations[selectedLanguage][
+            key
+          ] = `[Translation Error: ${baseLanguage} -> ${selectedLanguage}]`;
         }
       }
     }
-
+    setTranslateAllFromBaseLoading(false);
     setTranslations(updatedTranslations);
   };
   const translateBaseToAll = async () => {
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
     const updatedTranslations = { ...translations };
 
+    setTranslateBaseToAllLoading(true);
     for (const lang of languages) {
       if (lang !== baseLanguage) {
         for (const [key, value] of Object.entries(translations[baseLanguage])) {
           if (!updatedTranslations[lang][key]) {
             try {
-              const prompt = `Translate the following text from ${baseLanguage} to ${lang}: "${value}"`;
+              const prompt = `Translate the following text from ${baseLanguage} to ${lang}:  and please return the translated text only  "${value}"`;
               const result = await model.generateContent(prompt);
               const response = result.response;
               const translatedText = response.text();
@@ -151,23 +163,62 @@ export default function Home() {
                 key
               ] = `[Translation Error: ${baseLanguage} -> ${lang}]`;
             }
+          }
+        }
+      }
+    }
+    setTranslateBaseToAllLoading(false);
+    setTranslations(updatedTranslations);
+  };
+  const translateKeyFromBase = async (tKey: string) => {
+    const model = genAI.getGenerativeModel({
+      model: "gemini-1.5-flash",
+    });
+    const updatedTranslations = { ...translations };
+    setTranslateKeyFromBaseLoading(true);
+    setTraningKey(tKey);
+    if (selectedLanguage !== baseLanguage) {
+      for (const [key, value] of Object.entries(translations[baseLanguage])) {
+        if (tKey == key) {
+          try {
+            const prompt = `Translate the following text from ${baseLanguage} to ${selectedLanguage}  and please return the translated text only : "${value}"`;
+            const result = await model.generateContent(prompt);
+            const response = result.response;
+            const translatedText = response.text();
+            updatedTranslations[selectedLanguage][key] = translatedText.replace(
+              /^["']|["']$/g,
+              ""
+            );
+          } catch (error) {
+            console.error(
+              `Error translating ${key} to ${selectedLanguage}:`,
+              error
+            );
+            updatedTranslations[selectedLanguage][
+              key
+            ] = `[Translation Error: ${baseLanguage} -> ${selectedLanguage}]`;
           }
         }
       }
     }
 
     setTranslations(updatedTranslations);
+    setTranslateKeyFromBaseLoading(false);
+    setTraningKey("");
   };
-  const translateKeyAllFromBase = async () => {
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+  const translateKeyBaseToAll = async (tKey: string) => {
+    const model = genAI.getGenerativeModel({
+      model: "gemini-1.5-flash",
+    });
     const updatedTranslations = { ...translations };
-
+    setTranslateKeyBaseToAllLoading(true);
+    setTraningKey(tKey);
     for (const lang of languages) {
       if (lang !== baseLanguage) {
         for (const [key, value] of Object.entries(translations[baseLanguage])) {
-          if (!updatedTranslations[lang][key]) {
+          if (key == tKey) {
             try {
-              const prompt = `Translate the following text from ${baseLanguage} to ${lang}: "${value}"`;
+              const prompt = `Translate the following text from ${baseLanguage} to ${lang}  and please return the translated text only : "${value}"`;
               const result = await model.generateContent(prompt);
               const response = result.response;
               const translatedText = response.text();
@@ -185,37 +236,8 @@ export default function Home() {
         }
       }
     }
-
-    setTranslations(updatedTranslations);
-  };
-  const translateKeyBaseToAll = async () => {
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-    const updatedTranslations = { ...translations };
-
-    for (const lang of languages) {
-      if (lang !== baseLanguage) {
-        for (const [key, value] of Object.entries(translations[baseLanguage])) {
-          if (!updatedTranslations[lang][key]) {
-            try {
-              const prompt = `Translate the following text from ${baseLanguage} to ${lang}: "${value}"`;
-              const result = await model.generateContent(prompt);
-              const response = result.response;
-              const translatedText = response.text();
-              updatedTranslations[lang][key] = translatedText.replace(
-                /^["']|["']$/g,
-                ""
-              );
-            } catch (error) {
-              console.error(`Error translating ${key} to ${lang}:`, error);
-              updatedTranslations[lang][
-                key
-              ] = `[Translation Error: ${baseLanguage} -> ${lang}]`;
-            }
-          }
-        }
-      }
-    }
-
+    setTranslateKeyBaseToAllLoading(false);
+    setTraningKey("");
     setTranslations(updatedTranslations);
   };
   const languagesToRender =
@@ -257,6 +279,9 @@ export default function Home() {
                       onClick={translateAllFromBase}
                       className="ml-3 w-[400]"
                     >
+                      {translateAllFromBaseLoading && (
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      )}
                       Translate All from Base Language
                     </Button>
                   ) : (
@@ -264,6 +289,9 @@ export default function Home() {
                       onClick={translateBaseToAll}
                       className="ml-3 w-[400]"
                     >
+                      {translateBaseToAllLoading && (
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      )}
                       Translate to All Language
                     </Button>
                   )}
@@ -297,16 +325,26 @@ export default function Home() {
                   <div className="flex justify-center items-center">
                     {lang == baseLanguage ? (
                       <Button
-                        onClick={translateKeyBaseToAll}
+                        onClick={() => {
+                          translateKeyBaseToAll(key);
+                        }}
                         className="ml-3 w-[400]"
                       >
+                        {translateKeyBaseToAllLoading && traningKey == key && (
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        )}
                         Translate to All Language
                       </Button>
                     ) : (
                       <Button
-                        onClick={translateKeyAllFromBase}
+                        onClick={() => {
+                          translateKeyFromBase(key);
+                        }}
                         className="ml-3 w-[400]"
                       >
+                        {translateKeyFromBaseLoading && traningKey == key && (
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        )}
                         Translate from Base Language
                       </Button>
                     )}

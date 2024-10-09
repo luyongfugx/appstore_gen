@@ -141,8 +141,9 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
       languageOptions.map((lang) => [
         lang.value,
         {
-          title: "title",
+          take_photo: "take photo",
           name: "name",
+          home_page: "home page",
         },
       ])
     )
