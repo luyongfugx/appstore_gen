@@ -79,6 +79,10 @@ export type TemplateData = {
   bgColor?: string;
   primaryColor?: string;
 };
+export type TranslationRow = {
+  key: string;
+  [lang: string]: string;
+};
 //{templateOne:TemplateData,templateTow:TemplateData}
 export type TemplateDatas = Record<string, TemplateData>;
 
@@ -136,18 +140,21 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
   const [editing, setEditting] = useState(false);
   const [keepRatio, setKeepRatio] = useState(false);
   const [editingItem, setEdittingItem] = useState<any>();
-  const [translations, setTranslations] = useState(
-    Object.fromEntries(
-      languageOptions.map((lang) => [
-        lang.value,
-        {
-          take_photo: "take photo",
-          name: "name",
-          home_page: "home page",
-        },
-      ])
-    )
-  );
+  const [translations, setTranslations] = useState<TranslationRow[]>([
+    { key: "hello", en: "Hello", zh: "你好", es: "" },
+    { key: "goodbye", en: "Goodbye", zh: "再见", es: "" },
+    { key: "thank_you", en: "Thank you", zh: "谢谢", es: "" },
+  ]);
+  // Object.fromEntries(
+  //   languageOptions.map((lang) => [
+  //     lang.value,
+  //     {
+  //       take_photo: "take photo",
+  //       name: "name",
+  //       home_page: "home page",
+  //     },
+  //   ])
+  // )
   const SetCrousalValues = (lang: string, length: number) => {
     setSelectedLanguage(lang);
     setCrouLength(length);

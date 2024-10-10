@@ -1,5 +1,5 @@
 "use client";
-import { useMyContext } from "@/lib/Context";
+import { TranslationRow, useMyContext } from "@/lib/Context";
 import React, { useEffect, useRef, useState } from "react";
 import { Button } from "../ui/Button";
 import { DownloadCloudIcon, FileDown, ImageDown, Loader2 } from "lucide-react";
@@ -88,23 +88,40 @@ function NavHeader() {
   const generateLocalizationFiles = () => {
     const iosFiles = {};
     const androidFiles = {};
+
     languages.forEach((lang) => {
       let iosContent = "";
-      Object.entries(translations[lang]).forEach(([key, value]) => {
-        iosContent += `"${key}" = "${value}";\n`;
-      });
-      iosFiles[`${lang}.lproj/Localizable.strings`] = iosContent;
-      // Generate Android files
       let androidContent =
         '<?xml version="1.0" encoding="utf-8"?>\n<resources>\n';
-      Object.entries(translations[lang]).forEach(([key, value]) => {
-        androidContent += `    <string name="${key}">${value}</string>\n`;
+      translations.forEach((newRow: TranslationRow) => {
+        iosContent += `"${newRow.key}" = "${newRow[lang] || ""}";\n`;
+        androidContent += `    <string name="${newRow.key}">${
+          newRow[lang] || ""
+        }</string>\n`;
       });
       androidContent += "</resources>";
+      iosFiles[`${lang}.lproj/Localizable.strings`] = iosContent;
       androidFiles[`values-${lang === "en" ? "" : lang}/strings.xml`] =
         androidContent;
     });
     dlZip({ ios: iosFiles, android: androidFiles });
+    // languages.forEach((lang) => {
+    //   let iosContent = "";
+    //   Object.entries(translations[lang]).forEach(([key, value]) => {
+    //     iosContent += `"${key}" = "${value}";\n`;
+    //   });
+    //   iosFiles[`${lang}.lproj/Localizable.strings`] = iosContent;
+    //   // Generate Android files
+    //   let androidContent =
+    //     '<?xml version="1.0" encoding="utf-8"?>\n<resources>\n';
+    //   Object.entries(translations[lang]).forEach(([key, value]) => {
+    //     androidContent += `    <string name="${key}">${value}</string>\n`;
+    //   });
+    //   androidContent += "</resources>";
+    //   androidFiles[`values-${lang === "en" ? "" : lang}/strings.xml`] =
+    //     androidContent;
+    // });
+    // dlZip({ ios: iosFiles, android: androidFiles });
   };
   const dlZip = async (generatedFiles: any) => {
     const zip = new JSZip();
@@ -128,7 +145,7 @@ function NavHeader() {
         <Languages />
       </div>
 
-      {pathname == "/gen/localization" && (
+      {(pathname == "/gen/localization" || pathname == "/gen/gridlocal") && (
         <div className="flex h-full items-center justify-end gap-2.5">
           <Button
             onClick={() => {

@@ -1,0 +1,167 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DIRECT_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  password      String?
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+}
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])
+}
+
+model Session {
+  sessionToken String   @id @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@id([identifier, token])
+}
+
+model Subscription {
+  id                 String    @id @default(cuid())
+  email              String
+  productId          Int?
+  productName        String
+  provider           String
+  customerId         Int?
+  subscriptionId     String    @unique
+  variantId          Int?
+  currentPeriodEnd   DateTime?
+  createdAt          DateTime  @default(now())
+  orderId            String
+  orderItemId        String?
+  orderStatus        Int?      @default(0)
+  storeId            Int?
+  subscriptionStatus Int?      @default(0)
+  type               Int?      @default(0)
+}
+
+model Prediction {
+  id           String    @id @default(cuid())
+  email        String
+  input        Json?
+  output       Json?
+  status       String?
+  created_at   DateTime?
+  started_at   DateTime?
+  completed_at DateTime?
+  metrics      Json?
+  error        String?
+  version      String?
+  logs         String?
+}
+
+model Consumption {
+  id           String    @id @default(cuid())
+  email        String
+  type         Int
+  consum_count Int?
+  ext_id       String    @unique @default(cuid())
+  created_at   DateTime?
+}
+
+model Free_Consumption {
+  id           String    @id @default(cuid())
+  email        String
+  type         Int
+  consum_count Int?
+  ext_id       String    @unique @default(cuid())
+  created_at   DateTime?
+}
+
+model Diet {
+  id             String   @id @default(cuid())
+  diet_date      String
+  clerk_sub      String
+  email          String?
+  name           String
+  type           Int
+  image          String
+  total_calories Int
+  total_protein  String
+  total_fat      String
+  total_carb     String
+  created_at     DateTime @default(now())
+}
+
+model Food {
+  id             String @id @default(cuid())
+  name           String
+  lang           String
+  diet_id        String
+  count          Int
+  calories       Int
+  unit           String
+  protein        String
+  fat            String
+  carb           String
+  calories_of_xg String
+  percent        Int
+}
+
+model Month_Count {
+  id        String  @id @default(cuid())
+  clerk_sub String?
+  month     String?
+  diet_date String?
+  calories  Int
+  protein   Decimal
+  fat       Decimal
+  carb      Decimal
+}
+
+model App_Project {
+  id    String @id @default(cuid())
+  email String
+  name  String
+}
+
+model Localization_Files {
+  id         String  @id @default(cuid())
+  email      String
+  project_id String
+  ver        String?
+  json       Json?
+}
+
+model Screen_Shot {
+  id         String  @id @default(cuid())
+  email      String
+  project_id String
+  ver        String?
+  json       Json?
+}

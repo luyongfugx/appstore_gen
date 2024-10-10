@@ -69,6 +69,7 @@ function Languages() {
     setBaseLanguage,
     baseLanguage,
   } = useMyContext();
+  const pathname = usePathname();
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("en");
 
@@ -95,58 +96,64 @@ function Languages() {
           </Select>{" "}
         </div>
       </div>
-      {<div className="text-left flex mr-2">Selected Language:</div>}
-      <div className="flex justify-center">
-        <Popover open={open} onOpenChange={setOpen}>
-          <PopoverTrigger asChild>
-            <Button
-              variant="outline"
-              role="combobox"
-              aria-expanded={open}
-              className="w-[200px] justify-between"
-            >
-              {value
-                ? languageOptions.find((language) => language.value === value)
-                    ?.flag +
-                  " " +
-                  languageOptions.find((language) => language.value === value)
-                    ?.label
-                : "Select language..."}
-              <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-[200px] p-0">
-            <Command>
-              <CommandInput placeholder="Search language..." />
-              <CommandEmpty>No language found.</CommandEmpty>
-              <CommandGroup>
-                <CommandList>
-                  {languageOptions.map((language, i) => (
-                    <CommandItem
-                      key={i}
-                      onSelect={(currentValue) => {
-                        setValue(currentValue === value ? "" : currentValue);
-                        setSelectedLanguage(currentValue);
-                        // console.log("currentValue" + currentValue);
-                        setOpen(false);
-                      }}
-                      value={language.value}
-                    >
-                      <Check
-                        className={cn(
-                          "mr-2 h-4 w-4",
-                          value === language.value ? "opacity-100" : "opacity-0"
-                        )}
-                      />
-                      {language.flag} {language.label}
-                    </CommandItem>
-                  ))}
-                </CommandList>
-              </CommandGroup>
-            </Command>
-          </PopoverContent>
-        </Popover>
-      </div>
+      {pathname == "/gen/screen/TemplateOne" && (
+        <div className="text-left flex mr-2">Selected Language:</div>
+      )}
+      {pathname == "/gen/screen/TemplateOne" && (
+        <div className="flex justify-center">
+          <Popover open={open} onOpenChange={setOpen}>
+            <PopoverTrigger asChild>
+              <Button
+                variant="outline"
+                role="combobox"
+                aria-expanded={open}
+                className="w-[200px] justify-between"
+              >
+                {value
+                  ? languageOptions.find((language) => language.value === value)
+                      ?.flag +
+                    " " +
+                    languageOptions.find((language) => language.value === value)
+                      ?.label
+                  : "Select language..."}
+                <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-[200px] p-0">
+              <Command>
+                <CommandInput placeholder="Search language..." />
+                <CommandEmpty>No language found.</CommandEmpty>
+                <CommandGroup>
+                  <CommandList>
+                    {languageOptions.map((language, i) => (
+                      <CommandItem
+                        key={i}
+                        onSelect={(currentValue) => {
+                          setValue(currentValue === value ? "" : currentValue);
+                          setSelectedLanguage(currentValue);
+                          // console.log("currentValue" + currentValue);
+                          setOpen(false);
+                        }}
+                        value={language.value}
+                      >
+                        <Check
+                          className={cn(
+                            "mr-2 h-4 w-4",
+                            value === language.value
+                              ? "opacity-100"
+                              : "opacity-0"
+                          )}
+                        />
+                        {language.flag} {language.label}
+                      </CommandItem>
+                    ))}
+                  </CommandList>
+                </CommandGroup>
+              </Command>
+            </PopoverContent>
+          </Popover>
+        </div>
+      )}
     </div>
   );
 }
