@@ -99,9 +99,6 @@ const saveTranslations = async (data: any) => {
       body: JSON.stringify(data),
     });
   } catch (e) {}
-
-  // await new Promise((resolve) => setTimeout(resolve, 1000));
-  // console.log("Saved data:", data);
 };
 
 export default function MultiLanguageTable() {
@@ -120,7 +117,6 @@ export default function MultiLanguageTable() {
   } | null>(null);
 
   const [editValue, setEditValue] = useState("");
-
   useEffect(() => {
     const loadInitialData = async () => {
       try {
