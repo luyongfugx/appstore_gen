@@ -46,7 +46,7 @@
     "tailwind-merge": "^2.1.0",
     "tailwindcss-animate": "^1.0.7",
     "lemonsqueezy.ts": "0.1.7",
-    "next-auth": "4.22.1",
+    "next-auth": "^4.22.1",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.45",
     "tinycolor2": "^1.6.0"
