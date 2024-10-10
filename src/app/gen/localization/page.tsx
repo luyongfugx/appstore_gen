@@ -40,23 +40,23 @@ const translateWithGemini = async (
   }
 };
 
-export const changePass = async (password: string) => {
-  const changePassApi = "/api/profile/changepass";
-  try {
-    const response = await doFetch(changePassApi, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ password }),
-    });
+// export const changePass = async (password: string) => {
+//   const changePassApi = "/api/profile/changepass";
+//   try {
+//     const response = await doFetch(changePassApi, {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({ password }),
+//     });
 
-    const user = await response.json();
-    return response;
-  } catch (error) {
-    console.log(error);
-  }
-};
+//     const user = await response.json();
+//     return response;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 // 模拟从服务器获取数据的函数
 const fetchInitialData = async () => {
   const dataApi = "/api/localization/get";
