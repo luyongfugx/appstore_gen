@@ -66,8 +66,11 @@ function Languages() {
   const {
     setSelectedLanguage,
     selectedLanguage,
+    templateName,
     setBaseLanguage,
     baseLanguage,
+    templateDatas,
+    setTemplateDatas,
   } = useMyContext();
   const pathname = usePathname();
   const [open, setOpen] = React.useState(false);
@@ -129,9 +132,18 @@ function Languages() {
                       <CommandItem
                         key={i}
                         onSelect={(currentValue) => {
+                          console.log(templateDatas[templateName]);
                           setValue(currentValue === value ? "" : currentValue);
+                          const tempD = templateDatas[templateName];
+                          if (tempD.screenData![currentValue] == undefined) {
+                            tempD.screenData![currentValue] =
+                              tempD.screenData![baseLanguage];
+                          }
+                          templateDatas[templateName] = { ...tempD };
+                          console.log("tempD ", tempD);
+                          console.log("lang ", templateDatas);
+                          setTemplateDatas({ ...templateDatas });
                           setSelectedLanguage(currentValue);
-                          // console.log("currentValue" + currentValue);
                           setOpen(false);
                         }}
                         value={language.value}

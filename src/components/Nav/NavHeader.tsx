@@ -1,5 +1,5 @@
 "use client";
-import { TranslationRow, useMyContext } from "@/lib/Context";
+import { boxData, TranslationRow, useMyContext } from "@/lib/Context";
 import React, { useEffect, useRef, useState } from "react";
 import { Button } from "../ui/Button";
 import { DownloadCloudIcon, FileDown, ImageDown, Loader2 } from "lucide-react";
@@ -21,6 +21,7 @@ import Languages from "./Languages";
 import { usePathname } from "next/navigation";
 import { languageOptions } from "@/conf/langs";
 import JSZip from "jszip";
+import { translateWithGemini } from "@/lib/translate";
 
 function NavHeader() {
   const {
@@ -28,9 +29,11 @@ function NavHeader() {
     crouLength,
     selectedLanguage,
     outPutSize,
+    baseLanguage,
     setEditting,
     setMoveableId,
     templateName,
+    setTemplateDatas,
     translations,
     templateDatas,
   } = useMyContext();
@@ -84,6 +87,38 @@ function NavHeader() {
   const saveAsImg = () => {
     const fileName = outPutSize.name + "_" + selectedLanguage;
     downloadImages(img, fileName);
+  };
+  const doTranslate = () => {
+    if (baseLanguage != selectedLanguage) {
+      // console.log("templateDatas", templateDatas);
+      const data = templateDatas[templateName].screenData;
+      const srcArray = data![baseLanguage];
+      const targetArray = data![selectedLanguage];
+      srcArray.forEach(async (screens, index) => {
+        screens.forEach(async (item, ix) => {
+          if (item.type === "text") {
+            const target = targetArray[index][ix];
+            setLoading(true);
+            target.value = await translateWithGemini(
+              baseLanguage,
+              selectedLanguage,
+              item.value
+            );
+            targetArray[index][ix] = target;
+            const newTemplateDatas = { ...templateDatas };
+            const newArray: boxData[][] = [];
+            targetArray.forEach((item) => {
+              newArray.push(item);
+            });
+            setLoading(false);
+
+            newTemplateDatas[templateName].screenData![selectedLanguage] =
+              newArray;
+            setTemplateDatas({ ...newTemplateDatas });
+          }
+        });
+      });
+    }
   };
   const generateLocalizationFiles = () => {
     const iosFiles = {};
@@ -143,6 +178,9 @@ function NavHeader() {
       <div className="flex-1 h-full flex justify-center gap-2.5">
         {pathname == "/gen/screen/TemplateOne" && <Output />}
         <Languages />
+        <Button isLoading={loading} onClick={doTranslate}>
+          translate
+        </Button>
       </div>
 
       {(pathname == "/gen/localization" || pathname == "/gen/gridlocal") && (
@@ -195,6 +233,7 @@ function NavHeader() {
                     </div>
                   )}
                 </div>
+
                 <div className="w-full p-2 flex flex-row items-center gap-4 justify-center">
                   <Button isLoading={loading} onClick={saveAsImg}>
                     Download

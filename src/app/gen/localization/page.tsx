@@ -14,31 +14,31 @@ import { Input } from "@/components/ui/input";
 import { Loader2, Plus, Globe, RefreshCw, Check, X } from "lucide-react";
 import { languageOptions } from "@/conf/langs";
 import { TranslationRow, useMyContext } from "@/lib/Context";
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import doFetch from "@/aiboot_cloud/uselib/do-fetch";
-const genAI = new GoogleGenerativeAI("AIzaSyAs4y5XGQ24c-m-rf6_Pv8qcqEnd7cFCJQ");
+import { translateWithGemini } from "@/lib/translate";
+// const genAI = new GoogleGenerativeAI("AIzaSyAs4y5XGQ24c-m-rf6_Pv8qcqEnd7cFCJQ");
 
-const translateWithGemini = async (
-  baseLanguage: any,
-  selectedLanguage: any,
-  value: any
-) => {
-  try {
-    const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash",
-    });
-    const prompt = `Translate the following text from ${baseLanguage} to ${selectedLanguage}  and please return the translated text only : "${value}"`;
-    const result = await model.generateContent(prompt);
-    const response = result.response;
-    const translatedText = response.text();
-    const reText = translatedText
-      .replace(/^["']|["']$/g, "")
-      .replace(/\n/g, "");
-    return reText;
-  } catch (e) {
-    return "translate error";
-  }
-};
+// const translateWithGemini = async (
+//   baseLanguage: any,
+//   selectedLanguage: any,
+//   value: any
+// ) => {
+//   try {
+//     const model = genAI.getGenerativeModel({
+//       model: "gemini-1.5-flash",
+//     });
+//     const prompt = `Translate the following text from ${baseLanguage} to ${selectedLanguage}  and please return the translated text only : "${value}"`;
+//     const result = await model.generateContent(prompt);
+//     const response = result.response;
+//     const translatedText = response.text();
+//     const reText = translatedText
+//       .replace(/^["']|["']$/g, "")
+//       .replace(/\n/g, "");
+//     return reText;
+//   } catch (e) {
+//     return "translate error";
+//   }
+// };
 
 // export const changePass = async (password: string) => {
 //   const changePassApi = "/api/profile/changepass";

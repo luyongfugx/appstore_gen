@@ -9,7 +9,7 @@ export const defaultTemplateDatas: TemplateDatas = {
       // Clock in to work: chấm công
       // Recording every minute of your life: ghi lại từng phút giây của cuộc sống
 
-      jp: [
+      ja: [
         [
           {
             name: "title",
@@ -1930,7 +1930,7 @@ export const defaultTemplateDatas: TemplateDatas = {
           },
         ],
       ],
-      cn: [
+      zh: [
         [
           {
             name: "title",

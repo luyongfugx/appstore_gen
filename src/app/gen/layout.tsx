@@ -24,7 +24,6 @@ export default function RootLayout({
           </div>
           <div className="ml-14 w-full flex overflow-scroll z-0">
             {pathname == "/gen/screen/TemplateOne" && <Slidebar />}
-
             {children}
           </div>
         </main>
